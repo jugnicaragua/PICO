@@ -31,6 +31,8 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 * Multi IDE
 * JasperReport
 * JVM 8
+* MVC 
+* POO
 
 # Prearando  el IDE
 coming
@@ -42,11 +44,7 @@ coming
 
 
 # Licencia
-
+  Copyright (c) 2018  free libre open source software (FLOSS), licensed under the GNU General Public License version 3 (GPLv3), see the LICENSE file or a copy at:  http://www.gnu.org/licenses/
 
 # Autores y Colaboradores
-
-# Agradecimientos
-
-
-
+JUG Nicaragua, Grupo de Usuarios Java de Nicaragua.
