@@ -3,7 +3,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 
 # Objetivo
 * Ser Didactico para los que pretenden aprender Java utilizando las mejores practicas.
-* Ser una solucion para MicroEmpresas que necesitan llevar contabilidad como las panaderias.
+* Ser una solucion para MicroEmpresas que necesitan llevar contabilidad.
 * Ser un reductor de la cantidad de proyectos de graduacion en centros tecnicos y universidades enfocados en Contabilidad.
 
 # Caracteristicas Funcionales
@@ -34,7 +34,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 * MVC 
 * POO
 
-# Prearando  el IDE
+# Preparando  el IDE
 coming
 
 # Diseño
@@ -44,7 +44,9 @@ coming
 
 
 # Licencia
-  Copyright (c) 2018  free libre open source software (FLOSS), licensed under the GNU General Public License version 3 (GPLv3), see the LICENSE file or a copy at:  http://www.gnu.org/licenses/
+Copyright (c) 2018 Grupo de Usuarios Java de Nicaragua.
+
+Pico Accounting is free libre open source software (FLOSS), licensed under the GNU General Public License version 3 (GPLv3), see the COPYING file or a copy at: https://www.gnu.org/licenses/gpl.txt
 
 # Autores y Colaboradores
 JUG Nicaragua, Grupo de Usuarios Java de Nicaragua.
