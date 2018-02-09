@@ -24,7 +24,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 * Totalmente comentado y Documentado
 
 
-# Arquitectura
+# Stack
 * maven
 * HSQLDB 
 * Swing
