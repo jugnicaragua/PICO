@@ -89,7 +89,7 @@ del impuesto, ni de trámites ante instituciones de la policía, ni de ninguna
 índole. Su único propósito es informar al cliente sobre el precio de los
 productos, servicio u otros que estimen conveniente.
 
-Objetivos del sistema:
+#### Objetivos del sistema:
 
 Brindar una solucion contable para pequeñas empresas contables para que las
 mismas sean puedan dar solucion a sus requisitos de información financiera sin
