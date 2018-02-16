@@ -8,6 +8,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 
 # Caracteristicas Funcionales
 * Didactico
+  - Totalmente comentado.
 * Sencillo
 * Intuitivo
 * Portable
