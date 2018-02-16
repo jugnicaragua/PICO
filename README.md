@@ -25,17 +25,21 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 
 
 # Stack
+```
+  Conjunto de Tecnologias necesarias
+```
+* JVM/JDK 8
 * maven
-* HSQLDB 
+* HSQLDB (Base de datos)
+* JPA (Persistencia)
 * Swing
 * Multi IDE
 * JasperReport
-* JVM 8
 * MVC 
 * POO
 
 # Preparando  el IDE
-coming
+...
 
 # Diseño
   TDR <enlace a la pagina de los TDR>
