@@ -1,0 +1,10 @@
+language: java
+sudo: false
+
+install: true
+
+before_script:
+  - cd PICO
+  
+script:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
