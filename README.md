@@ -1,6 +1,8 @@
 # PICO
 Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colaborativo.
 
+[![Build Status](https://travis-ci.org/jug-ni/PICO.svg?branch=master)](https://travis-ci.org/jug-ni/PICO)
+
 # Objetivo
 * Ser Didactico para los que pretenden aprender Java utilizando las mejores practicas.
 * Ser una solucion para MicroEmpresas que necesitan llevar contabilidad.
