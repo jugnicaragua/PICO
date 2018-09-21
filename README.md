@@ -35,7 +35,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 * Manejador: maven
 * Base de Datos: Empotrada SQLITE  y HSQLDB
 * JPA (Persistencia)
-* ORB: Hibernate
+* ORM: Hibernate
 * Swing
 * Reportes: JasperReport
 * MVC 
