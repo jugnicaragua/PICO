@@ -1,8 +1,11 @@
 # Especificaciones de Requisitos del Software.
-
+  Consdierando
 ## Introducción.
+...
+
 
 ### Proposito.
+Deben ser un sistema sencillo apto par pymes.
 
 ### Ámbito del Sistema.
 
