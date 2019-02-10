@@ -31,7 +31,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 ```
   Conjunto de Tecnologias utilizadas
 ```
-* Base: JVM/JDK 8
+* Base: JVM OpenJDK (AdoptOpenJDK) Version 11 LTS
 * Manejador: maven
 * Base de Datos: Empotrada SQLITE  y HSQLDB
 * JPA (Persistencia)
@@ -41,6 +41,10 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 * MVC 
 * POO
 * Multi IDE
+
+## Estilo de Código:
+Para el estilo de codificacion, usaremoes el estilo creado por google: 
+https://google.github.io/styleguide/javaguide.html
 
 
 # Preparando  el IDE
