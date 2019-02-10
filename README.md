@@ -42,6 +42,10 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 * POO
 * Multi IDE
 
+## Estilo de Código:
+Para el estilo de codificacion, usaremoes el estilo creado por google: 
+https://google.github.io/styleguide/javaguide.html
+
 
 # Preparando  el IDE
 ...
