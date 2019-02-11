@@ -1,6 +1,6 @@
 /**
  *Clase ItemMenu
- * @author gacs
+ * @author Gustavo Castro -GACS
  * Con esta se evita repetir algunas sentencia y se le cargan al contructor
  */
 package org.jugni.apps.pico.clasesherramientas;
