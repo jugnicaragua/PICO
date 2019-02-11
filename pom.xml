@@ -17,8 +17,8 @@
 
     <licenses>
         <license>
-            <name>Public domain</name>
-            <url>http://unlicense.org/</url>
+            <name>GPL-v3.0</name>
+            <url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
             <distribution>manual</distribution>
         </license>
     </licenses>
