@@ -90,10 +90,10 @@ public class VentanaPrincipal {
 		JDesktopPane desktopPane = new JDesktopPane();
 		frmPicoSistema.getContentPane().add(desktopPane, BorderLayout.CENTER);
 		
-		JMenuBar menuBar = new JMenuBar();
-		frmPicoSistema.setJMenuBar(menuBar);
+//		MenuPrincipal menuBar = new MenuPrincipal();
+		frmPicoSistema.setJMenuBar(new MenuPrincipal());
 		
-		JMenu mnArchivo = new JMenu("Archivo");
+/*		JMenu mnArchivo = new JMenu("Archivo");
 		menuBar.add(mnArchivo);
 		
 		JMenuItem mntmIniciarSession = new JMenuItem("Iniciar Session");
@@ -197,7 +197,7 @@ public class VentanaPrincipal {
 		
 		JMenuItem mntmCalularAguinaldo = new JMenuItem("Calular Aguinaldo");
 		mnHerramientas.add(mntmCalularAguinaldo);
-		
+		z
 		JSeparator separator_1 = new JSeparator();
 		mnHerramientas.add(separator_1);
 		
@@ -229,7 +229,7 @@ public class VentanaPrincipal {
 		mnAcercaDe.add(mntmLicencias);
 		
 		JMenuItem mntmAcercaDe = new JMenuItem("Acerca de");
-		mnAcercaDe.add(mntmAcercaDe);
+		mnAcercaDe.add(mntmAcercaDe);*/
 	}
 	
 	
