@@ -38,12 +38,12 @@ Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Cola
 * ORM: Hibernate
 * Swing
 * Reportes: JasperReport
-* MVC 
+* MVC
 * POO
 * Multi IDE
 
 ## Estilo de Código:
-Para el estilo de codificación, usaremos el estilo creado por Google: 
+Para el estilo de codificación, usaremos el estilo creado por Google:
 https://google.github.io/styleguide/javaguide.html
 
 
