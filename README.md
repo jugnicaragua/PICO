@@ -1,15 +1,15 @@
 # PICO
-Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colaborativo.
+Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Colaborativo.
 
 [![Build Status](https://travis-ci.org/jug-ni/PICO.svg?branch=master)](https://travis-ci.org/jug-ni/PICO)
 
 # Objetivo
-* Ser Didactico para los que pretenden aprender Java utilizando las mejores practicas.
-* Ser una solucion para MicroEmpresas que necesitan llevar contabilidad.
-* Ser un reductor de la cantidad de proyectos de graduacion en centros tecnicos y universidades enfocados en Contabilidad.
+* Ser Didáctico para los que pretenden aprender Java utilizando las mejores prácticas.
+* Ser una solución para MicroEmpresas que necesitan llevar contabilidad.
+* Ser un reductor de la cantidad de proyectos de graduación en centros técnicos y universidades enfocados en Contabilidad.
 
-# Caracteristicas Funcionales
-* Didactico
+# Características Funcionales
+* Didáctico
   - Totalmente comentado.
 * Sencillo
 * Intuitivo
@@ -17,7 +17,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 * mono empresa
 * Reportes contables
 
-# Caracteristicas Técnicas.
+# Características Técnicas.
 * De escritorio
 * Portable
 * Base de datos Empotrada
@@ -29,7 +29,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 
 # Stack
 ```
-  Conjunto de Tecnologias utilizadas
+  Conjunto de Tecnologías utilizadas
 ```
 * Base: JVM OpenJDK (AdoptOpenJDK) Version 11 LTS
 * Manejador: maven
@@ -38,12 +38,12 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 * ORM: Hibernate
 * Swing
 * Reportes: JasperReport
-* MVC 
+* MVC
 * POO
 * Multi IDE
 
 ## Estilo de Código:
-Para el estilo de codificacion, usaremoes el estilo creado por google: 
+Para el estilo de codificación, usaremos el estilo creado por Google:
 https://google.github.io/styleguide/javaguide.html
 
 
@@ -51,7 +51,7 @@ https://google.github.io/styleguide/javaguide.html
 ...
 
 # Diseño
-  TDR <enlace a la pagina de los TDR>
+  TDR <enlace a la página de los TDR>
   UML <Enlace a los diagramas de Caso de USO>
   UI <enlace a las interfaces>
 
