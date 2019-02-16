@@ -55,6 +55,9 @@ https://google.github.io/styleguide/javaguide.html
   UML <Enlace a los diagramas de Caso de USO>
   UI <enlace a las interfaces>
 
+# Como colaborar
+
+Sus colaboraciones hacerlas con PULL Request a la rama Developer.
 
 # Licencia
 Copyright (c) 2018 Grupo de Usuarios Java de Nicaragua.
