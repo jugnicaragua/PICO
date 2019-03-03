@@ -3,9 +3,9 @@
  * @author Gustavo Castro -GACS
  * Con esta se evita repetir algunas sentencia y se le cargan al contructor
  */
-package org.jugni.apps.pico.clasesherramientas;
+package org.jugni.apps.pico.vista.utils;
 
-public class ItemMenus extends javax.swing.JMenuItem {
+public class ItemMenuUtils extends javax.swing.JMenuItem {
     private static final long serialVersionUID = 1L;
         /**
          * Contructor de item menu
@@ -15,7 +15,7 @@ public class ItemMenus extends javax.swing.JMenuItem {
          * @param tecla Combinacion de tecla asignado al menu
          * @param teclamodi  Tecla de control (Ctrl y Alt)combinada con el parametro tecla
          */
-        public ItemMenus(String titulo, String cToolTip,char cMnemonic,int tecla,int teclamodi){
+        public ItemMenuUtils(String titulo, String cToolTip,char cMnemonic,int tecla,int teclamodi){
             super(titulo, cMnemonic);
             setToolTipText(cToolTip);
             setAccelerator(javax.swing.KeyStroke.getKeyStroke(tecla, teclamodi));
@@ -28,7 +28,7 @@ public class ItemMenus extends javax.swing.JMenuItem {
       * @param cToolTip Descripcion del menu
       * @param cMnemonic Caracter para ejecucion del menu "Alt+caracter"
       */   
-    public ItemMenus(String titulo, String cToolTip,char cMnemonic){
+    public ItemMenuUtils(String titulo, String cToolTip,char cMnemonic){
         setText(titulo);
         setToolTipText(cToolTip);
         setMnemonic(cMnemonic);
