@@ -5,8 +5,8 @@ package org.jugni.apps.pico.vista.swing;
 
 import java.awt.Frame;
 
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
+
+import org.jugni.apps.pico.vista.swing.dialogos.Acercade;
 
 /**
  * Clase que ejecuta las intrucciones del menu
@@ -14,12 +14,14 @@ import javax.swing.JOptionPane;
  *
  */
 public class EjecutarMenu {
-	private final Frame parent = JOptionPane.getRootFrame(); //hijo del frame principal de la aplicacion
-	public EjecutarMenu() {}
+	private final Frame parent ; //hijo del frame principal de la aplicacion
+	public EjecutarMenu(Frame parent) {
+		this.parent=parent;
+	}
 	
 	public void ejecutarAcercaDe() {
-//		JDialog about =new  org.jugni.apps.pico.vista.swing.dialogos.Login(parent);
-//		about.setVisible(true);
+		Acercade about =new  Acercade(parent);
+		about.setVisible(true);
 		
 	}
 
