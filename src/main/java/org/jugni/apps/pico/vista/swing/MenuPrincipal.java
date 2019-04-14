@@ -48,7 +48,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
      * 
      */
     private void initMenuPrincipal() {
-        ejecutarMenu = new EjecutarMenu();
+        ejecutarMenu = new EjecutarMenu((java.awt.Frame) this.getParent());
     	setName("MenuPrincipal");
         // Inicia la declaracion de menus
         mnArchivo          = new JMenu("Archivo");
@@ -116,17 +116,14 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
         mnCaptacion.add(mntmCaptacionAjuste);
         
         //**Se Instancia los submenu al menu mnAyuda
-         mntmManualEnLina   = new ItemMenuUtils("Manual en lina","Presenta un manual del sistema",'M');
+         mntmManualEnLina   = new ItemMenuUtils("Manual en lina","**Presenta un manual del sistema",'M');
          mntmIrAlForo       = new ItemMenuUtils("Ir al Foro","Los traslada al foro de los desarrolladores",'I');		
          mntmAcercaDe       = new ItemMenuUtils("Acerca de ","Acerca de Pico",'A');
         //**Agrega el metodo de escucha para los sub menu de mnAyuda
         mntmManualEnLina.addActionListener(this);
         mntmIrAlForo.addActionListener(this);
-        mntmAcercaDe.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				ejecutarMenu.ejecutarAcercaDe();
-			} 
+        mntmAcercaDe.addActionListener(e -> {
+				ejecutarMenu.ejecutarAcercaDe( );
 		});
         //**Se agrega los submenu al menu mnAyuda
          mnAyuda.add(mntmManualEnLina);
