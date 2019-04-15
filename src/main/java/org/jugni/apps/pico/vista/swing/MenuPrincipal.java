@@ -14,8 +14,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 
 public class MenuPrincipal extends JMenuBar implements ActionListener{
-    private static final long serialVersionUID = 1L;
     
+	private static final long serialVersionUID = 1L;
+	private EjecutarMenu ejecutarMenu;   // ejecuta las acciones del menu      
     private JMenu	mnArchivo,          //Menu Archivo
     				mnCatalogo,          //Menu Catalogo agrupa todos los sub menu de catalos
     				mnCaptacion,        //Menu Captacion Agrupa los sub menu con movimiento periodico( comprobantes, cxp,cxc)
@@ -36,7 +37,6 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
             mntmIrAlForo,                                   //submenu que lo traslada a un foro de los desarrolladores
             mntmAcercaDe;                               //Submenu que muestra un dialogo acerca de
             
-            
                                         
            
     public MenuPrincipal() {
@@ -48,14 +48,15 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
      * 
      */
     private void initMenuPrincipal() {
-           setName("MenuPrincipal");
+        ejecutarMenu = new EjecutarMenu((java.awt.Frame) this.getParent());
+    	setName("MenuPrincipal");
         // Inicia la declaracion de menus
-        mnArchivo            = new JMenu("Archivo");
+        mnArchivo          = new JMenu("Archivo");
         mnCatalogo         = new JMenu("Catalogo");
         mnCaptacion        = new JMenu("Captacion");
-        mnInforme            = new JMenu("Informes");
-        mnHerramienta     = new JMenu("Herramientas");
-        mnAyuda                = new JMenu("Ayuda");
+        mnInforme          = new JMenu("Informes");
+        mnHerramienta      = new JMenu("Herramientas");
+        mnAyuda            = new JMenu("Ayuda");
         mnArchivo.setMnemonic('A');
         mnCatalogo.setMnemonic('C');
         mnCaptacion.setMnemonic('p');
@@ -73,10 +74,10 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
 		
         //*Inicia declaracion de sub menu e item
         //**Se instancia los submenu de archivo
-        mntmIniciarSession                  =	new ItemMenuUtils("Iniciar Session","Inicia Session de usuario",'I');
+        mntmIniciarSession          =	new ItemMenuUtils("Iniciar Session","Inicia Session de usuario",'I');
         mntmParametrosGenerales     =	new ItemMenuUtils("Parametros Generales","Administra las configuraciones del Sistema",'P');
-        mntmCicloFiscal                         =	new ItemMenuUtils("Ciclo Fiscal","Establece el Periodo Fiscal",'C');
-        mntmSalir                                   =  	new ItemMenuUtils("Salir","Sale del Sistema",'S',KeyEvent.VK_Q, InputEvent.CTRL_MASK);
+        mntmCicloFiscal             =	new ItemMenuUtils("Ciclo Fiscal","Establece el Periodo Fiscal",'C');
+        mntmSalir                   =  	new ItemMenuUtils("Salir","Sale del Sistema",'S',KeyEvent.VK_Q, InputEvent.CTRL_MASK);
        
         mntmSalir.setIcon("/org/tango-project/tango-icon-theme/16x16/actions/system-log-out.png");
         //**Agrega el metodo de escucha para los sub menu de mnArchivo
@@ -105,7 +106,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
         mnCatalogo.add(mntmCatalogoContable);
         
         //**Se Instancia los submenu al menu mnCaptacion
-        mntmCaptacionDiario     =   new ItemMenuUtils("Comprobante dirio", "Administrador de comprobante diario", 'd');
+        mntmCaptacionDiario    =   new ItemMenuUtils("Comprobante dirio", "Administrador de comprobante diario", 'd');
         mntmCaptacionAjuste    =   new ItemMenuUtils("Comprobante de ajuste", "Administrador de comprobante Ajuste", 'a');
         //**Agrega el metodo de escucha para los sub menu de mnCaptacion
         mntmCaptacionDiario.addActionListener(this);
@@ -115,13 +116,15 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
         mnCaptacion.add(mntmCaptacionAjuste);
         
         //**Se Instancia los submenu al menu mnAyuda
-         mntmManualEnLina   = new ItemMenuUtils("Manual en lina","Presenta un manual del sistema",'M');
-         mntmIrAlForo               = new ItemMenuUtils("Ir al Foro","Los traslada al foro de los desarrolladores",'I');		
-         mntmAcercaDe           = new ItemMenuUtils("Acerca de ","Acerca de Pico",'A');
+         mntmManualEnLina   = new ItemMenuUtils("Manual en lina","**Presenta un manual del sistema",'M');
+         mntmIrAlForo       = new ItemMenuUtils("Ir al Foro","Los traslada al foro de los desarrolladores",'I');		
+         mntmAcercaDe       = new ItemMenuUtils("Acerca de ","Acerca de Pico",'A');
         //**Agrega el metodo de escucha para los sub menu de mnAyuda
         mntmManualEnLina.addActionListener(this);
         mntmIrAlForo.addActionListener(this);
-        mntmAcercaDe.addActionListener(this);
+        mntmAcercaDe.addActionListener(e -> {
+				ejecutarMenu.ejecutarAcercaDe( );
+		});
         //**Se agrega los submenu al menu mnAyuda
          mnAyuda.add(mntmManualEnLina);
          mnAyuda.add(mntmIrAlForo);
