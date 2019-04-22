@@ -5,27 +5,24 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Frame;
 import java.io.IOException;
 import java.net.URISyntaxException;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.HyperlinkEvent;
+import org.jugni.apps.pico.vista.utils.JDialogoUtil;
 /**
  * Acerca de PICO
  * @author gacs
  *
  */
-public class Acercade extends JDialog {
+public class Acercade extends JDialogoUtil {
 
-	private static final long serialVersionUID = 1L;
 	private JLabel lblTitle; 
 	private JLabel lblPico; 
 	private JLabel lblImagenPico;
@@ -40,17 +37,17 @@ public class Acercade extends JDialog {
 	 * @param parent recibe el frame del cual es jdiogo es hijo
 	 * 
 	 */
-	public Acercade(Frame parent) {
-		super(parent,true);
-		setVisible(false);
+	public Acercade() {
 		initAcercade();
 		pack();
+		setLocationRelativeTo(null);		
+
 	}
 
 /*	
 	public static void main(String[] args) {
 		try {
-			Acercade dialog = new Acercade(JOptionPane.getRootFrame());
+			Acercade dialog = new Acercade();
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -61,13 +58,10 @@ public class Acercade extends JDialog {
 	private void initAcercade() {
 		//Inicializa el Jdialogo
 		{
-			setLocationRelativeTo(null);		
-			setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			setTitle("Acerca de");
 			setName("Acercade");
-			setResizable(false);
-//			setPreferredSize(new Dimension(400, 300));
 			getContentPane().setLayout(new BorderLayout());
+
 		}
 		//Se instanciasn los componentes del jdialogo
 		{
@@ -145,14 +139,12 @@ public class Acercade extends JDialog {
 			cmdOk.setActionCommand("OK");
 			
 			cmdOk.addActionListener(a ->  {				
-					jdlclose();
+					frmClose();
 			});
 			pnlButton.add(cmdOk);
 			getRootPane().setDefaultButton(cmdOk);
 		}
 	}
 	
-	private void jdlclose() {
-		this.dispose();
-	}
+	
 }
