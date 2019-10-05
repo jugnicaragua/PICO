@@ -1,7 +1,7 @@
 # PICO
 Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Colaborativo.
 
-[![Build Status](https://travis-ci.org/jug-ni/PICO.svg?branch=master)](https://travis-ci.org/jug-ni/PICO)
+[![Build Status](https://travis-ci.org/jugnicaragua/PICO.svg?branch=master)](https://travis-ci.org/jugnicaragua:master./PICO)
 
 # Objetivo
 * Ser Didáctico para los que pretenden aprender Java utilizando las mejores prácticas.
