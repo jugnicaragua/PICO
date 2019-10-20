@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.jugni.apps.pico.modelos.Cuenta;
 import org.jugni.apps.pico.modelos.TipoCuenta;
 import org.jugni.apps.pico.vista.swing.HibernateUtil;
 import org.junit.AfterClass;
@@ -29,6 +30,8 @@ public class ModelTest {
 	    Transaction transaction =session.beginTransaction() ;
         session.save(modelo1);
         session.save(modelo2);
+        session.save(new Cuenta("01-00-00000","Activo",1,1,"Algo",modelo1));
+        session.save(new Cuenta("01-01-00000","Circulante",1,1,"Algo",modelo2));
         transaction.commit();
         lstDatos= session.createQuery(SQLQUERY).getResultList();
         assertNotNull(lstDatos);
