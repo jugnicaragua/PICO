@@ -67,3 +67,5 @@ Pico Accounting is free libre open source software (FLOSS), licensed under the G
 
 # Autores y Colaboradores
 JUG Nicaragua, Grupo de Usuarios Java de Nicaragua.
+https://javanicaragua.org/nuestro-equipo/
+
