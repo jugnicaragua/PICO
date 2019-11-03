@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="TipoCuenta" ,
 indexes = {@Index(name = "idx_tipocuenta", columnList="Descripcion")})
-public class TipoCuenta {
+public class CuentaTipo {
 	@Id
 	@GeneratedValue
 	private Long id;
@@ -34,7 +34,7 @@ public class TipoCuenta {
 	private List<Cuenta> cuentas= new ArrayList<>() ;
 	
 	
-	public TipoCuenta(String descripcion) {
+	public CuentaTipo(String descripcion) {
 		this.id = null;
 		this.descripcion = descripcion;
 	}
@@ -42,7 +42,7 @@ public class TipoCuenta {
 	   * Constructor Vacio requerido, para cuando no se tiene los valores 
 	   * al instanciar la clase TipoCuenta
 	   */
-	public TipoCuenta() {
+	public CuentaTipo() {
 	}
 
 	/**
@@ -107,7 +107,7 @@ public class TipoCuenta {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TipoCuenta other = (TipoCuenta) obj;
+		CuentaTipo other = (CuentaTipo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

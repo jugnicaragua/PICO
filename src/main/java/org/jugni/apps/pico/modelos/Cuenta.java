@@ -39,7 +39,7 @@ public class Cuenta {
   
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name="IdTipoCuenta")
-  private TipoCuenta tipoCuenta;
+  private CuentaTipo cuentaTipo;
 
   
   /**
@@ -50,13 +50,13 @@ public class Cuenta {
     
   }
 
-	public Cuenta(String id, String descripcion, int nivel, int padre, String naturalesa, TipoCuenta tipoCuenta) {
+	public Cuenta(String id, String descripcion, int nivel, int padre, String naturalesa, CuentaTipo tipoCuenta) {
 	this.id = id;
 	this.descripcion = descripcion;
 	this.nivel = nivel;
 	this.padre = padre;
 	this.naturalesa = naturalesa;
-	this.tipoCuenta = tipoCuenta;
+	this.cuentaTipo = tipoCuenta;
 }
 	/**
 	 * Devuelve el valor del id de cuenta
@@ -90,15 +90,15 @@ public class Cuenta {
 	 * Devuelve el tipo de cuenta relacionado a la cuenta
 	 * @return
 	 */
-	public TipoCuenta getTipoCuenta() {
-		return tipoCuenta;
+	public CuentaTipo getTipoCuenta() {
+		return cuentaTipo;
 	}
 	/**
 	 * Establece el tipo de cuenta relacionado a la cuenta
 	 * @param tipoCuenta
 	 */
-	public void setTipoCuenta(TipoCuenta tipoCuenta) {
-		this.tipoCuenta = tipoCuenta;
+	public void setTipoCuenta(CuentaTipo tipoCuenta) {
+		this.cuentaTipo = tipoCuenta;
 	}
 	/**
 	 * Devuelve el nivel de la cuenta
