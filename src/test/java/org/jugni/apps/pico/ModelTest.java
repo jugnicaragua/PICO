@@ -7,21 +7,21 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jugni.apps.pico.modelos.Cuenta;
-import org.jugni.apps.pico.modelos.TipoCuenta;
+import org.jugni.apps.pico.modelos.CuentaTipo;
 import org.jugni.apps.pico.vista.swing.HibernateUtil;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class ModelTest {
-    private static TipoCuenta modelo1;
-    private static TipoCuenta modelo2;
-    private List<TipoCuenta> lstDatos;
-    final String SQLQUERY="FROM TipoCuenta";
+    private static CuentaTipo modelo1;
+    private static CuentaTipo modelo2;
+    private List<CuentaTipo> lstDatos;
+    final String SQLQUERY="FROM CuentaTipo";
     @BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		modelo1 = new TipoCuenta("Activo");
-        modelo2 = new TipoCuenta("Circulante");
+		modelo1 = new CuentaTipo("Activo");
+        modelo2 = new CuentaTipo("Circulante");
 	}
 
 	@Test
