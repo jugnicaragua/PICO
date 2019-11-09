@@ -14,17 +14,18 @@ import javax.persistence.Table;
 
 
 /**
- * Clase que representa la entidad o tabla TipoCuenta.
+ * Clase que representa la entidad o tabla CuentaTipo.
  *
  * @author gacs
  *
  */
 @Entity
-@Table(name="TipoCuenta" ,
+@Table(name="CuentaTipo" ,
 indexes = {@Index(name = "idx_tipocuenta", columnList="Descripcion")})
 public class CuentaTipo {
 	@Id
 	@GeneratedValue
+	@Column(name = "Id")
 	private Long id;
 	@Column(name = "Descripcion", length = 50)
 	private String descripcion;
