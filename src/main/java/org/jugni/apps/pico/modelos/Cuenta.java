@@ -1,5 +1,7 @@
 package org.jugni.apps.pico.modelos;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,7 +21,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Cuentas" ,
 indexes = {@Index(name = "idx_cuenta", columnList="Descripcion"),
-		@Index(name = "idx_cuenta", columnList="Naturalesa")})
+		@Index(name = "idx_cuenta", columnList="Naturaleza")})
 public class Cuenta {
   @Id()
   @Column(name="Id", length = 25)
@@ -33,31 +36,31 @@ public class Cuenta {
   @Column(name="Padre")
   private int padre;
   
-  @Column(name="Naturalesa", length = 50)
-  private String naturalesa;
+  @Column(name="Naturaleza", length = 50)
+  private String naturaleza;
   
   
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name="IdTipoCuenta")
+  @JoinColumn(name="CuentaTipoId")
   private CuentaTipo cuentaTipo;
-
   
+  @OneToMany(mappedBy = "cuenta",
+	cascade = CascadeType.ALL)
+  private List<ComprobanteCuenta>  comprobantesCuenta;
   /**
    * Constructor Vacio requerido, para cuando no se tiene los valores 
    * al instanciar la clase cuenta
    */
-  public Cuenta() {
+    public Cuenta() {
     
-  }
-
-	public Cuenta(String id, String descripcion, int nivel, int padre, String naturalesa, CuentaTipo tipoCuenta) {
+    }
+    public Cuenta(String id, String descripcion, int nivel, int padre, String naturaleza) {
 	this.id = id;
 	this.descripcion = descripcion;
 	this.nivel = nivel;
 	this.padre = padre;
-	this.naturalesa = naturalesa;
-	this.cuentaTipo = tipoCuenta;
-}
+	this.naturaleza = naturaleza;
+    }
 	/**
 	 * Devuelve el valor del id de cuenta
 	 * @return String
@@ -133,14 +136,14 @@ public class Cuenta {
 	 * @return
 	 */
 	public String getNaturalesa() {
-		return naturalesa;
+		return naturaleza;
 	}
 	/**
 	 * Establece la naturaleza de la cuenta
 	 * @param naturalesa
 	 */
 	public void setNaturalesa(String naturalesa) {
-		this.naturalesa = naturalesa;
+		this.naturaleza = naturaleza;
 	}
 
 	@Override
@@ -168,9 +171,8 @@ public class Cuenta {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "Cuenta [id=" + id + ", descripcion=" + descripcion + ", nivel=" + nivel + ", padre=" + padre
-				+ ", naturalesa=" + naturalesa + "]";
-	}
+    @Override
+    public String toString() {
+        return "Cuenta{" + "id=" + id + ", descripcion=" + descripcion + ", nivel=" + nivel + ", padre=" + padre + ", naturaleza=" + naturaleza + ", cuentaTipo=" + cuentaTipo + ", comprobantesCuenta=" + comprobantesCuenta + '}';
+    }
 }
