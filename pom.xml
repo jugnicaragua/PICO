@@ -85,7 +85,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.4.6.Final</version>
+            <version>5.4.8.Final</version>
         </dependency>
 
         <!-- Dependencies for SQLite -->
