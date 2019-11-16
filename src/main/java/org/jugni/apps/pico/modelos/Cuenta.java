@@ -10,6 +10,7 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -44,7 +45,7 @@ public class Cuenta {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CuentaTipoId")
     private CuentaTipo cuentaTipo;
-
+    
     @OneToMany(mappedBy = "cuenta",
             cascade = CascadeType.ALL)
     private List<ComprobanteCuenta> comprobantesCuenta;
@@ -52,6 +53,11 @@ public class Cuenta {
     @OneToMany(mappedBy = "cuenta",
             cascade = CascadeType.ALL)
     private List<CuentaCierre> cuentaCierre;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EstadoId")
+    private Estado estado;
+
 
     /**
      * Constructor Vacio requerido, para cuando no se tiene los valores al
@@ -61,7 +67,7 @@ public class Cuenta {
 
     }
 
-    public Cuenta(String id, String descripcion, int nivel, int padre, String naturaleza, CuentaTipo cuentaTipo, List<ComprobanteCuenta> comprobantesCuenta, List<CuentaCierre> cuentaCierre) {
+    public Cuenta(String id, String descripcion, int nivel, int padre, String naturaleza, CuentaTipo cuentaTipo, List<ComprobanteCuenta> comprobantesCuenta, List<CuentaCierre> cuentaCierre, Estado estado) {
         this.id = id;
         this.descripcion = descripcion;
         this.nivel = nivel;
@@ -70,7 +76,10 @@ public class Cuenta {
         this.cuentaTipo = cuentaTipo;
         this.comprobantesCuenta = comprobantesCuenta;
         this.cuentaCierre = cuentaCierre;
+        this.estado = estado;
     }
+
+    
 
     
     /**
@@ -213,6 +222,14 @@ public class Cuenta {
         this.cuentaCierre = cuentaCierre;
     }
 
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
     
     @Override
     public int hashCode() {
@@ -246,7 +263,7 @@ public class Cuenta {
 
     @Override
     public String toString() {
-        return "Cuenta{" + "id=" + id + ", descripcion=" + descripcion + ", nivel=" + nivel + ", padre=" + padre + ", naturaleza=" + naturaleza + ", cuentaTipo=" + cuentaTipo + ", comprobantesCuenta=" + comprobantesCuenta + ", cuentaCierre=" + cuentaCierre + '}';
+        return "Cuenta{" + "id=" + id + ", descripcion=" + descripcion + ", nivel=" + nivel + ", padre=" + padre + ", naturaleza=" + naturaleza + ", cuentaTipo=" + cuentaTipo + ", comprobantesCuenta=" + comprobantesCuenta + ", cuentaCierre=" + cuentaCierre + ", estado=" + estado + '}';
     }
     
 }
