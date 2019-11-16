@@ -16,6 +16,7 @@ import javax.persistence.Table;
  * Clase que representa la entidad o tabla Cuentas.
  * 
  * @author gacs
+ * @license  : GPLv3
  */
 
 @Entity
