@@ -1,7 +1,9 @@
 package org.jugni.apps.pico.modelos;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Clase que representa la entidad o tabla Cierre.
@@ -38,6 +41,10 @@ public class Cierre {
     @JoinColumn(name = "CierreTipoId")
     private CierreTipo cierreTipo;
 
+    @OneToMany(mappedBy = "cierre",
+            cascade = CascadeType.ALL)
+    private List<CuentaCierre> cuentaCierre;
+
     /**
      * Constructor Vacio requerido, para cuando no se tiene los valores al
      * instanciar la clase Cierre
@@ -45,12 +52,16 @@ public class Cierre {
     public Cierre() {
     }
 
-    public Cierre(Short anio, Byte mes, Date fecha, CierreTipo cierreTipo) {
+    public Cierre(Long id, Short anio, Byte mes, Date fecha, CierreTipo cierreTipo, List<CuentaCierre> cuentaCierre) {
+        this.id = id;
         this.anio = anio;
         this.mes = mes;
         this.fecha = fecha;
         this.cierreTipo = cierreTipo;
+        this.cuentaCierre = cuentaCierre;
     }
+
+
 
     public Long getId() {
         return id;
@@ -92,6 +103,16 @@ public class Cierre {
         this.cierreTipo = cierreTipo;
     }
 
+    public List<CuentaCierre> getCuentaCierre() {
+        return cuentaCierre;
+    }
+
+    public void setCuentaCierre(List<CuentaCierre> cuentaCierre) {
+        this.cuentaCierre = cuentaCierre;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -118,9 +139,9 @@ public class Cierre {
 
     @Override
     public String toString() {
-        return "Cierre{" + "id=" + id + ", anio=" + anio + ", mes=" + mes + ", fecha=" + fecha + ", cierreTipo=" + cierreTipo + '}';
+        return "Cierre{" + "id=" + id + ", anio=" + anio + ", mes=" + mes + ", fecha=" + fecha + ", cierreTipo=" + cierreTipo + ", cuentaCierre=" + cuentaCierre + '}';
     }
-    
-    
+
+
 
 }
