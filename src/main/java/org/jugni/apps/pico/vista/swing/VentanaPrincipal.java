@@ -5,10 +5,12 @@ import javax.swing.border.BevelBorder;
 import java.awt.*;
 
 
-public class VentanaPrincipal {
+public class VentanaPrincipal extends JFrame{
 
-	private final static JFrame frmPicoSistema = new JFrame(); ;
-
+	
+	//propiedad Singleton
+	static VentanaPrincipal miInstancia;
+	
 	/**
 	 * Create the application.
 	 */
@@ -18,19 +20,20 @@ public class VentanaPrincipal {
 		 * se etablecen los parametros basicos de configuracion.
 		 */
 		initialize();
+		miInstancia = this;
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frmPicoSistema.setTitle("PICO :: Sistema Contable");
-		frmPicoSistema.setName("vPrincipal");
-		frmPicoSistema.setBounds(100, 100, 626, 375);
-		frmPicoSistema.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("PICO :: Sistema Contable");
+		setName("vPrincipal");
+		setBounds(100, 100, 626, 375);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JToolBar toolBar_1 = new JToolBar();
-		frmPicoSistema.getContentPane().add(toolBar_1, BorderLayout.SOUTH);
+		getContentPane().add(toolBar_1, BorderLayout.SOUTH);
 		
 		JLabel lblFecha = new JLabel("Fecha: ");
 		lblFecha.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -46,17 +49,17 @@ public class VentanaPrincipal {
 		toolBar_1.add(progressBar);
 		
 		JToolBar toolBar = new JToolBar();
-		frmPicoSistema.getContentPane().add(toolBar, BorderLayout.NORTH);
+		getContentPane().add(toolBar, BorderLayout.NORTH);
 		
 		JButton btnNewButton = new JButton("Nuevo CD");
 		btnNewButton.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/org/tango-project/tango-icon-theme/16x16/actions/document-new.png")));
 		toolBar.add(btnNewButton);
 		
 		JDesktopPane desktopPane = new JDesktopPane();
-		frmPicoSistema.getContentPane().add(desktopPane, BorderLayout.CENTER);
+		getContentPane().add(desktopPane, BorderLayout.CENTER);
 
 		//Agregando el menu principal a la ventana
-		frmPicoSistema.setJMenuBar(new MenuPrincipal());
+		setJMenuBar(new MenuPrincipal());
 	}
 
 
@@ -64,6 +67,21 @@ public class VentanaPrincipal {
 	 * Metodo para mostrar, porque esta es una clase estandart, que no hereda ninguna otra clase, ergo, debemos usar un Wrapper.
 	 */
 	public void mostrar() {
-		frmPicoSistema.setVisible(true);
+		setVisible(true);
 	}
+
+  public static void agregar(JInternalFrame ventanaInterna) {
+      VentanaPrincipal.getIntancia().add(ventanaInterna);
+  }
+  
+  /**
+   * Metodo SingleTon de la Ventana Principal
+   * @return
+   */
+  public static VentanaPrincipal getIntancia() {
+    return (null==miInstancia) ? new VentanaPrincipal() : miInstancia;
+  }
+  
+  
 }
+

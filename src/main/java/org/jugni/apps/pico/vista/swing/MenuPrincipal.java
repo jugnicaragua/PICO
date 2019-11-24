@@ -95,7 +95,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
          *Agrega Eventos  o acciones para Las opciones del menu Archivo
          */
         mntmSalir.addActionListener(ActionEvent -> MenuPrincipalAcciones.salir());
-        mntmEmpresa.addActionListener(ActionListener -> MenuPrincipalAcciones.mostrarVentanaDatosEmpresa());
+        mntmEmpresa.addActionListener(ActioEvent -> MenuPrincipalAcciones.mostrarVentanaDatosEmpresa());
 
         //**Se instancia los submenu del menu mnCatalogo
         mntmCatalogoTipoCuentas  = new ItemMenuUtils("Catalogo tipo de Cuentas","Administra catalogo de tipo de cuenta",'T');

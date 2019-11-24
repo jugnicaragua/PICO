@@ -13,196 +13,196 @@ import java.util.logging.Logger;
  */
 public class MiAplicacionPICO {
 
-	String m_originalFullName = null;
+  String m_originalFullName = null;
 
-	// PRIVATE
+  // PRIVATE
 
-	private static SplashScreen fSplashScreen;
-	private static final Logger fLogger = Logger.getLogger(MiAplicacionPICO.class.getName());
-	private static final String SPLASH_IMAGE = "StocksMonitor.gif";
+  private static SplashScreen fSplashScreen;
+  private static final Logger fLogger = Logger.getLogger(MiAplicacionPICO.class.getName());
+  private static final String SPLASH_IMAGE = "StocksMonitor.gif";
 
-	// main
-	public static void main(String[] args) {
+  // main
+  public static void main(String[] args) {
 
-		System.out.println("Hello World!");
+    System.out.println("Hello World!");
 
-		String osName = System.getProperty("os.name");
+    String osName = System.getProperty("os.name");
 
-		if (osName != null && osName.indexOf("Windows") != -1) {
-			try {
-				UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (UnsupportedLookAndFeelException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} else {
-			try {
-				UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (InstantiationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (UnsupportedLookAndFeelException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+    if (osName != null && osName.indexOf("Windows") != -1) {
+      try {
+        UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+      } catch (ClassNotFoundException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      } catch (InstantiationException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      } catch (IllegalAccessException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      } catch (UnsupportedLookAndFeelException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    } else {
+      try {
+        // comentaod por ahora TODO encontrar el NAtivo
+        // UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+        /*
+         * } catch (ClassNotFoundException e) { // TODO Auto-generated catch block e.printStackTrace(); }
+         * catch (InstantiationException e) { // TODO Auto-generated catch block e.printStackTrace(); }
+         * catch (IllegalAccessException e) { // TODO Auto-generated catch block e.printStackTrace();
+         * 
+         * 
+         * } catch (UnsupportedLookAndFeelException e) { // TODO Auto-generated catch block
+         * e.printStackTrace(); }
+         */
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
 
-		// TODO: Verificacion del sistema
+    }
 
-		// TODO: cargar preferencias
+    // TODO: Verificacion del sistema
 
-		// TODO: Validar cosas de la base de datos.
+    // TODO: cargar preferencias
 
-		// si todo bien,
+    // TODO: Validar cosas de la base de datos.
 
-		MiAplicacionPICO.initialize(args);
+    // si todo bien,
 
-		//
-	}
+    MiAplicacionPICO.initialize(args);
 
-	private static void initialize(String[] args) {
-		// cargandoSplashScreen
-		try {
-			showSplashScreen(null);
+    //
+  }
 
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+  private static void initialize(String[] args) {
+    // cargandoSplashScreen
+    try {
+      showSplashScreen(null);
 
-		showMainWindow();
+    } catch (Exception e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
 
-		//EventQueue.invokeLater(new SplashScreenCloser());
-	}
+    showMainWindow();
 
-	private static void showMainWindow() {
-		fLogger.info("Mostrando la Ventana Principal.");
-		VentanaPrincipal mainWindow = new VentanaPrincipal();
-		mainWindow.mostrar();
-	}
+    // EventQueue.invokeLater(new SplashScreenCloser());
+  }
 
-	private static void showSplashScreen(ImageInfo test) throws Exception {
-		fLogger.info("Showing the splash screen.");
-		SplashScreen splashScreen = SplashScreen.getSplashScreen();
-		if (splashScreen == null) {
-			throw new RuntimeException("Splash screen is not shown!");
-		}
-		Graphics2D g = splashScreen.createGraphics();
-		Rectangle splashBounds = splashScreen.getBounds();
-		int screenX = (int) splashBounds.getCenterX();
-		int screenY = (int) splashBounds.getCenterY();
-		Robot robot = new Robot();
-		Color splashScreenColor = robot.getPixelColor(screenX, screenY);
+  private static void showMainWindow() {
+    fLogger.info("Mostrando la Ventana Principal.");
+    VentanaPrincipal mainWindow = new VentanaPrincipal();
+    mainWindow.mostrar();
+  }
 
-		float scaleFactor = getScaleFactor();
-		Color testColor = (1 < scaleFactor) ? test.color2x : test.color1x;
-		if (!compare(testColor, splashScreenColor)) {
-			throw new RuntimeException("Image with wrong resolution is used for splash screen!");
-		}
-	}
+  private static void showSplashScreen(ImageInfo test) throws Exception {
+    fLogger.info("Showing the splash screen.");
+    SplashScreen splashScreen = SplashScreen.getSplashScreen();
+    if (splashScreen == null) {
+      throw new RuntimeException("Splash screen is not shown!");
+    }
+    Graphics2D g = splashScreen.createGraphics();
+    Rectangle splashBounds = splashScreen.getBounds();
+    int screenX = (int) splashBounds.getCenterX();
+    int screenY = (int) splashBounds.getCenterY();
+    Robot robot = new Robot();
+    Color splashScreenColor = robot.getPixelColor(screenX, screenY);
 
-	void exitFromSystem() {
-		System.exit(0);
-	}
+    float scaleFactor = getScaleFactor();
+    Color testColor = (1 < scaleFactor) ? test.color2x : test.color1x;
+    if (!compare(testColor, splashScreenColor)) {
+      throw new RuntimeException("Image with wrong resolution is used for splash screen!");
+    }
+  }
 
-	private int getLastIndexOfSlash(String thisname) {
-		int index = m_originalFullName.lastIndexOf("/");
-		if (index == -1)
-			index = m_originalFullName.lastIndexOf("\\");
-		return index;
-	}
+  void exitFromSystem() {
+    System.exit(0);
+  }
 
-	/**
-	 * Removes the splash screen.
-	 *
-	 * Invoke this <tt>Runnable</tt> using <tt>EventQueue.invokeLater</tt>, in order
-	 * to remove the splash screen in a thread-safe manner.
-	 */
-	private static final class SplashScreenCloser implements Runnable {
-		@Override
-		public void run() {
-			fLogger.fine("Closing the splash screen.'");
-		}
-	}
+  private int getLastIndexOfSlash(String thisname) {
+    int index = m_originalFullName.lastIndexOf("/");
+    if (index == -1)
+      index = m_originalFullName.lastIndexOf("\\");
+    return index;
+  }
 
-	private static void logBasicSystemInfo() {
-		fLogger.info("Launching the application...");
-		fLogger.config("Operating System: " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
-		fLogger.config("JRE: " + System.getProperty("java.version"));
-		fLogger.info("Java Launched From: " + System.getProperty("java.home"));
-		fLogger.config("Class Path: " + System.getProperty("java.class.path"));
-		fLogger.config("Library Path: " + System.getProperty("java.library.path"));
-		//fLogger.config("Application Name: " + Const.APP_NAME + "/" + Consts.APP_VERSION);
-		fLogger.config("User Home Directory: " + System.getProperty("user.home"));
-		fLogger.config("User Working Directory: " + System.getProperty("user.dir"));
-		fLogger.info("Test INFO logging.");
-		fLogger.fine("Test FINE logging.");
-		fLogger.finest("Test FINEST logging.");
-	}
+  /**
+   * Removes the splash screen.
+   *
+   * Invoke this <tt>Runnable</tt> using <tt>EventQueue.invokeLater</tt>, in order to remove the
+   * splash screen in a thread-safe manner.
+   */
+  private static final class SplashScreenCloser implements Runnable {
+    @Override
+    public void run() {
+      fLogger.fine("Closing the splash screen.'");
+    }
+  }
 
-	static float getScaleFactor() {
+  private static void logBasicSystemInfo() {
+    fLogger.info("Launching the application...");
+    fLogger.config("Operating System: " + System.getProperty("os.name") + " " + System.getProperty("os.version"));
+    fLogger.config("JRE: " + System.getProperty("java.version"));
+    fLogger.info("Java Launched From: " + System.getProperty("java.home"));
+    fLogger.config("Class Path: " + System.getProperty("java.class.path"));
+    fLogger.config("Library Path: " + System.getProperty("java.library.path"));
+    // fLogger.config("Application Name: " + Const.APP_NAME + "/" + Consts.APP_VERSION);
+    fLogger.config("User Home Directory: " + System.getProperty("user.home"));
+    fLogger.config("User Working Directory: " + System.getProperty("user.dir"));
+    fLogger.info("Test INFO logging.");
+    fLogger.fine("Test FINE logging.");
+    fLogger.finest("Test FINEST logging.");
+  }
 
-		final Dialog dialog = new Dialog((Window) null);
-		dialog.setSize(100, 100);
-		dialog.setModal(true);
-		float[] scaleFactors = new float[1];
-		Panel panel = new Panel() {
+  static float getScaleFactor() {
 
-			@Override
-			public void paint(Graphics g) {
-				String scaleStr = System.getenv("GDK_SCALE");
-				if (scaleStr != null && !scaleStr.equals("")) {
-					try {
-						scaleFactors[0] = Float.valueOf(scaleStr);
-					} catch (NumberFormatException ex) {
-						scaleFactors[0] = 1.0f;
-					}
-				}
-				dialog.setVisible(false);
-			}
-		};
-		dialog.add(panel);
-		dialog.setVisible(true);
-		dialog.dispose();
-		return scaleFactors[0];
-	}
+    final Dialog dialog = new Dialog((Window) null);
+    dialog.setSize(100, 100);
+    dialog.setModal(true);
+    float[] scaleFactors = new float[1];
+    Panel panel = new Panel() {
 
-	static boolean compare(Color c1, Color c2) {
-		return compare(c1.getRed(), c2.getRed()) && compare(c1.getGreen(), c2.getGreen())
-				&& compare(c1.getBlue(), c2.getBlue());
-	}
+      @Override
+      public void paint(Graphics g) {
+        String scaleStr = System.getenv("GDK_SCALE");
+        if (scaleStr != null && !scaleStr.equals("")) {
+          try {
+            scaleFactors[0] = Float.valueOf(scaleStr);
+          } catch (NumberFormatException ex) {
+            scaleFactors[0] = 1.0f;
+          }
+        }
+        dialog.setVisible(false);
+      }
+    };
+    dialog.add(panel);
+    dialog.setVisible(true);
+    dialog.dispose();
+    return scaleFactors[0];
+  }
 
-	static boolean compare(int n, int m) {
-		return Math.abs(n - m) <= 50;
-	}
+  static boolean compare(Color c1, Color c2) {
+    return compare(c1.getRed(), c2.getRed()) && compare(c1.getGreen(), c2.getGreen()) && compare(c1.getBlue(), c2.getBlue());
+  }
 
-	static class ImageInfo {
+  static boolean compare(int n, int m) {
+    return Math.abs(n - m) <= 50;
+  }
 
-		final String name1x;
-		final String name2x;
-		final Color color1x;
-		final Color color2x;
+  static class ImageInfo {
 
-		public ImageInfo(String name1x, String name2x, Color color1x, Color color2x) {
-			this.name1x = name1x;
-			this.name2x = name2x;
-			this.color1x = color1x;
-			this.color2x = color2x;
-		}
-	}
+    final String name1x;
+    final String name2x;
+    final Color color1x;
+    final Color color2x;
+
+    public ImageInfo(String name1x, String name2x, Color color1x, Color color2x) {
+      this.name1x = name1x;
+      this.name2x = name2x;
+      this.color1x = color1x;
+      this.color2x = color2x;
+    }
+  }
 }
