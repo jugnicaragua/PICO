@@ -1,18 +1,8 @@
 package org.jugni.apps.pico.vista.swing;
 
-import java.awt.EventQueue;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JPanel;
-import java.awt.GridLayout;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-//import net.miginfocom.swing.MigLayout;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.JButton;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 
 public class Empresa extends JInternalFrame {
@@ -21,26 +11,17 @@ public class Empresa extends JInternalFrame {
 	private JTextField txtD;
 	private JTextField txtD_1;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Empresa frame = new Empresa();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	//Area de definicion de Variables Globales
+	static Empresa miInstancia;
+
 
 	/**
-	 * Create the frame.
+	 * Constructor de Empresa
 	 */
 	public Empresa() {
+		//establciendo el valor del Sigleton
+		miInstancia = this;
+
 		setToolTipText("Datos de la empresa");
 		setOpaque(true);
 		setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -98,6 +79,17 @@ public class Empresa extends JInternalFrame {
 		btncerrar.setBounds(392, 340, 89, 23);
 		getContentPane().add(btncerrar);
 
+		//establciendo el valor del Sigleton
+		miInstancia = this;
+
 	}
-	
+
+	/**
+	 * SingleTon de Empresa.
+	 *
+	 * @return
+	 */
+	public static Empresa getInstancia() {
+		return null == miInstancia ? (new Empresa()) : miInstancia;
+	}
 }

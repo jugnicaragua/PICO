@@ -1,4 +1,4 @@
-package org.jugni.apps.pico.vista.swing;
+package org.jugni.apps.pico.vista.utils;
 
 // Sample code file: Utilities.java
 // Warning: This code has been marked up for HTML
@@ -24,14 +24,12 @@ CUSTOMERS WITH RESPECT TO THIS CODE.
 
 //package com.novell.application.console.shell;
 
-import java.awt.*;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.*;
 import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Properties;
 
 //import com.objectspace.jgl.*;
 //import com.novell.application.console.snapin.scope.*;

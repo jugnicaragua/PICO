@@ -22,10 +22,14 @@ CUSTOMERS WITH RESPECT TO THIS CODE.
 
 //package com.novell.application.console.shell;
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.*;
+import org.jugni.apps.pico.vista.utils.Utilities;
+
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Simple splash screen. It is created in a static initializer inside the

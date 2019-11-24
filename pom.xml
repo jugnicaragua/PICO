@@ -73,7 +73,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>org.jugni.apps.pico.App</mainClass>
+                            <mainClass>org.jugni.apps.pico.MiAplicacionPICO</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -97,7 +97,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>org.jugni.apps.pico.App</mainClass>
+                    <mainClass>org.jugni.apps.pico.MiAplicacionPICO</mainClass>
                 </configuration>
             </plugin>
 

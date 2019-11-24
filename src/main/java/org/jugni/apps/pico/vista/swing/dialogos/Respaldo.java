@@ -1,27 +1,16 @@
 package org.jugni.apps.pico.vista.swing.dialogos;
 
-import java.awt.BorderLayout;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
+import org.jugni.apps.pico.vista.utils.JDialogoUtil;
+import org.jugni.apps.pico.vista.utils.Utilities;
+
+import javax.swing.*;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-
-import org.jugni.apps.pico.vista.swing.Utilities;
-import org.jugni.apps.pico.vista.utils.JDialogoUtil;
 
 /**
  * Formulario para respaldo

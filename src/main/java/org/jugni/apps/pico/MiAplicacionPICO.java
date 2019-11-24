@@ -1,37 +1,24 @@
 package org.jugni.apps.pico;
 
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.plaf.basic.*;
-import javax.swing.event.*;
-import javax.swing.plaf.*;
-import javax.swing.tree.*;
-
 import org.jugni.apps.pico.vista.swing.VentanaPrincipal;
 
-import java.util.Vector;
-import java.util.StringTokenizer;
-import java.net.URL;
-import java.util.Enumeration;
-
-import java.util.logging.*;
+import javax.swing.*;
+import java.awt.*;
+import java.util.logging.Logger;
 
 /**
  * 
  * Hello world!
  *
  */
-public class App {
+public class MiAplicacionPICO {
 
 	String m_originalFullName = null;
 
 	// PRIVATE
 
 	private static SplashScreen fSplashScreen;
-	private static final Logger fLogger = Logger.getLogger(App.class.getName());
+	private static final Logger fLogger = Logger.getLogger(MiAplicacionPICO.class.getName());
 	private static final String SPLASH_IMAGE = "StocksMonitor.gif";
 
 	// main
@@ -83,7 +70,7 @@ public class App {
 
 		// si todo bien,
 
-		App.initialize(args);
+		MiAplicacionPICO.initialize(args);
 
 		//
 	}
@@ -104,9 +91,9 @@ public class App {
 	}
 
 	private static void showMainWindow() {
-		fLogger.info("Showing the main window.");
+		fLogger.info("Mostrando la Ventana Principal.");
 		VentanaPrincipal mainWindow = new VentanaPrincipal();
-		mainWindow.show();
+		mainWindow.mostrar();
 	}
 
 	private static void showSplashScreen(ImageInfo test) throws Exception {

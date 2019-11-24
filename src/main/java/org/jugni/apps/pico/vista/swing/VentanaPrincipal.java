@@ -1,46 +1,22 @@
 package org.jugni.apps.pico.vista.swing;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDesktopPane;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JProgressBar;
-import javax.swing.JToolBar;
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import java.awt.*;
 
 
 public class VentanaPrincipal {
 
 	private final static JFrame frmPicoSistema = new JFrame(); ;
-	private final Action action = new SwingAction();
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaPrincipal window = new VentanaPrincipal();
-					window.frmPicoSistema.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the application.
 	 */
 	public VentanaPrincipal() {
+		/**
+		 * Se inicializa,
+		 * se etablecen los parametros basicos de configuracion.
+		 */
 		initialize();
 	}
 
@@ -48,7 +24,6 @@ public class VentanaPrincipal {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
 		frmPicoSistema.setTitle("PICO :: Sistema Contable");
 		frmPicoSistema.setName("vPrincipal");
 		frmPicoSistema.setBounds(100, 100, 626, 375);
@@ -79,26 +54,16 @@ public class VentanaPrincipal {
 		
 		JDesktopPane desktopPane = new JDesktopPane();
 		frmPicoSistema.getContentPane().add(desktopPane, BorderLayout.CENTER);
-		
-//		MenuPrincipal menuBar = new MenuPrincipal();
+
+		//Agregando el menu principal a la ventana
 		frmPicoSistema.setJMenuBar(new MenuPrincipal());
-		
 	}
-	
-	
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-		}
-	}
-	
-	
-	
-	public void show() {
-		
+
+
+	/**
+	 * Metodo para mostrar, porque esta es una clase estandart, que no hereda ninguna otra clase, ergo, debemos usar un Wrapper.
+	 */
+	public void mostrar() {
 		frmPicoSistema.setVisible(true);
 	}
 }
