@@ -25,8 +25,14 @@ CUSTOMERS WITH RESPECT TO THIS CODE.
 //package com.novell.application.console.shell;
 
 import java.awt.*;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.*;
 import javax.swing.*;
+
 //import com.objectspace.jgl.*;
 //import com.novell.application.console.snapin.scope.*;
 //import com.novell.application.console.snapin.context.*;
@@ -298,4 +304,24 @@ public class Utilities {
 
 		return frame;
 	}
+	
+
+public static void cp(String oringen, String destino) throws IOException {
+    BufferedInputStream in = null;
+    BufferedOutputStream out = null; 
+    try {
+        in = new BufferedInputStream(new FileInputStream(oringen));
+        out = new BufferedOutputStream(new FileOutputStream(destino));
+        byte[] buffer = new byte[1024];
+        int length;
+        while ((length = in.read(buffer)) > 0) {
+            out.write(buffer, 0, length);
+        }
+    } finally {
+        if(in!=null)
+        	in.close();
+        if(out!=null)
+        	out.close();
+    }
+}
 }

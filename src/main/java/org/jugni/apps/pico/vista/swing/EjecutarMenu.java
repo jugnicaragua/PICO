@@ -3,10 +3,8 @@
  */
 package org.jugni.apps.pico.vista.swing;
 
-import java.awt.Frame;
-
-
 import org.jugni.apps.pico.vista.swing.dialogos.Acercade;
+import org.jugni.apps.pico.vista.swing.dialogos.Respaldo;
 
 /**
  * Clase que ejecuta las intrucciones del menu
@@ -14,14 +12,17 @@ import org.jugni.apps.pico.vista.swing.dialogos.Acercade;
  *
  */
 public class EjecutarMenu {
-	private final Frame parent ; //hijo del frame principal de la aplicacion
-	public EjecutarMenu(Frame parent) {
-		this.parent=parent;
+	public EjecutarMenu() {
 	}
 	
 	public void ejecutarAcercaDe() {
-		Acercade about =new  Acercade(parent);
+		Acercade about =new  Acercade();
 		about.setVisible(true);
+		
+	}
+	public void ejecutarRespaldo() {
+		Respaldo respaldo =new  Respaldo();
+		respaldo.setVisible(true);
 		
 	}
 

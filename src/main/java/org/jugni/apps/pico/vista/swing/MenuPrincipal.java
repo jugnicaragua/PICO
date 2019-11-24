@@ -25,17 +25,18 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
     				mnAyuda;			// Agrupa los menus de ayuda y acerca de
     
     private ItemMenuUtils   
-            mntmIniciarSession,                         //Submenu que llama a formulario de inicio de session
-            mntmParametrosGenerales,            //Submenu que llama al formulario de configuracion
-            mntmCicloFiscal,                                //Submenu que llama al formulario  de configuracion de siclo fiscal
-            mntmSalir,                                          //Submenu que cierra la aplicacion
+            mntmIniciarSession,         //Submenu que llama a formulario de inicio de session
+            mntmParametrosGenerales,    //Submenu que llama al formulario de configuracion
+            mntmCicloFiscal,            //Submenu que llama al formulario  de configuracion de siclo fiscal
+            mntmSalir,					//Submenu que cierra la aplicacion
             mntmCatalogoTipoCuentas,	//Submenu que llama al formulario de Tipos de cuenta
-            mntmCatalogoContable,                   //Submenu que llama al formulario de catalogo de cuenta
-            mntmCaptacionDiario,                     //Submenu que llama al formulario de captacion de comprobante diario
-            mntmCaptacionAjuste,                     //Submenu que llama al formulario de captacion de comprobante Ajuste            
-            mntmManualEnLina,                           //Submenu que llama al manual que se encuentra en linea
-            mntmIrAlForo,                                   //submenu que lo traslada a un foro de los desarrolladores
-            mntmAcercaDe;                               //Submenu que muestra un dialogo acerca de
+            mntmCatalogoContable,		//Submenu que llama al formulario de catalogo de cuenta
+            mntmCaptacionDiario,		//Submenu que llama al formulario de captacion de comprobante diario
+            mntmCaptacionAjuste,		//Submenu que llama al formulario de captacion de comprobante Ajuste            
+            mntmHerramientaRespaldo,	//Submenu que llama al formulario de Respaldo del la base de datos            
+            mntmManualEnLina,           //Submenu que llama al manual que se encuentra en linea
+            mntmIrAlForo,               //submenu que lo traslada a un foro de los desarrolladores
+            mntmAcercaDe;               //Submenu que muestra un dialogo acerca de
             
                                         
            
@@ -48,7 +49,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
      * 
      */
     private void initMenuPrincipal() {
-        ejecutarMenu = new EjecutarMenu((java.awt.Frame) this.getParent());
+        ejecutarMenu = new EjecutarMenu();
     	setName("MenuPrincipal");
         // Inicia la declaracion de menus
         mnArchivo          = new JMenu("Archivo");
@@ -115,8 +116,20 @@ public class MenuPrincipal extends JMenuBar implements ActionListener{
         mnCaptacion.add(mntmCaptacionDiario);
         mnCaptacion.add(mntmCaptacionAjuste);
         
+        
         //**Se Instancia los submenu al menu mnAyuda
-         mntmManualEnLina   = new ItemMenuUtils("Manual en lina","**Presenta un manual del sistema",'M');
+         mntmHerramientaRespaldo   = new ItemMenuUtils("Respaldo","Respalda la base de datos",'R');
+
+         //**Agrega el metodo de escucha para los sub menu de mnHerramientas
+
+         mntmHerramientaRespaldo.addActionListener(e -> {
+ 				ejecutarMenu.ejecutarRespaldo( );
+ 		});
+         //**Se agrega los submenu al menu Herramienta
+         mnHerramienta.add(mntmHerramientaRespaldo);
+
+        //**Se Instancia los submenu al menu mnAyuda
+         mntmManualEnLina   = new ItemMenuUtils("Manual en lina","Presenta un manual del sistema",'M');
          mntmIrAlForo       = new ItemMenuUtils("Ir al Foro","Los traslada al foro de los desarrolladores",'I');		
          mntmAcercaDe       = new ItemMenuUtils("Acerca de ","Acerca de Pico",'A');
         //**Agrega el metodo de escucha para los sub menu de mnAyuda
