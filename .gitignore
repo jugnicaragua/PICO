@@ -199,3 +199,4 @@ temp/
 desing/
 
 # End of https://www.gitignore.io/api/linux,maven,backup,windows,netbeans,intellij,intellij+all
+/.settings/

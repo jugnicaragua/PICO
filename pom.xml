@@ -30,9 +30,10 @@
 
     <!-- Propiedades del proyecto -->
     <properties>
+        <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
 
     <repositories>
@@ -42,15 +43,34 @@
         </repository>
     </repositories>
 
+
+    <!-- Configuracion pra la construccion del Paquete -->
     <build>
+        <!-- etableciendo un nombre definitivo a nuestro jar -->
+        <finalName>PICO</finalName>
+
         <!-- plugins -->
         <plugins>
-            <!-- Crear un fat jar -->
+
+            <!--Plugin: Estableciendo el nivel de version del compilador -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+
+
+            <!-- Plugin: Crear un fat jar -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.2.0</version>
                 <configuration>
                     <!-- Clase main -->
+                    <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
                             <mainClass>org.jugni.apps.pico.App</mainClass>
@@ -70,25 +90,37 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Plugin: para que se ejecute desde Maven Comando -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <configuration>
+                    <mainClass>org.jugni.apps.pico.App</mainClass>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
     <!--  Todas las librerias necesarias -->
     <dependencies>
+        <!-- Logging -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.11.0</version>
         </dependency>
 
-        <!-- ORM -->
+        <!-- ORM  (Base de datos manejo) -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>5.3.6.Final</version>
         </dependency>
 
-        <!-- Dependencies for SQLite -->
+        <!-- Dependencies for SQLite (Base de datos)  -->
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
@@ -127,6 +159,7 @@
             <version>1.0</version>
         </dependency>
 
+        <!-- TODO Aun no sé que hace esta dependencia aquí -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
@@ -134,12 +167,22 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- pruebas unitarias -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Plugin de compilacion -->
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>
