@@ -6,9 +6,9 @@ import java.awt.*;
 
 public class VentanaPrincipal extends JFrame {
 
+     static JDesktopPane desktopPane;
      //propiedad Singleton
      static VentanaPrincipal miInstancia;
-     static JDesktopPane desktopPane;
 
      /**
       * Create the application.
@@ -29,6 +29,7 @@ public class VentanaPrincipal extends JFrame {
           setName("vPrincipal");
           setBounds(100, 100, 626, 375);
           setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+          setExtendedState(MAXIMIZED_BOTH);
 
           JToolBar toolBar_1 = new JToolBar();
           getContentPane().add(toolBar_1, BorderLayout.SOUTH);
@@ -53,8 +54,8 @@ public class VentanaPrincipal extends JFrame {
           btnNewButton.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/org/tango-project/tango-icon-theme/16x16/actions/document-new.png")));
           toolBar.add(btnNewButton);
 
-          getContentPane().add(desktopPane, BorderLayout.CENTER);
           desktopPane = new JDesktopPane();
+          getContentPane().add(desktopPane, BorderLayout.CENTER);
 
           //Agregando el menu principal a la ventana
           setJMenuBar(new MenuPrincipal());
@@ -72,9 +73,11 @@ public class VentanaPrincipal extends JFrame {
           //TODO : Pendiente de revisar su utilidad
           VentanaPrincipal.getIntancia().add(ventanaInterna);
      }
+
      /**
       * Agrega las ventanas JInternalFrame al escritorio(desktopPane)
-      * @param ventanaInterna 
+      *
+      * @param ventanaInterna
       */
      public static void agregarAlEscritorio(JInternalFrame ventanaInterna) {
           desktopPane.add(ventanaInterna);
