@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Entity
 public class MiEmpresa {
      @Id
-     @Column(name = "Id", length = 25)
+     @Column(name = "Ruc", length = 25)
      private String ruc;
      
      @Column(name = "RazonSocial", length = 35)
