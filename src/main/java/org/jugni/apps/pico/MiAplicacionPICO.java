@@ -118,6 +118,7 @@ public class MiAplicacionPICO {
   }
 
   void exitFromSystem() {
+       System.gc();
     System.exit(0);
   }
 
