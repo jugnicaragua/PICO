@@ -3,117 +3,382 @@ package org.jugni.apps.pico.vista.swing;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.border.TitledBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.jugni.apps.pico.DAO.EmpresaImpl;
+import org.jugni.apps.pico.modelos.MiEmpresa;
 
 public class Empresa extends JInternalFrame {
-  private JTextField txtXx;
-  private JTextField txtD;
-  private JTextField txtD_1;
 
-  // Area de definicion de Variables Globales
-  static Empresa miInstancia;
+     private JTextField txtRuc;
+     private JTextField txtRazonSocial;
+     private JTextField txtEmitirA;
+     private JTextField txtDireccion;
+     private JTextField txtRepresentanteLegal;
+     private JTextField txtContacto;
+     private JTextField txtWebSite;
+     private JTextField txtCorreo;
+     private JTextField txtTelefono;
+     private JLabel lblImagen;
+     private MiEmpresa datosEmpresa;
+     // Area de definicion de Variables Globales
+     static Empresa miInstancia;
 
+     /**
+      * Constructor de Empresa
+      */
+     private Empresa() {
+          // establciendo el valor del Sigleton
+          initEmpresa();
+          miInstancia = this;
+     }
 
-  /**
-   * Constructor de Empresa
-   */
-  public Empresa() {
-    // establciendo el valor del Sigleton
-    miInstancia = this;
+     private void initEmpresa() {
+          setToolTipText("Datos de la empresa");
+          setOpaque(true);
+          setBorder(new LineBorder(new Color(0, 0, 0)));
+          setIconifiable(false);
+          setTitle("Datos de la empresa");
+          setClosable(true);
+          Color bgCampoObligatorio = new Color(255, 228, 181); //Color de fondo para los campos que son obligatorios
 
-    setToolTipText("Datos de la empresa");
-    setOpaque(true);
-    setBorder(new LineBorder(new Color(0, 0, 0)));
-    setIconifiable(false);
-    setTitle("Datos de la empresa");
-    setClosable(true);
-    setBounds(100, 100, 568, 339);
-    // getContentPane().setLayout(null);
+          // getContentPane().setLayout(null);
+          //Se establece las teclas que al presionar avance el foco
+          Set<AWTKeyStroke> keyFoco = new HashSet<>();
+          keyFoco.add(AWTKeyStroke.getAWTKeyStroke(
+                  KeyEvent.VK_ENTER, 0));
+          keyFoco.add(AWTKeyStroke.getAWTKeyStroke(
+                  KeyEvent.VK_TAB, 0));
+          getContentPane().setFocusTraversalKeys(
+                  KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
+                  keyFoco);
 
-    JLabel lblMiEmpresa = new JLabel("Mi empresa");
-    lblMiEmpresa.setFont(new Font("Tahoma", Font.BOLD, 22));
-    lblMiEmpresa.setBounds(10, 11, 143, 29);
-    getContentPane().add(lblMiEmpresa, BorderLayout.NORTH);
+          JLabel lblMiEmpresa = new JLabel("Mi empresa");
+          lblMiEmpresa.setFont(new Font("Tahoma", Font.BOLD, 22));
+          lblMiEmpresa.setPreferredSize(new Dimension(40, 40));
+          JPanel panel = new JPanel();
+          JPanel pnlEmpresa = new JPanel();
+          JPanel pnlContacto = new JPanel();
+          JPanel imagenPanel = new JPanel();
+          JPanel panel_button = new JPanel();
 
-    JPanel panel = new JPanel();
-    panel.setBounds(41, 51, 410, 204);
-    getContentPane().add(panel, BorderLayout.CENTER);
-    panel.setLayout(new FormLayout(new ColumnSpec[] {
-        FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-        ColumnSpec.decode("142px"),
-        FormSpecs.UNRELATED_GAP_COLSPEC,
-        ColumnSpec.decode("100px"),},
-      new RowSpec[] {
-        FormSpecs.RELATED_GAP_ROWSPEC,
-        RowSpec.decode("19px"),
-        FormSpecs.RELATED_GAP_ROWSPEC,
-        RowSpec.decode("19px"),
-        FormSpecs.RELATED_GAP_ROWSPEC,
-        RowSpec.decode("19px"),
-        FormSpecs.RELATED_GAP_ROWSPEC,
-        RowSpec.decode("15px"),}));
-    // panel.setLayout(new MigLayout("", "[140.00px][123px,grow][123px]", "[35.00px][][][]"));
-    // panel.setLayout(new Layout("", "[140.00px][123px,grow][123px]", "[35.00px][][][]"));
+          panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+          pnlEmpresa.setAlignmentX(LEFT_ALIGNMENT);
+          pnlContacto.setAlignmentX(LEFT_ALIGNMENT);
+          pnlEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empresa", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.black));
+          pnlContacto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contacto", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.black));
+          panel.add(pnlEmpresa);
+          panel.add(Box.createRigidArea(new Dimension(10, 10)));
+          panel.add(pnlContacto);
+          imagenPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
+          Box boxImagen = Box.createVerticalBox();
+          JButton btnImagen = new JButton("Imagen");
+          btnImagen.addActionListener((ActionEvent arg0) -> {
+               obtenerImagen();
+          });
+          btnImagen.setAlignmentX(CENTER_ALIGNMENT);
+          btnImagen.setFocusable(false);
+          lblImagen = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/jugnica.jpg")));
+          lblImagen.setPreferredSize(new Dimension(20, 100));
+          lblImagen.setAlignmentX(CENTER_ALIGNMENT);
+          boxImagen.add(lblImagen);
+          boxImagen.add(Box.createRigidArea(new Dimension(10, 10)));
+          boxImagen.add(btnImagen);
+          imagenPanel.add(boxImagen);
 
-    JLabel lblRuc = new JLabel("RUC:");
-    panel.add(lblRuc, "2, 2, left, center");
+          //        panel.setBounds(41, 51, 410, 204);
+          getContentPane().add(lblMiEmpresa, BorderLayout.NORTH);
+          getContentPane().add(panel, BorderLayout.CENTER);
+          getContentPane().add(panel_button, BorderLayout.SOUTH);
+          getContentPane().add(imagenPanel, BorderLayout.EAST);
 
-    txtXx = new JTextField();
-    txtXx.setText("xx");
-    panel.add(txtXx, "4, 2, left, top");
-    txtXx.setColumns(10);
+          pnlEmpresa.setLayout(new FormLayout(new ColumnSpec[]{
+               FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+               ColumnSpec.decode("156px"),
+               FormSpecs.RELATED_GAP_COLSPEC,
+               ColumnSpec.decode("300px"),},
+                  new RowSpec[]{
+                       FormSpecs.RELATED_GAP_ROWSPEC,
+                       RowSpec.decode("19px"),
+                       FormSpecs.RELATED_GAP_ROWSPEC,
+                       RowSpec.decode("19px"),
+                       FormSpecs.RELATED_GAP_ROWSPEC,
+                       RowSpec.decode("19px"),
+                       FormSpecs.RELATED_GAP_ROWSPEC,
+                       RowSpec.decode("19px"),}));
 
-    JLabel lblRepresentanteLegal = new JLabel("Representante Legal");
-    panel.add(lblRepresentanteLegal, "2, 4, left, center");
+          pnlContacto.setLayout(new FormLayout(new ColumnSpec[]{
+               FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+               ColumnSpec.decode("156px"),
+               FormSpecs.RELATED_GAP_COLSPEC,
+               ColumnSpec.decode("300px"),},
+                  new RowSpec[]{
+                       FormSpecs.RELATED_GAP_ROWSPEC,
+                       RowSpec.decode("19px"),
+                       FormSpecs.RELATED_GAP_ROWSPEC,
+                       RowSpec.decode("19px"),
+                       FormSpecs.RELATED_GAP_ROWSPEC,
+                       RowSpec.decode("19px"),
+                       FormSpecs.RELATED_GAP_ROWSPEC,
+                       RowSpec.decode("19px"),
+                       FormSpecs.RELATED_GAP_ROWSPEC,
+                       RowSpec.decode("19px"),}));
 
-    txtD = new JTextField();
-    txtD.setText("d");
-    panel.add(txtD, "4, 4, right, top");
-    txtD.setColumns(10);
+          // panel.setLayout(new MigLayout("", "[140.00px][123px,grow][123px]", "[35.00px][][][]"));
+          // panel.setLayout(new Layout("", "[140.00px][123px,grow][123px]", "[35.00px][][][]"));
+          JLabel lblRuc = new JLabel("N°. RUC. :");
+          lblRuc.setToolTipText("Ingrese el numero RUC.");
+          pnlEmpresa.add(lblRuc, "2, 2, left, center");
 
-    JLabel lblDireccion = new JLabel("Direccion");
-    lblDireccion.setHorizontalAlignment(SwingConstants.LEFT);
-    panel.add(lblDireccion, "2, 6, left, center");
+          JLabel lblRazonSocial = new JLabel("Razón Social :");
+          lblRazonSocial.setToolTipText("Ingrese la razón social o el nombre comercial");
+          pnlEmpresa.add(lblRazonSocial, "2, 4, left, center");
 
-    txtD_1 = new JTextField();
-    txtD_1.setText("d");
-    panel.add(txtD_1, "4, 6, left, top");
-    txtD_1.setColumns(10);
+          JLabel lblEmitirA = new JLabel("Emitir CK A :");
+          lblEmitirA.setToolTipText("Ingrese el nombre con que se emitirán CK");
+          pnlEmpresa.add(lblEmitirA, "2, 6, left, center");
 
-    JLabel lblNewLabel = new JLabel("New label");
-    panel.add(lblNewLabel, "2, 8, left, center");
+          JLabel lblRepresentanteLegal = new JLabel("Representante Legal :");
+          lblRepresentanteLegal.setToolTipText("Ingrese El nombre del representante Legal.");
+          pnlEmpresa.add(lblRepresentanteLegal, "2, 8, left, center");
 
-    JPanel panel_1 = new JPanel();
-    getContentPane().add(panel_1, BorderLayout.SOUTH);
+          JLabel lblContacto = new JLabel("Contacto :");
+          lblContacto.setToolTipText("Ingrese nombre del contacto");
+          pnlContacto.add(lblContacto, "2, 2, left, center");
 
-    JButton btnCerrar = new JButton("Cerrrar");
-    btnCerrar.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent arg0) {
-        mtdCerrar();
-      }
-    });
-    panel_1.add(btnCerrar);
+          JLabel lblTelefono = new JLabel("Teléfono :");
+          lblTelefono.setToolTipText("Ingrese números de teléfonos del contacto");
+          pnlContacto.add(lblTelefono, "2, 4, left, center");
 
-    // establciendo el valor del Sigleton
-    miInstancia = this;
+          JLabel lblWebSite = new JLabel("Web :");
+          lblWebSite.setToolTipText("Ingrese sitio web de la empresa");
+          pnlContacto.add(lblWebSite, "2, 6, left, center");
 
-  }
+          JLabel lblCorreo = new JLabel("Correo Electronico :");
+          lblCorreo.setToolTipText("ingrese correo electrónico de la empresa o contacto");
+          pnlContacto.add(lblCorreo, "2, 8, left, center");
 
-  protected void mtdCerrar() {
-    this.dispose();
-  }
+          JLabel lblDireccion = new JLabel("Dirección :");
+          lblDireccion.setToolTipText("Ingrese dirección de la empresa");
+          lblDireccion.setHorizontalAlignment(SwingConstants.LEFT);
+          pnlContacto.add(lblDireccion, "2, 10, left, center");
 
-  /**
-   * SingleTon de Empresa.
-   *
-   * @return
-   */
-  public static Empresa getInstancia() {
-    return null == miInstancia ? (new Empresa()) : miInstancia;
-  }
+          txtRuc = new JTextField();
+          txtRuc.setToolTipText(lblRuc.getToolTipText());
+          txtRuc.setBackground(bgCampoObligatorio);
+          txtRuc.setInputVerifier(new InputVerifier() {
+               @Override
+               public boolean verify(JComponent input) {
+                    return validRuc();
+               }
+          });
+          pnlEmpresa.add(txtRuc, "4, 2, left, top");
+          txtRuc.setColumns(20);
+
+          txtRazonSocial = new JTextField();
+          txtRazonSocial.setToolTipText(lblRazonSocial.getToolTipText());
+          txtRazonSocial.setBackground(bgCampoObligatorio);
+          txtRazonSocial.setInputVerifier(new InputVerifier() {
+               @Override
+               public boolean verify(JComponent input) {
+                    return validRazonSocial();
+               }
+          });
+          pnlEmpresa.add(txtRazonSocial, "4, 4, left, top");
+          txtRazonSocial.setColumns(30);
+
+          txtEmitirA = new JTextField();
+          txtEmitirA.setToolTipText(lblEmitirA.getToolTipText());
+          txtEmitirA.setBackground(bgCampoObligatorio);
+          txtEmitirA.setInputVerifier(new InputVerifier() {
+               @Override
+               public boolean verify(JComponent input) {
+                    return validEmitirA();
+               }
+          });
+          pnlEmpresa.add(txtEmitirA, "4, 6, left, top");
+          txtEmitirA.setColumns(30);
+
+          txtRepresentanteLegal = new JTextField();
+          txtRepresentanteLegal.setToolTipText(lblRepresentanteLegal.getToolTipText());
+          txtRepresentanteLegal.setBackground(bgCampoObligatorio);
+          txtRepresentanteLegal.setInputVerifier(new InputVerifier() {
+               @Override
+               public boolean verify(JComponent input) {
+                    return validRepresentanteLegal();
+               }
+          });
+          pnlEmpresa.add(txtRepresentanteLegal, "4, 8, left, top");
+          txtRepresentanteLegal.setColumns(30);
+
+          txtContacto = new JTextField();
+          txtContacto.setToolTipText(lblContacto.getToolTipText());
+          pnlContacto.add(txtContacto, "4, 2, left, top");
+          txtContacto.setColumns(30);
+
+          txtTelefono = new JTextField();
+          txtTelefono.setToolTipText(lblTelefono.getToolTipText());
+          pnlContacto.add(txtTelefono, "4, 4, left, top");
+          txtTelefono.setColumns(30);
+
+          txtWebSite = new JTextField();
+          txtWebSite.setToolTipText(lblWebSite.getToolTipText());
+          pnlContacto.add(txtWebSite, "4, 6, left, top");
+          txtWebSite.setColumns(30);
+
+          txtCorreo = new JTextField();
+          txtCorreo.setToolTipText(lblCorreo.getToolTipText());
+          pnlContacto.add(txtCorreo, "4, 8, left, top");
+          txtCorreo.setColumns(30);
+
+          txtDireccion = new JTextField();
+          txtDireccion.setToolTipText(lblDireccion.getToolTipText());
+          pnlContacto.add(txtDireccion, "4, 10, left, top");
+          txtDireccion.setColumns(30);
+
+          JButton btnCerrar = new JButton("Cerrrar");
+          btnCerrar.setFocusable(false);
+          btnCerrar.setToolTipText("Cierra el Formulario de empresa");
+          btnCerrar.setPreferredSize(new Dimension(120, 20));
+          btnCerrar.addActionListener((ActionEvent arg0) -> {
+               cerrar();
+          });
+          JButton btnActualizar = new JButton("Actualizar");
+          btnActualizar.setFocusable(false);
+          btnActualizar.setToolTipText("Actualiza los datos de la empresa");
+          btnActualizar.setPreferredSize(new Dimension(120, 20));
+          btnActualizar.addActionListener((ActionEvent arg0) -> {
+               if (loadEmpresa()) {
+                    EmpresaImpl empresaImpl = new EmpresaImpl();
+                    empresaImpl.actualizarRegistro(datosEmpresa);
+                    empresaImpl.close();
+                    cerrar();
+               }
+          });
+          panel_button.add(btnCerrar);
+          panel_button.add(btnActualizar);
+          pack();
+     }
+
+     private boolean validRuc() {
+          if (txtRuc.getText().isEmpty()) {
+               showMessaje("Numero RUC, no puede estar vacío");
+               return false;
+          }
+          return true;
+     }
+
+     private boolean validRazonSocial() {
+          if (txtRazonSocial.getText().isEmpty()) {
+               showMessaje("Razón Social, no puede estar vacío");
+               return false;
+          }
+          return true;
+     }
+
+     private boolean validEmitirA() {
+          if (txtEmitirA.getText().isEmpty()) {
+               showMessaje("Emitir CK a,  no puede estar vacío");
+               return false;
+          }
+          return true;
+     }
+
+     private boolean validRepresentanteLegal() {
+          if (txtRepresentanteLegal.getText().isEmpty()) {
+               showMessaje("Nombre del representante legal, no puede estar vacío");
+               return false;
+          }
+          return true;
+     }
+
+     private void showMessaje(String mensaje) {
+          StringBuilder strMensaje = new StringBuilder();
+          byte ii = 0;
+          for (short i = 0; mensaje.length() > i && 500 > i; i++) {
+               strMensaje.append(mensaje.charAt(i));
+               ii++;
+               if (ii >= 75) {
+                    strMensaje.append("\n");
+                    ii = 0;
+               }
+          }
+          JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+                  strMensaje.toString(), getTitle(), JOptionPane.ERROR_MESSAGE);
+     }
+
+     /**
+      * obtiene imagen almacenada
+      *
+      */
+     private void obtenerImagen() {
+          JFileChooser frdGetFile = new JFileChooser();
+          frdGetFile.setCurrentDirectory(new File(System.getProperty("user.home")));
+          frdGetFile.setFileFilter(new FileNameExtensionFilter("Archivo de Imagenes", "jpg", "png", "jpeg"));
+          int opcion = frdGetFile.showOpenDialog(this);
+          if (opcion == JFileChooser.APPROVE_OPTION) {
+               ImageIcon imgiconTemp = new ImageIcon(frdGetFile.getSelectedFile().toString());
+               String imgDescrip = imgiconTemp.getDescription();
+               ImageIcon imgTemp = imgiconTemp;
+               imgTemp.setImage(imgiconTemp.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
+               imgTemp.setDescription(imgDescrip);
+               lblImagen.setIcon(imgTemp);
+
+          }
+     }
+
+     //Almacena los datos del formulario en la entidad MiEmpresa
+     private boolean loadEmpresa() {
+          if (!validRuc()) {
+               txtRuc.requestFocus();
+               return false;
+          }
+          if (!validRazonSocial()) {
+               txtRazonSocial.requestFocus();
+               return false;
+          }
+          if (!validRepresentanteLegal()) {
+               txtRepresentanteLegal.requestFocus();
+               return false;
+          }
+          if (!validEmitirA()) {
+               txtEmitirA.requestFocus();
+               return false;
+          }
+          datosEmpresa = new MiEmpresa();
+          datosEmpresa.setRuc(txtRuc.getText());
+          datosEmpresa.setRazonSocial(txtRazonSocial.getText());
+          datosEmpresa.setRepresentanteLegal(txtRepresentanteLegal.getText());
+          datosEmpresa.setEmitirA(txtEmitirA.getText());
+          datosEmpresa.setContacto(txtContacto.getText());
+          datosEmpresa.setCorreo(txtCorreo.getText());
+          datosEmpresa.setTelefono(txtTelefono.getText());
+          datosEmpresa.setWebSite(txtWebSite.getText());
+          datosEmpresa.setdireccion(txtDireccion.getText());
+          datosEmpresa.setCorreo(txtCorreo.getText());
+          return true;
+     }
+
+     /**
+      * SingleTon de Empresa.
+      *
+      * @return
+      */
+     public static Empresa getInstancia() {
+          return null == miInstancia ? (new Empresa()) : miInstancia;
+     }
+
+     protected void cerrar() {
+          this.dispose();
+     }
+
 }

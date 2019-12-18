@@ -3,41 +3,41 @@ package org.jugni.apps.pico.DAO;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-
 /**
  * Clase util para crear SessionFactory
+ *
  * @author gacs
  *
  */
 public class HibernateUtil {
 
-    private static SessionFactory sessionFactory;
+     private static SessionFactory sessionFactory;
 
-    public static SessionFactory getSessionFactory() {
+     public static SessionFactory getSessionFactory() {
 
-        if (sessionFactory == null) {
+          if (sessionFactory == null) {
 
-            try {
-                sessionFactory = new Configuration().configure().buildSessionFactory();
+               try {
+                    sessionFactory = new Configuration().configure().buildSessionFactory();
 
-            } catch (Exception e) {
+               } catch (Exception e) {
 
-                e.printStackTrace();
+                    e.printStackTrace();
 
-                if (sessionFactory != null) {
-                	sessionFactory.close();
+                    if (sessionFactory != null) {
+                         sessionFactory.close();
 
-                }
-            }
-        }
-        return sessionFactory;
-    }
+                    }
+               }
+          }
+          return sessionFactory;
+     }
 
-    public static void shutdown() {
+     public static void shutdown() {
 
-        if (sessionFactory != null) {
-        	sessionFactory.close();
-        }
+          if (sessionFactory != null) {
+               sessionFactory.close();
+          }
 
-    }
+     }
 }

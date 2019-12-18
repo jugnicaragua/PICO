@@ -14,7 +14,6 @@
          
         <property name="hibernate.hbm2ddl.auto">update</property>
          
-        <mapping class="org.jugni.apps.pico.modelos.TipoCuenta"/>
-        <mapping class="org.jugni.apps.pico.modelos.Cuenta"/>
+        <mapping class="org.jugni.apps.pico.modelos.MiEmpresa"/>
     </session-factory>
 </hibernate-configuration>
