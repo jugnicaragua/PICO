@@ -27,8 +27,27 @@ public class MiAplicacionPICO {
     System.out.println("Hello World!");
 
     String osName = System.getProperty("os.name");
+          try {
+               //itera los LookAndFeels instalados
+               for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                         //"GTK+"
+                         //"CDE/Motif"
+                         // "Nimbus"
+                         // "Metal"
+                         //Si se esta en sistema operativo windows  
+                    if (osName != null && osName.contains("Win") ) {
+                         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+                         break;
+                    } else if (info.getClassName().contains("Nimb")) { //otros sistemas operativos
+                         UIManager.setLookAndFeel(info.getClassName());
+                         break;
+                    }
+               }
+          } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+               ex.printStackTrace();
+          }
 
-    if (osName != null && osName.indexOf("Windows") != -1) {
+   /* if (osName != null && osName.indexOf("Windows") != -1) {
       try {
         UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
       } catch (ClassNotFoundException e) {
@@ -56,12 +75,11 @@ public class MiAplicacionPICO {
          * 
          * } catch (UnsupportedLookAndFeelException e) { // TODO Auto-generated catch block
          * e.printStackTrace(); }
-         */
       } catch (Exception e) {
         e.printStackTrace();
       }
-
     }
+*/
 
     // TODO: Verificacion del sistema
 
