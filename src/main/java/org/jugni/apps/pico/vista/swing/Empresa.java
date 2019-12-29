@@ -33,6 +33,7 @@ public class Empresa extends JInternalFrame {
      // Area de definicion de Variables Globales
      static Empresa miInstancia;
 
+
      /**
       * Constructor de Empresa
       */
@@ -40,7 +41,8 @@ public class Empresa extends JInternalFrame {
           // establciendo el valor del Sigleton
           initEmpresa();
           miInstancia = this;
-     }
+          rellenarCamposForm();
+        }
 
      private void initEmpresa() {
           setToolTipText("Datos de la empresa");
@@ -335,7 +337,24 @@ public class Empresa extends JInternalFrame {
 
           }
      }
-
+     /**
+      * Rellena los campos del formaulario, obteniendo los datos de la base de datos
+      */
+     private void rellenarCamposForm(){
+          EmpresaImpl empresaImpl = new EmpresaImpl();
+          datosEmpresa=empresaImpl.obtenerRegistro();
+          txtRuc.setText(datosEmpresa.getRuc());
+          txtRazonSocial.setText(datosEmpresa.getRazonSocial());
+          txtRepresentanteLegal.setText(datosEmpresa.getRepresentanteLegal());
+          txtEmitirA.setText(datosEmpresa.getEmitirA());
+          txtContacto.setText(datosEmpresa.getContacto());
+          txtCorreo.setText(datosEmpresa.getCorreo());
+          txtTelefono.setText(datosEmpresa.getTelefono());
+          txtWebSite.setText(datosEmpresa.getWebSite());
+          txtDireccion.setText(datosEmpresa.getdireccion());
+          empresaImpl.close();
+     }
+     
      //Almacena los datos del formulario en la entidad MiEmpresa
      private boolean loadEmpresa() {
           if (!validRuc()) {
@@ -364,7 +383,6 @@ public class Empresa extends JInternalFrame {
           datosEmpresa.setTelefono(txtTelefono.getText());
           datosEmpresa.setWebSite(txtWebSite.getText());
           datosEmpresa.setdireccion(txtDireccion.getText());
-          datosEmpresa.setCorreo(txtCorreo.getText());
           return true;
      }
 
