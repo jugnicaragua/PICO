@@ -33,6 +33,7 @@ public class Empresa extends JInternalFrame {
      // Area de definicion de Variables Globales
      static Empresa miInstancia;
 
+
      /**
       * Constructor de Empresa
       */
@@ -40,7 +41,8 @@ public class Empresa extends JInternalFrame {
           // establciendo el valor del Sigleton
           initEmpresa();
           miInstancia = this;
-     }
+          rellenarCamposForm();
+        }
 
      private void initEmpresa() {
           setToolTipText("Datos de la empresa");
@@ -108,13 +110,13 @@ public class Empresa extends JInternalFrame {
                ColumnSpec.decode("300px"),},
                   new RowSpec[]{
                        FormSpecs.RELATED_GAP_ROWSPEC,
-                       RowSpec.decode("19px"),
+                       RowSpec.decode("23px"),
                        FormSpecs.RELATED_GAP_ROWSPEC,
-                       RowSpec.decode("19px"),
+                       RowSpec.decode("23px"),
                        FormSpecs.RELATED_GAP_ROWSPEC,
-                       RowSpec.decode("19px"),
+                       RowSpec.decode("23px"),
                        FormSpecs.RELATED_GAP_ROWSPEC,
-                       RowSpec.decode("19px"),}));
+                       RowSpec.decode("23px"),}));
 
           pnlContacto.setLayout(new FormLayout(new ColumnSpec[]{
                FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
@@ -123,15 +125,15 @@ public class Empresa extends JInternalFrame {
                ColumnSpec.decode("300px"),},
                   new RowSpec[]{
                        FormSpecs.RELATED_GAP_ROWSPEC,
-                       RowSpec.decode("19px"),
+                       RowSpec.decode("23px"),
                        FormSpecs.RELATED_GAP_ROWSPEC,
-                       RowSpec.decode("19px"),
+                       RowSpec.decode("23px"),
                        FormSpecs.RELATED_GAP_ROWSPEC,
-                       RowSpec.decode("19px"),
+                       RowSpec.decode("23px"),
                        FormSpecs.RELATED_GAP_ROWSPEC,
-                       RowSpec.decode("19px"),
+                       RowSpec.decode("23px"),
                        FormSpecs.RELATED_GAP_ROWSPEC,
-                       RowSpec.decode("19px"),}));
+                       RowSpec.decode("23px"),}));
 
           // panel.setLayout(new MigLayout("", "[140.00px][123px,grow][123px]", "[35.00px][][][]"));
           // panel.setLayout(new Layout("", "[140.00px][123px,grow][123px]", "[35.00px][][][]"));
@@ -248,14 +250,14 @@ public class Empresa extends JInternalFrame {
           JButton btnCerrar = new JButton("Cerrrar");
           btnCerrar.setFocusable(false);
           btnCerrar.setToolTipText("Cierra el Formulario de empresa");
-          btnCerrar.setPreferredSize(new Dimension(120, 20));
+          btnCerrar.setPreferredSize(new Dimension(120, 40));
           btnCerrar.addActionListener((ActionEvent arg0) -> {
                cerrar();
           });
-          JButton btnActualizar = new JButton("Actualizar");
+          JButton btnActualizar = new JButton("Guardar");
           btnActualizar.setFocusable(false);
-          btnActualizar.setToolTipText("Actualiza los datos de la empresa");
-          btnActualizar.setPreferredSize(new Dimension(120, 20));
+          btnActualizar.setToolTipText("Guardar los datos de la empresa");
+          btnActualizar.setPreferredSize(new Dimension(120, 40));
           btnActualizar.addActionListener((ActionEvent arg0) -> {
                if (loadEmpresa()) {
                     EmpresaImpl empresaImpl = new EmpresaImpl();
@@ -335,7 +337,24 @@ public class Empresa extends JInternalFrame {
 
           }
      }
-
+     /**
+      * Rellena los campos del formaulario, obteniendo los datos de la base de datos
+      */
+     private void rellenarCamposForm(){
+          EmpresaImpl empresaImpl = new EmpresaImpl();
+          datosEmpresa=empresaImpl.obtenerRegistro();
+          txtRuc.setText(datosEmpresa.getRuc());
+          txtRazonSocial.setText(datosEmpresa.getRazonSocial());
+          txtRepresentanteLegal.setText(datosEmpresa.getRepresentanteLegal());
+          txtEmitirA.setText(datosEmpresa.getEmitirA());
+          txtContacto.setText(datosEmpresa.getContacto());
+          txtCorreo.setText(datosEmpresa.getCorreo());
+          txtTelefono.setText(datosEmpresa.getTelefono());
+          txtWebSite.setText(datosEmpresa.getWebSite());
+          txtDireccion.setText(datosEmpresa.getdireccion());
+          empresaImpl.close();
+     }
+     
      //Almacena los datos del formulario en la entidad MiEmpresa
      private boolean loadEmpresa() {
           if (!validRuc()) {
@@ -364,7 +383,6 @@ public class Empresa extends JInternalFrame {
           datosEmpresa.setTelefono(txtTelefono.getText());
           datosEmpresa.setWebSite(txtWebSite.getText());
           datosEmpresa.setdireccion(txtDireccion.getText());
-          datosEmpresa.setCorreo(txtCorreo.getText());
           return true;
      }
 
