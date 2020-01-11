@@ -59,6 +59,21 @@ public class MenuPrincipalAcciones {
 
           }
      }
+     public static void mostrarVentanaCuentaTipo() {
+          /**
+           * Llamando un Singleton de Ventana Empresa
+           */
+          try {
+
+               //Agrenga  la Venana de Empresa al escritorio
+               VentanaPrincipal.agregarAlEscritorio(CuentaTipoForm.getInstancia());
+               //Establciendola como visible.
+               CuentaTipoForm.getInstancia().setVisible(true);
+
+          } catch (Exception e) {
+
+          }
+     }
 
      public static void mostrarParametrosGenerales() {
 
