@@ -26,12 +26,14 @@ public class CuentaTipo {
     @Id
     @GeneratedValue
     @Column(name = "Id")
-    private Long id;
+    private Integer id;
+    
     @Column(name = "Descripcion", length = 50)
     private String descripcion;
-    @OneToMany(mappedBy = "cuentaTipo",
-        cascade = CascadeType.ALL)
-    private List<Cuenta> cuentas= new ArrayList<>() ;
+
+//    @OneToMany(mappedBy = "cuentaTipo",
+//        cascade = CascadeType.ALL)
+ //   private List<Cuenta> cuentas= new ArrayList<>() ;
     
     public CuentaTipo(String descripcion){
 	this.id = null;
@@ -48,14 +50,14 @@ public class CuentaTipo {
      * Devuelve el valor del Id
      * @return Long 
      */
-    public Long getId() {
+    public Integer getId() {
 	return id;
     }
     /**
      * Establce el valor del id
      * @param id Long, puede recibir balor null
      */
-    public void setId(Long id) {
+    public void setId(Integer id) {
     	this.id = id;
     }
     /**
@@ -77,7 +79,7 @@ public class CuentaTipo {
      * Nos devuelve las cuentas que se relacionan con el tipo de cuenta
      * @return List<Cuenta>
      */
-    public List<Cuenta> getCuentas() {
+  /*  public List<Cuenta> getCuentas() {
 	return cuentas;
     }
 	
@@ -85,10 +87,11 @@ public class CuentaTipo {
      * Establece las cuentas que le corresponde a tipo de cuenta
      * @param cuentas
      */
-    public void setCuentas(List<Cuenta> cuentas) {
+  /*  public void setCuentas(List<Cuenta> cuentas) {
     	this.cuentas = cuentas;
     }
-    @Override
+*/
+@Override
     public int hashCode() {
 	final int prime = 31;
 	int result = 1;
@@ -114,7 +117,7 @@ public class CuentaTipo {
 
     @Override
     public String toString() {
-        return "CuentaTipo{" + "id=" + id + ", descripcion=" + descripcion + ", cuentas=" + cuentas + '}';
+        return "CuentaTipo{" + "id=" + id + ", descripcion=" + descripcion + ", cuentas=" + '}';
     }
 
 }

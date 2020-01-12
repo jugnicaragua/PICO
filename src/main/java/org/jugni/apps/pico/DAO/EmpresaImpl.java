@@ -8,7 +8,9 @@ import org.jugni.apps.pico.modelos.MiEmpresa;
  * Clase implementar persistencia de datos
   * 
  *  @author  :Gustavo Castro <gacsnic75@gmail.com>
- *  @version :1.0 
+ * @version : 0.1.0
+ * @license : GPLv3
+ * 
  */
 public class EmpresaImpl implements ActualizarRegistroDao<MiEmpresa>,ObtenerRegistroDao<MiEmpresa>{
 

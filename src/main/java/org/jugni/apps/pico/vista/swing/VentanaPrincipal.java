@@ -76,11 +76,15 @@ public class VentanaPrincipal extends JFrame {
 
      /**
       * Agrega las ventanas JInternalFrame al escritorio(desktopPane)
-      *
+      *Centra la ventada en el desktopPane
       * @param ventanaInterna
       */
      public static void agregarAlEscritorio(JInternalFrame ventanaInterna) {
           desktopPane.add(ventanaInterna);
+          Dimension dskSize = desktopPane.getSize();
+          Dimension frmSize = ventanaInterna.getSize();
+          ventanaInterna.setLocation((dskSize.width - frmSize.width) / 2, (dskSize.height - frmSize.height) / 2);
+          ventanaInterna.setVisible(true);
      }
 
      /**
