@@ -3,6 +3,10 @@
  */
 package org.jugni.apps.pico.vista.swing;
 
+import java.beans.PropertyVetoException;
+import javax.swing.JInternalFrame;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.jugni.apps.pico.vista.swing.dialogos.Acercade;
 import org.jugni.apps.pico.vista.swing.dialogos.Respaldo;
 
@@ -13,6 +17,8 @@ import org.jugni.apps.pico.vista.swing.dialogos.Respaldo;
  *
  */
 public class MenuPrincipalAcciones {
+
+     private static final Logger LOGGER = LogManager.getLogger();
 
      public MenuPrincipalAcciones() {
      }
@@ -45,19 +51,30 @@ public class MenuPrincipalAcciones {
      }
 
      public static void mostrarVentanaDatosEmpresa() {
-          /**
-           * Llamando un Singleton de Ventana Empresa
-           */
+          mostrarVentana(Empresa.getInstancia());
+     }
+
+     public static void mostrarVentanaCuentaTipo() {
+          mostrarVentana(CuentaTipoForm.getInstancia());
+     }
+
+     private static void mostrarVentana(JInternalFrame frm) {
           try {
+               //Agrenga  la Ventana al escritorio si la ventana no esta visible
+               if (!frm.isVisible()) {
+                    VentanaPrincipal.agregarAlEscritorio(frm);
+               } else {
+                    // si la ventana esta visible pero debajo de otras ventanas se mueve al frente y se selecciona
+                    frm.moveToFront();
+                    if (!frm.isSelected()) {
+                         frm.setSelected(true);
+                    }
+               }
 
-               //Agrenga  la Venana de Empresa al escritorio
-               VentanaPrincipal.agregarAlEscritorio(Empresa.getInstancia());
-               //Establciendola como visible.
-               Empresa.getInstancia().setVisible(true);
-
-          } catch (Exception e) {
-
+          } catch (PropertyVetoException e) {
+               LOGGER.error("Error al activar la ventana Tipo de cuenta", e);
           }
+
      }
 
      public static void mostrarParametrosGenerales() {

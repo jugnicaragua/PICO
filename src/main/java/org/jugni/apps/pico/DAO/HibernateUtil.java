@@ -1,5 +1,6 @@
 package org.jugni.apps.pico.DAO;
 
+import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
@@ -20,7 +21,7 @@ public class HibernateUtil {
                try {
                     sessionFactory = new Configuration().configure().buildSessionFactory();
 
-               } catch (Exception e) {
+               } catch (HibernateException e) {
 
                     e.printStackTrace();
 
