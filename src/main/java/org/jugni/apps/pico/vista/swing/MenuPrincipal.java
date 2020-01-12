@@ -77,7 +77,9 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
           mntmEmpresa = new ItemMenuUtils("Datos Empresa", "Configurar los datos de la Emprsa");
           mntmParametrosGenerales = new ItemMenuUtils("Parametros Generales", "Administra las configuraciones del Sistema", 'P');
           mntmCicloFiscal = new ItemMenuUtils("Ciclo Fiscal", "Establece el Periodo Fiscal", 'C');
-          mntmSalir = new ItemMenuUtils("Salir", "Sale del Sistema", 'S', KeyEvent.VK_Q, InputEvent.CTRL_MASK, "/org/tango-project/tango-icon-theme/16x16/actions/system-log-out.png");
+          mntmSalir = new ItemMenuUtils("Salir", "Sale del Sistema", 'S',
+                  KeyEvent.VK_Q, InputEvent.CTRL_MASK,
+                  "/org/tango-project/tango-icon-theme/16x16/actions/system-log-out.png");
 
           //**Se agregan los sub menu al menu mnArchivo
           mnArchivo.add(mntmIniciarSession);
