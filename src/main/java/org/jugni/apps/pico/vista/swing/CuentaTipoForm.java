@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import org.jugni.apps.pico.DAO.CuentaTipoImpl;
+import org.jugni.apps.pico.modelos.CuentaTipo;
 import org.jugni.apps.pico.vista.utils.CerrarButton;
 import org.jugni.apps.pico.vista.utils.GuardarButton;
 
@@ -97,6 +99,11 @@ public class CuentaTipoForm extends JInternalFrame {
      }
      
      private void guardar(){
+          CuentaTipo ct=new CuentaTipo();
+          ct.setDescripcion(txtCuentaTipo.getText());
+          CuentaTipoImpl ctImpl=new CuentaTipoImpl();
+          ctImpl.insertarRegistro(ct);
+          ctImpl.close();
      }
      
 }
