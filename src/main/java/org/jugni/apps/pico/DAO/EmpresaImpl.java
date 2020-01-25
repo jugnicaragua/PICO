@@ -38,7 +38,14 @@ public class EmpresaImpl implements ActualizarRegistroDao<MiEmpresa>,ObtenerRegi
       */
      @Override
      public MiEmpresa obtenerRegistro() {
-          return (MiEmpresa) session.createQuery("From MiEmpresa").getSingleResult();
+          Object obj;
+          //Se captura execion para cuando la tabla esta sin registro.
+          try{
+               obj=session.createQuery(" From MiEmpresa ").getSingleResult();
+          }catch (Exception e){
+               obj = new MiEmpresa();
+          }
+          return (MiEmpresa) obj;
      }
 
 }

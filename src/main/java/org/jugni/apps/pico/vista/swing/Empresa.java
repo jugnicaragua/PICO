@@ -261,7 +261,7 @@ public class Empresa extends JInternalFrame {
           btnActualizar.addActionListener((ActionEvent arg0) -> {
                if (loadEmpresa()) {
                     EmpresaImpl empresaImpl = new EmpresaImpl();
-                    empresaImpl.actualizarRegistro(datosEmpresa);
+                  empresaImpl.actualizarRegistro(datosEmpresa);
                     empresaImpl.close();
                     cerrar();
                }
