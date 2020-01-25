@@ -1,5 +1,6 @@
 package org.jugni.apps.pico.modelos;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.*;
 
@@ -8,7 +9,7 @@ import javax.persistence.*;
  * @author gacs
  */
 @Entity
-public class MiEmpresa {
+public class MiEmpresa implements Serializable {
      @Id
      @Column(name = "Ruc", length = 25)
      private String ruc;
