@@ -10,12 +10,16 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.jugni.apps.pico.DAO.EmpresaImpl;
 import org.jugni.apps.pico.modelos.MiEmpresa;
+import org.jugni.apps.pico.vista.utils.Utilities;
 
 public class Empresa extends JInternalFrame {
 
@@ -30,9 +34,11 @@ public class Empresa extends JInternalFrame {
      private JTextField txtTelefono;
      private JLabel lblImagen;
      private MiEmpresa datosEmpresa;
+     final String IMAGENPATH = System.getProperty("user.dir") + "/var/db/logo.png";
+     JButton btnGuardar = new JButton("Guardar");
+     ImageIcon imgLogo;
      // Area de definicion de Variables Globales
      static Empresa miInstancia;
-
 
      /**
       * Constructor de Empresa
@@ -42,7 +48,7 @@ public class Empresa extends JInternalFrame {
           initEmpresa();
           miInstancia = this;
           rellenarCamposForm();
-        }
+     }
 
      private void initEmpresa() {
           setToolTipText("Datos de la empresa");
@@ -76,6 +82,7 @@ public class Empresa extends JInternalFrame {
           panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
           pnlEmpresa.setAlignmentX(LEFT_ALIGNMENT);
           pnlContacto.setAlignmentX(LEFT_ALIGNMENT);
+          //Agrega bordes con titulos a los paneles pnlEmpresa y pnlContacto
           pnlEmpresa.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Empresa", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.black));
           pnlContacto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Contacto", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.black));
           panel.add(pnlEmpresa);
@@ -85,11 +92,18 @@ public class Empresa extends JInternalFrame {
           Box boxImagen = Box.createVerticalBox();
           JButton btnImagen = new JButton("Imagen");
           btnImagen.addActionListener((ActionEvent arg0) -> {
+               btnGuardar.setEnabled(true);
                obtenerImagen();
           });
           btnImagen.setAlignmentX(CENTER_ALIGNMENT);
           btnImagen.setFocusable(false);
-          lblImagen = new JLabel(new javax.swing.ImageIcon(getClass().getResource("/jugnica.jpg")));
+          //verifica que la imagen del logo existe
+          if (new File(IMAGENPATH).exists()) {
+               imgLogo=new javax.swing.ImageIcon(IMAGENPATH);
+          } else {
+               imgLogo=new javax.swing.ImageIcon(getClass().getResource("/jugnica.jpg"));
+          }
+          lblImagen = new JLabel(imgLogo);
           lblImagen.setPreferredSize(new Dimension(20, 100));
           lblImagen.setAlignmentX(CENTER_ALIGNMENT);
           boxImagen.add(lblImagen);
@@ -247,6 +261,19 @@ public class Empresa extends JInternalFrame {
           pnlContacto.add(txtDireccion, "4, 10, left, top");
           txtDireccion.setColumns(30);
 
+          for (var comp : pnlEmpresa.getComponents()) {
+               if (comp instanceof JTextField) {
+                    ((JTextField) comp).addKeyListener(new java.awt.event.KeyAdapter() {
+                         //Habilita el boton guardar cuando digitamos algun caracter en el textfield
+                         @Override
+                         public void keyPressed(java.awt.event.KeyEvent evt) {
+                              if (!btnGuardar.isEnabled()) {
+                                   btnGuardar.setEnabled(true);
+                              }
+                         }
+                    });
+               }
+          }
           JButton btnCerrar = new JButton("Cerrrar");
           btnCerrar.setFocusable(false);
           btnCerrar.setToolTipText("Cierra el Formulario de empresa");
@@ -254,20 +281,16 @@ public class Empresa extends JInternalFrame {
           btnCerrar.addActionListener((ActionEvent arg0) -> {
                cerrar();
           });
-          JButton btnActualizar = new JButton("Guardar");
-          btnActualizar.setFocusable(false);
-          btnActualizar.setToolTipText("Guardar los datos de la empresa");
-          btnActualizar.setPreferredSize(new Dimension(120, 40));
-          btnActualizar.addActionListener((ActionEvent arg0) -> {
-               if (loadEmpresa()) {
-                    EmpresaImpl empresaImpl = new EmpresaImpl();
-                  empresaImpl.actualizarRegistro(datosEmpresa);
-                    empresaImpl.close();
-                    cerrar();
-               }
+          btnGuardar.setFocusable(false);
+          btnGuardar.setToolTipText("Guardar los datos de la empresa");
+          btnGuardar.setPreferredSize(new Dimension(120, 40));
+          btnGuardar.setEnabled(false);
+          btnGuardar.addActionListener((ActionEvent arg0) -> {
+               guardar();
           });
+
           panel_button.add(btnCerrar);
-          panel_button.add(btnActualizar);
+          panel_button.add(btnGuardar);
           pack();
      }
 
@@ -325,24 +348,24 @@ public class Empresa extends JInternalFrame {
      private void obtenerImagen() {
           JFileChooser frdGetFile = new JFileChooser();
           frdGetFile.setCurrentDirectory(new File(System.getProperty("user.home")));
-          frdGetFile.setFileFilter(new FileNameExtensionFilter("Archivo de Imagenes", "jpg", "png", "jpeg"));
+          frdGetFile.setFileFilter(new FileNameExtensionFilter("Archivo de Imagenes", "png"));
           int opcion = frdGetFile.showOpenDialog(this);
           if (opcion == JFileChooser.APPROVE_OPTION) {
                ImageIcon imgiconTemp = new ImageIcon(frdGetFile.getSelectedFile().toString());
                String imgDescrip = imgiconTemp.getDescription();
-               ImageIcon imgTemp = imgiconTemp;
-               imgTemp.setImage(imgiconTemp.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
-               imgTemp.setDescription(imgDescrip);
-               lblImagen.setIcon(imgTemp);
-
+               imgLogo = imgiconTemp;
+               imgLogo.setImage(imgiconTemp.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
+               imgLogo.setDescription(imgDescrip);
+               lblImagen.setIcon(imgLogo);
           }
      }
+
      /**
       * Rellena los campos del formaulario, obteniendo los datos de la base de datos
       */
-     private void rellenarCamposForm(){
+     private void rellenarCamposForm() {
           EmpresaImpl empresaImpl = new EmpresaImpl();
-          datosEmpresa=empresaImpl.obtenerRegistro();
+          datosEmpresa = empresaImpl.obtenerRegistro();
           txtRuc.setText(datosEmpresa.getRuc());
           txtRazonSocial.setText(datosEmpresa.getRazonSocial());
           txtRepresentanteLegal.setText(datosEmpresa.getRepresentanteLegal());
@@ -354,7 +377,7 @@ public class Empresa extends JInternalFrame {
           txtDireccion.setText(datosEmpresa.getdireccion());
           empresaImpl.close();
      }
-     
+
      //Almacena los datos del formulario en la entidad MiEmpresa
      private boolean loadEmpresa() {
           if (!validRuc()) {
@@ -384,6 +407,22 @@ public class Empresa extends JInternalFrame {
           datosEmpresa.setWebSite(txtWebSite.getText());
           datosEmpresa.setdireccion(txtDireccion.getText());
           return true;
+     }
+
+     //Guarda las modificaciones del formulario
+     private void guardar() {
+          if (loadEmpresa()) {
+               try {
+                    Utilities.cp(imgLogo, IMAGENPATH);
+               } catch (IOException ex) {
+                    Logger.getLogger(Empresa.class.getName()).log(Level.SEVERE, null, ex);
+               }
+               EmpresaImpl empresaImpl = new EmpresaImpl();
+               empresaImpl.actualizarRegistro(datosEmpresa);
+               empresaImpl.close();
+               cerrar();
+          }
+
      }
 
      /**
