@@ -38,13 +38,10 @@ public class MiEmpresa implements Serializable {
      @Column(name = "Telefono", length = 35)
      private String telefono;
 
-     @Column(name = "ImgUbicacion", length = 250)
-     private String imgUbicacion; //Almacena la direccion de la imagen de la Empresa
-     
      public MiEmpresa() {
      }
 
-     public MiEmpresa(String ruc, String razonSocial, String emitirA, String direccion, String representanteLegal, String contacto, String webSite, String correo, String telefono, String imgUbicacion) {
+     public MiEmpresa(String ruc, String razonSocial, String emitirA, String direccion, String representanteLegal, String contacto, String webSite, String correo, String telefono) {
           this.ruc = ruc;
           this.razonSocial = razonSocial;
           this.emitirA = emitirA;
@@ -54,7 +51,6 @@ public class MiEmpresa implements Serializable {
           this.webSite = webSite;
           this.correo = correo;
           this.telefono = telefono;
-          this.imgUbicacion = imgUbicacion;
      }
 
      public String getRuc() {
@@ -129,13 +125,6 @@ public class MiEmpresa implements Serializable {
           this.telefono = telefono;
      }
 
-     public String getImgUbicacion() {
-          return imgUbicacion;
-     }
-
-     public void setImgUbicacion(String imgUbicacion) {
-          this.imgUbicacion = imgUbicacion;
-     }
 
      @Override
      public int hashCode() {
@@ -161,7 +150,7 @@ public class MiEmpresa implements Serializable {
 
      @Override
      public String toString() {
-          return "Empresa{" + "ruc=" + ruc + ", razonSocial=" + razonSocial + ", EmitirA=" + emitirA + ", Direccion=" + direccion + ", representanteLegal=" + representanteLegal + ", contacto=" + contacto + ", webSite=" + webSite + ", correo=" + correo + ", telefono=" + telefono + ", imgUbicacion=" + imgUbicacion + '}';
+          return "Empresa{" + "ruc=" + ruc + ", razonSocial=" + razonSocial + ", EmitirA=" + emitirA + ", Direccion=" + direccion + ", representanteLegal=" + representanteLegal + ", contacto=" + contacto + ", webSite=" + webSite + ", correo=" + correo + ", telefono=" + telefono +  '}';
      }
      
      
