@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package org.jugni.apps.pico.DAO;
 
 import java.util.List;
@@ -12,23 +11,23 @@ import org.hibernate.Transaction;
 import org.jugni.apps.pico.modelos.CuentaTipo;
 
 /**
- *<strong> org.jugni.apps.pico.DAO </strong>
- *  @author  :Gustavo Castro <gacsnic75@gmail.com>
+ * <strong> org.jugni.apps.pico.DAO </strong>
+ *
+ * @author :Gustavo Castro <gacsnic75@gmail.com>
  * @version : 0.1.0
  * @license : GPLv3
  *
- *   Clase CuentaTipoImpl : implementar persistencia de datos de tipo de cuenta
+ * Clase CuentaTipoImpl : implementar persistencia de datos de tipo de cuenta
  */
-public class CuentaTipoImpl implements  ObtenerRegistrosDao<CuentaTipo>,ActualizarRegistroDao<CuentaTipo>{
+public class CuentaTipoImpl implements ObtenerRegistrosDao<CuentaTipo>, ActualizarRegistroDao<CuentaTipo> {
+
      private final Session session = HibernateUtil.getSessionFactory().openSession();
-    
-    public void close() {
-          session.close();
-     }
 
      @Override
      public List<CuentaTipo> obtenerRegistros() {
-          return session.createQuery(" From CuentaTipo ").getResultList();
+          List<CuentaTipo> CuentaTipoS = session.createQuery(" From CuentaTipo ").getResultList();
+          session.close();
+          return CuentaTipoS;
      }
 
      @Override
@@ -39,6 +38,7 @@ public class CuentaTipoImpl implements  ObtenerRegistrosDao<CuentaTipo>,Actualiz
           session.saveOrUpdate(registro);
           //hace permanente los cambios
           transaction.commit();
+          session.close();
      }
 
 }
