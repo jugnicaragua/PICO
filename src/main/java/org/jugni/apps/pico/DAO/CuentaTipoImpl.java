@@ -19,19 +19,26 @@ import org.jugni.apps.pico.modelos.CuentaTipo;
  *
  *   Clase CuentaTipoImpl : implementar persistencia de datos de tipo de cuenta
  */
-public class CuentaTipoImpl implements CrearRegistroDao<CuentaTipo>{
+public class CuentaTipoImpl implements  ObtenerRegistrosDao<CuentaTipo>,ActualizarRegistroDao<CuentaTipo>{
      private final Session session = HibernateUtil.getSessionFactory().openSession();
-     @Override
-     public void insertarRegistro(CuentaTipo registro) {
-          //Intacia la transaccion
-          Transaction transaction = session.beginTransaction();
-          //Guarda la informacion en la base de datos
-          session.save(registro);
-          //hace permanente los cambios
-          transaction.commit();
-     }
-     
+    
     public void close() {
           session.close();
      }
+
+     @Override
+     public List<CuentaTipo> obtenerRegistros() {
+          return session.createQuery(" From CuentaTipo ").getResultList();
+     }
+
+     @Override
+     public void actualizarRegistro(CuentaTipo registro) {
+          //Intacia la transaccion
+          Transaction transaction = session.beginTransaction();
+          //Guarda la informacion en la base de datos
+          session.saveOrUpdate(registro);
+          //hace permanente los cambios
+          transaction.commit();
+     }
+
 }
