@@ -9,7 +9,6 @@ import java.util.List;
  *  @version :1.0 
  * @param <T> En la clase que lo implemente se sustituye por la clase entidad
  */
-public interface ObtenerRegistrosDao <T> extends ObtenerRegistroDao<T>{
+public interface ObtenerRegistrosDao <T> {
       List<T>  obtenerRegistros();
-      List<T>  obtenerRegistrosSi(T registro);
 }
