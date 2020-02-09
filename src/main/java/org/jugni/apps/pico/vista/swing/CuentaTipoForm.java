@@ -1,7 +1,10 @@
 package org.jugni.apps.pico.vista.swing;
 
 import java.awt.*;
+import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -22,11 +25,13 @@ import org.jugni.apps.pico.vista.utils.GuardarButton;
 public class CuentaTipoForm extends JInternalFrame {
 
      private static CuentaTipoForm INSTANCE;
-     private JTextField txtCuentaTipo;
+     private JComboBox cmbCuentaTipo;
+     private List<CuentaTipo> cuentaTipos;
+     private CuentaTipoCBModel cuentaTipoModel;
 
      // El constructor privado no permite que se genere un constructor por defecto.
      private CuentaTipoForm() {
-          INSTANCE=this;
+          INSTANCE = this;
           initCuentaTipoForm();
      }
 
@@ -36,12 +41,12 @@ public class CuentaTipoForm extends JInternalFrame {
       * @return
       */
      public static CuentaTipoForm getInstancia() {
-          return (INSTANCE==null) ? new CuentaTipoForm() : INSTANCE;
+          return (INSTANCE == null) ? new CuentaTipoForm() : INSTANCE;
      }
 
      protected void cerrar() {
           this.dispose();
-          INSTANCE=null;
+          INSTANCE = null;
      }
 
      private void initCuentaTipoForm() {
@@ -57,53 +62,110 @@ public class CuentaTipoForm extends JInternalFrame {
           //se crear una etiqueta para titulo del formulario
           JLabel lblTitle = new JLabel("Tipos de cuenta");
           lblTitle.setFont(new Font("Tahoma", Font.BOLD, 22));
+          lblTitle.setForeground(Color.WHITE);
           lblTitle.setPreferredSize(new Dimension(40, 40));
 
           //Instanciar objetos contenidos en el formulario
+          cuentaTipoModel = new CuentaTipoCBModel();
           JLabel lblCuentaTipo = new JLabel("Tipo de cuenta:");
-          JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 10));
-          txtCuentaTipo = new JTextField(30);
+          JPanel pnlTitle = new JPanel(); //Panel que contiene el titulo del formulario
+          JPanel pnlCentral = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
+          JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 5));
+          JPanel pnlButton = new JPanel();
           CerrarButton btnCerrar = new CerrarButton();
           GuardarButton btnGuardar = new GuardarButton();
-          JPanel panel_button = new JPanel();
+          cmbCuentaTipo = new JComboBox();
 
           //se define caracteristicas de objesto del formulario
+          panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.black));
+          pnlTitle.setLayout(new BoxLayout(pnlTitle, BoxLayout.LINE_AXIS));
+          pnlTitle.setBackground(new Color(0, 117, 175));
           lblCuentaTipo.setToolTipText("Descripción de tipo de cuenta");
-          txtCuentaTipo.setToolTipText("Descripción de tipo de cuenta");
-          txtCuentaTipo.addKeyListener(new java.awt.event.KeyAdapter() { 
-               //Habilita el boton guardar cuando digitamos algun caracter en el textfield
+          cmbCuentaTipo.setEditable(true);
+          cmbCuentaTipo.setPreferredSize(new Dimension(300, 30));
+          cmbCuentaTipo.setModel(cuentaTipoModel);
+          //Al digitar caracteres en el editor Habilita el btnGuardar
+          cmbCuentaTipo.getEditor().getEditorComponent().addKeyListener(new KeyAdapter() {
                @Override
-               public void keyPressed(java.awt.event.KeyEvent evt) {
-                    if(!btnGuardar.isEnabled())  btnGuardar.setEnabled(true);
+               public void keyReleased(KeyEvent event) {
+                    if (!btnGuardar.isEnabled()) {
+                         btnGuardar.setEnabled(true);
+                    }
                }
           });
           panel.add(lblCuentaTipo);
-          panel.add(txtCuentaTipo);
-          panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.black));
+          panel.add(cmbCuentaTipo);
 
           btnCerrar.addActionListener((ActionEvent arg0) -> {
                cerrar();
           });
           btnGuardar.addActionListener((ActionEvent arg0) -> {
                guardar();
-               cerrar();
+               btnGuardar.setEnabled(false);
           });
 
           //Agrega los componentes al formulario
-          panel_button.add(btnCerrar);
-          panel_button.add(btnGuardar);
-          getContentPane().add(lblTitle, BorderLayout.NORTH);
-          getContentPane().add(panel, BorderLayout.CENTER);
-          getContentPane().add(panel_button, BorderLayout.SOUTH);
+          pnlTitle.add(Box.createRigidArea(new Dimension(10, 10)));
+          pnlTitle.add(lblTitle);
+          pnlButton.add(btnCerrar);
+          pnlButton.add(btnGuardar);
+          pnlCentral.add(panel);
+          getContentPane().add(pnlTitle, BorderLayout.NORTH);
+          getContentPane().add(pnlCentral, BorderLayout.CENTER);
+          getContentPane().add(pnlButton, BorderLayout.SOUTH);
           pack();
      }
-     
-     private void guardar(){
-          CuentaTipo ct=new CuentaTipo();
-          ct.setDescripcion(txtCuentaTipo.getText());
-          CuentaTipoImpl ctImpl=new CuentaTipoImpl();
-          ctImpl.insertarRegistro(ct);
-          ctImpl.close();
+
+     private void guardar() {
+          CuentaTipo ct = new CuentaTipo();
+          if (null == cmbCuentaTipo.getSelectedItem()) {
+               ct.setDescripcion(cmbCuentaTipo.getEditor().getItem().toString());
+          } else {
+               ct.setDescripcion(cmbCuentaTipo.getEditor().getItem().toString());
+               ct.setId(cuentaTipos.get(cmbCuentaTipo.getSelectedIndex()).getId());
+          }
+          new CuentaTipoImpl().actualizarRegistro(ct);
+          cuentaTipoModel.update();
+          cmbCuentaTipo.repaint();
+          cmbCuentaTipo.getEditor().setItem(null);
+          cmbCuentaTipo.setSelectedItem(null);
+          
      }
-     
+     /**
+      * ListModal para el combobox, lista los tipos de cuenta que se encuentran en la base de datos
+      */
+     class CuentaTipoCBModel extends AbstractListModel implements ComboBoxModel {
+
+          String id;
+
+          public CuentaTipoCBModel() {
+               update();
+          }
+
+          public void update() {
+               cuentaTipos = new CuentaTipoImpl().obtenerRegistros();
+          }
+
+          @Override
+          public int getSize() {
+               return cuentaTipos.size();
+          }
+
+          @Override
+          public Object getElementAt(int i) {
+               return cuentaTipos.get(i).getDescripcion();
+          }
+
+          @Override
+          public void setSelectedItem(Object o) {
+               id = (String) o;
+          }
+
+          @Override
+          public Object getSelectedItem() {
+               return id;
+          }
+
+     }
+
 }
