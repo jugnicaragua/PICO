@@ -70,9 +70,11 @@ public class Empresa extends JInternalFrame {
                   KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS,
                   keyFoco);
 
-          JLabel lblMiEmpresa = new JLabel("Mi empresa");
-          lblMiEmpresa.setFont(new Font("Tahoma", Font.BOLD, 22));
-          lblMiEmpresa.setPreferredSize(new Dimension(40, 40));
+          JLabel lblTitle = new JLabel("Mi empresa");
+          lblTitle.setFont(new Font("Tahoma", Font.BOLD, 22));
+          lblTitle.setForeground(Color.WHITE);
+          lblTitle.setPreferredSize(new Dimension(40, 40));
+          JPanel pnlTitle = new JPanel(); //Panel que contiene el titulo del formulario
           JPanel panel = new JPanel();
           JPanel pnlEmpresa = new JPanel();
           JPanel pnlContacto = new JPanel();
@@ -112,7 +114,11 @@ public class Empresa extends JInternalFrame {
           imagenPanel.add(boxImagen);
 
           //        panel.setBounds(41, 51, 410, 204);
-          getContentPane().add(lblMiEmpresa, BorderLayout.NORTH);
+          pnlTitle.setLayout(new BoxLayout(pnlTitle, BoxLayout.LINE_AXIS));
+          pnlTitle.setBackground(new Color(0, 117, 175));
+          pnlTitle.add(Box.createRigidArea(new Dimension(10, 10)));
+          pnlTitle.add(lblTitle);
+          getContentPane().add(pnlTitle, BorderLayout.NORTH);
           getContentPane().add(panel, BorderLayout.CENTER);
           getContentPane().add(panel_button, BorderLayout.SOUTH);
           getContentPane().add(imagenPanel, BorderLayout.EAST);
