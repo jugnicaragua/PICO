@@ -7,6 +7,7 @@ import java.beans.PropertyVetoException;
 import javax.swing.JInternalFrame;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.jugni.apps.pico.vista.reportes.Utils;
 import org.jugni.apps.pico.vista.swing.dialogos.Acercade;
 import org.jugni.apps.pico.vista.swing.dialogos.Respaldo;
 
@@ -79,6 +80,15 @@ public class MenuPrincipalAcciones {
 
      public static void mostrarParametrosGenerales() {
 
+     }
+     //muestra el reporte del balance general
+     public static void mostrarBalanceGeneral() {
+          try {
+               Utils.showReporte( "BalanceGeneral.jrxml" );
+          } catch (Exception e1) {
+               // TODO Auto-generated catch block
+               e1.printStackTrace();
+          }
      }
 
 }
