@@ -35,7 +35,8 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
              mntmHerramientaRespaldo, //Submenu que llama al formulario de Respaldo del la base de datos            
              mntmManualEnLina, //Submenu que llama al manual que se encuentra en linea
              mntmIrAlForo, //submenu que lo traslada a un foro de los desarrolladores
-             mntmAcercaDe;               //Submenu que muestra un dialogo acerca de
+             mntmAcercaDe,             //Submenu que muestra un dialogo acerca de
+             mntmBalanceGeneral;  //submenu para mostrar un reporte del balance general
 
      public MenuPrincipal() {
           initMenuPrincipal();
@@ -116,6 +117,15 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
           mnCaptacion.add(mntmCaptacionDiario);
           mnCaptacion.add(mntmCaptacionAjuste);
 
+          //**Se instancia los submenu al menu mnInforme
+          mntmBalanceGeneral = new ItemMenuUtils("Balance General","Balance general de la empresa",'b');
+          //**Agrega el metodo de escucha para los submenu de mnInforme
+          mntmBalanceGeneral.addActionListener(e -> {
+               MenuPrincipalAcciones.mostrarBalanceGeneral();
+          });
+          //**Se agrega los submenu al menu mnInforme
+          mnInforme.add(mntmBalanceGeneral);
+
           //**Se Instancia los submenu al menu mnAyuda
           mntmHerramientaRespaldo = new ItemMenuUtils("Respaldo", "Respalda la base de datos", 'R');
 
@@ -149,6 +159,6 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
      @Override
      public void actionPerformed(ActionEvent arg0) {
           JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-                   "No Terminado ", "menu no definido", JOptionPane.ERROR_MESSAGE);
+                  "No Terminado ", "menu no definido", JOptionPane.ERROR_MESSAGE);
      }
 }

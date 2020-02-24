@@ -64,16 +64,26 @@ public class Utils {
 			//demo
 			Collection<String> articulos = new ArrayList<String>();
 			articulos.add("omar");
-			
-			InputStream is = Utils.class.getResourceAsStream("/org/jugni/apps/pico/vista/reportes/"+url);
+
+			/*
+			* Maven establece el directorio resources como el destino para ficheros externos
+			* en dicho directorio, creo uno llamado reportes y copio los archivos de reportes.
+			* Luego, la url puede quedar como: reportes/nombre_del_reporte.jrxml
+			 */
+            InputStream is = Utils.class.getClassLoader().getResourceAsStream("reportes/" + url);
 			JasperDesign design = JRXmlLoader.load(is);
 			JasperReport report = JasperCompileManager.compileReport(design);
 			
 			//Parametros para los Reportes
 			 HashMap<String,Object> parametros = new HashMap<String,Object>();
 			 parametros.put("Dir", Utils.class.getResource(".")  );
-			 URL urlLogo = Utils.class.getResource( "org/jugni/apps/pico/vistas/reportes/cherry.jpg") ;
-			 BufferedImage urlImage = ImageIO.read(Utils.class.getResource( "/org/jugni/apps/pico/vista/reportes/cherry.jpg" ));
+			 /*
+			 *como la imagen se encuentra en resources, puedo unicamente escribir su nombre
+			 * utilizar classLoader para que busque desde la raiz
+            */
+             URL urlLogo = Utils.class.getClassLoader().getResource( "cherry.jpg") ;
+			 //con la url obtenida la paso de parametro al metodo read
+			 BufferedImage urlImage = ImageIO.read(urlLogo);
 			 parametros.put("logo", urlImage);
 			 
 			//llenando
