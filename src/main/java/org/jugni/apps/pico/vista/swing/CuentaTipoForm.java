@@ -60,7 +60,7 @@ public class CuentaTipoForm extends JInternalFrame {
           setName("Tipo_De_Cuenta");
 
           //se crear una etiqueta para titulo del formulario
-          JLabel lblTitle = new JLabel("Tipos de cuenta");
+          JLabel lblTitle = new JLabel("Tipos de cuenta - Crear/Editar ");
           lblTitle.setFont(new Font("Tahoma", Font.BOLD, 22));
           lblTitle.setForeground(Color.WHITE);
           lblTitle.setPreferredSize(new Dimension(40, 40));
