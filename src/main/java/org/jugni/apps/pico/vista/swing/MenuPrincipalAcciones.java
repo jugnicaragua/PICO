@@ -54,9 +54,13 @@ public class MenuPrincipalAcciones {
      public static void mostrarVentanaDatosEmpresa() {
           mostrarVentana(Empresa.getInstancia());
      }
-
+     //Muestra la ventana de formulario catalogo de tipo de cuenta
      public static void mostrarVentanaCuentaTipo() {
           mostrarVentana(CuentaTipoForm.getInstancia());
+     }
+     //Muestra la ventana de fromulario catalogo de cuenta
+     public static void mostrarVentanaCuenta() {
+          mostrarVentana(CuentaForm.getInstancia());
      }
 
      private static void mostrarVentana(JInternalFrame frm) {

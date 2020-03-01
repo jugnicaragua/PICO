@@ -101,7 +101,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
           mntmCatalogoContable = new ItemMenuUtils("Catalogo Contable", "Administra el catalogo de cuentas", 'c');
           //**Agrega el metodo de escucha para los sub menu de mnCatalogo
           mntmCatalogoTipoCuentas.addActionListener(ActioEvent -> MenuPrincipalAcciones.mostrarVentanaCuentaTipo());
-          mntmCatalogoContable.addActionListener(this);
+          mntmCatalogoContable.addActionListener(ActioEvent -> MenuPrincipalAcciones.mostrarVentanaCuenta());
           //**Se agrega los submenu al menu mnCatalogo
           mnCatalogo.add(mntmCatalogoTipoCuentas);
           mnCatalogo.add(mntmCatalogoContable);
