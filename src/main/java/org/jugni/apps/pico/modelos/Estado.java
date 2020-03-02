@@ -42,9 +42,8 @@ public class Estado {
     public Estado() {
     }
 
-    public Estado(String descripcion, Cuenta cuenta) {
+    public Estado(String descripcion) {
         this.descripcion = descripcion;
-        this.cuenta = cuenta;
     }
 
     public Integer getId() {
