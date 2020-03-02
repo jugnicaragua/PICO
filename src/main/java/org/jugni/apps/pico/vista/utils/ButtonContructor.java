@@ -23,7 +23,7 @@ public class ButtonContructor {
      */
     public static JButton createButtonDialogo(String title,String pathResource){
         var btn=createButtonDialogo(title);
-        btn.setIcon(new ImageIcon(ButtonContructor.class.getClass().getResource("/org/tango-project/tango-icon-theme/32x32/actions/process-stop.png")));
+        btn.setIcon(new ImageIcon(ButtonContructor.class.getResource(pathResource)));
         return btn;
     }
 
