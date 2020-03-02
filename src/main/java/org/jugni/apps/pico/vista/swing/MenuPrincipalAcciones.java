@@ -54,12 +54,22 @@ public class MenuPrincipalAcciones {
      public static void mostrarVentanaDatosEmpresa() {
           mostrarVentana(Empresa.getInstancia());
      }
+
      //Muestra la ventana de formulario catalogo de tipo de cuenta
      public static void mostrarVentanaCuentaTipo() {
           mostrarVentana(CuentaTipoForm.getInstancia());
      }
-     //Muestra la ventana de fromulario catalogo de cuenta
+
+     //Muestra la ventana de navegacion catalogo de cuenta
      public static void mostrarVentanaCuenta() {
+          JInternalFrame w = CuentaNavegaForm.getInstancia();
+          if (w!=null) {
+               mostrarVentana(w);
+          }
+     }
+
+     //Muestra la ventana de formulario catalogo de cuenta
+     public static void mostrarNuevoVentanaCuenta() {
           mostrarVentana(CuentaForm.getInstancia());
      }
 
@@ -85,10 +95,11 @@ public class MenuPrincipalAcciones {
      public static void mostrarParametrosGenerales() {
 
      }
+
      //muestra el reporte del balance general
      public static void mostrarBalanceGeneral() {
           try {
-               Utils.showReporte( "BalanceGeneral.jrxml" );
+               Utils.showReporte("BalanceGeneral.jrxml");
           } catch (Exception e1) {
                // TODO Auto-generated catch block
                e1.printStackTrace();

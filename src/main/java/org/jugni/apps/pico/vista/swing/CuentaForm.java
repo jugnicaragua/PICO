@@ -36,6 +36,9 @@ public class CuentaForm extends JInternalFrame {
     private List<CuentaTipo> cuentaTipos;
     private CuentaTipoCBModel cuentaTipoModel;
     private JComboBox cmbCuentaTipo;
+    private JTextField txtCodigo;
+    private JTextField txtNombre;
+    private JComboBox cmbNaturaleza;
 
     private CuentaForm(){
         INSTANCE = this;
@@ -60,10 +63,10 @@ public class CuentaForm extends JInternalFrame {
         var lblCodigo= new JLabel("Codigo :");
         var lblNaturaleza= new JLabel("Naturaleza :");
         var lblNombre =new JLabel("Nombre :");
-        var txtCodigo =new JTextField();
-        var txtNombre =new JTextField();
+         txtCodigo =new JTextField();
+        txtNombre =new JTextField();
+        cmbNaturaleza =new JComboBox();
         var txtDescrip= new JTextPane();
-        var cmbNaturaleza =new JComboBox();
         var pnlButton = new JPanel();
         var btnCerrar = new CerrarButton();
         var btnGuardar = new GuardarButton();
@@ -137,7 +140,7 @@ public class CuentaForm extends JInternalFrame {
         setIconifiable(false);
         setTitle("Catalogo de cuentas");
         setClosable(true);
-        setName("Tipo_De_Cuenta");
+        setName("Cuenta");
         getContentPane().setPreferredSize(new Dimension(600,280));
 
         //Se establece las teclas que al presionar avance el foco
@@ -160,7 +163,7 @@ public class CuentaForm extends JInternalFrame {
             constraints.gridheight = altura; // establece gridheight
             grid.setConstraints( componente, constraints ); // establece restricciones
             pnlCentral.add( componente ); // agrega el componente
-        } // fin del método agregarComponente
+        } 
 
     protected void cerrar() {
         this.dispose();
