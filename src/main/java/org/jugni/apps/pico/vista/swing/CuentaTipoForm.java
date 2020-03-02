@@ -10,6 +10,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import org.jugni.apps.pico.DAO.CuentaTipoImpl;
 import org.jugni.apps.pico.modelos.CuentaTipo;
+import org.jugni.apps.pico.vista.utils.ButtonContructor;
 import org.jugni.apps.pico.vista.utils.CerrarButton;
 import org.jugni.apps.pico.vista.utils.GuardarButton;
 
@@ -60,7 +61,7 @@ public class CuentaTipoForm extends JInternalFrame {
           setName("Tipo_De_Cuenta");
 
           //se crear una etiqueta para titulo del formulario
-          JLabel lblTitle = new JLabel("Tipos de cuenta");
+          JLabel lblTitle = new JLabel("Tipos de cuenta - Crear/Editar ");
           lblTitle.setFont(new Font("Tahoma", Font.BOLD, 22));
           lblTitle.setForeground(Color.WHITE);
           lblTitle.setPreferredSize(new Dimension(40, 40));
@@ -74,9 +75,10 @@ public class CuentaTipoForm extends JInternalFrame {
           JPanel pnlButton = new JPanel();
           CerrarButton btnCerrar = new CerrarButton();
           GuardarButton btnGuardar = new GuardarButton();
+          var btnAyuda= ButtonContructor.createButtonDialogo("Ayuda");
           cmbCuentaTipo = new JComboBox();
 
-          //se define caracteristicas de objesto del formulario
+          //se define caracteristicas de objetos del formulario
           panel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, null, TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.black));
           pnlTitle.setLayout(new BoxLayout(pnlTitle, BoxLayout.LINE_AXIS));
           pnlTitle.setBackground(new Color(0, 117, 175));
@@ -107,6 +109,8 @@ public class CuentaTipoForm extends JInternalFrame {
           //Agrega los componentes al formulario
           pnlTitle.add(Box.createRigidArea(new Dimension(10, 10)));
           pnlTitle.add(lblTitle);
+          pnlButton.add(btnAyuda);
+          pnlButton.add(Box.createRigidArea(new Dimension(60, 10)));
           pnlButton.add(btnCerrar);
           pnlButton.add(btnGuardar);
           pnlCentral.add(panel);

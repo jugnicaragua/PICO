@@ -67,15 +67,13 @@ public class Cuenta {
 
     }
 
-    public Cuenta(String id, String descripcion, int nivel, int padre, String naturaleza, CuentaTipo cuentaTipo, List<ComprobanteCuenta> comprobantesCuenta, List<CuentaCierre> cuentaCierre, Estado estado) {
+    public Cuenta(String id, String descripcion, int nivel, int padre, String naturaleza, CuentaTipo cuentaTipo,  Estado estado) {
         this.id = id;
         this.descripcion = descripcion;
         this.nivel = nivel;
         this.padre = padre;
         this.naturaleza = naturaleza;
         this.cuentaTipo = cuentaTipo;
-        this.comprobantesCuenta = comprobantesCuenta;
-        this.cuentaCierre = cuentaCierre;
         this.estado = estado;
     }
 
@@ -171,29 +169,17 @@ public class Cuenta {
     public void setPadre(int padre) {
         this.padre = padre;
     }
-
     /**
-     * Devuelve la naturaleza de la cuenta
-     *
-     * @return
+     * devuelve Nataruleza de la cuenta
+     * @return 
      */
-    public String getNaturalesa() {
-        return naturaleza;
-    }
-
-    /**
-     * Establece la naturaleza de la cuenta
-     *
-     * @param naturalesa
-     */
-    public void setNaturalesa(String naturalesa) {
-        this.naturaleza = naturaleza;
-    }
-
     public String getNaturaleza() {
         return naturaleza;
     }
-
+    /**
+     * Establece la nu
+     * @param naturaleza 
+     */
     public void setNaturaleza(String naturaleza) {
         this.naturaleza = naturaleza;
     }
