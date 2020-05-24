@@ -108,6 +108,7 @@ public class CuentaForm extends JInternalFrame {
 
         cmbCuentaTipo.setModel(cuentaTipoModel);
         txtDescrip.setText("TODO: definir que se describira en este campo, lorem ips");
+        //Agregar componente al gridLayout
         pnlCentral.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "General", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.black));
         constraints.fill=GridBagConstraints.BOTH;
         agregarcomponenteAlGrid(lblTipoCuenta,0,0,1,1);

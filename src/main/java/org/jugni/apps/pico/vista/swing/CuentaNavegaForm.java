@@ -1,30 +1,22 @@
 package org.jugni.apps.pico.vista.swing;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import javax.swing.Box;
-import javax.swing.JInternalFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.border.LineBorder;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableColumn;
-import org.jfree.layout.CenterLayout;
+import net.sf.jasperreports.engine.util.JsonUtil;
 import org.jugni.apps.pico.modelos.Cuenta;
-import org.jugni.apps.pico.modelos.CuentaTipo;
-import org.jugni.apps.pico.modelos.Estado;
 import org.jugni.apps.pico.vista.utils.ButtonContructor;
 import org.jugni.apps.pico.vista.utils.CabezeraRenderer;
 import org.jugni.apps.pico.vista.utils.CerrarButton;
 import org.jugni.apps.pico.vista.utils.ColorCeldaRenderer;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableColumn;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 /**
  * <strong> org.jugni.apps.pico.vista.swing </strong>
@@ -32,177 +24,281 @@ import org.jugni.apps.pico.vista.utils.ColorCeldaRenderer;
  * @author :Gustavo Castro <gacsnic75@gmail.com>
  * @version : 0.1.0
  * @license : GPLv3
- *
- * Clase CuentaTipoForm : Formulario para navegar en los registros de catalogo de cuentas
+ * <p>
+ * Clase CuentaTipoForm : Formulario para navegar en los registros de catalogo
+ * de cuentas
  */
 public class CuentaNavegaForm extends JInternalFrame {
 
-     private static CuentaNavegaForm INSTANCE;
-     private static List<Cuenta> cuentas;
-     private CuentaTableModel cuentaTableModel;
-     private JTable table;
+    private GridBagConstraints constraints;
+    private GridBagLayout grid;
+    private static CuentaNavegaForm INSTANCE;
+    private static List<Cuenta> cuentas;
+    private CuentaTableModel cuentaTableModel;
+    private JCheckBox chkActivo, chkInactivo, chkBalance;
+    private JTable table;
+    private JPanel pnlTop;
+    private JTextField txtNombre = new JTextField();
+    private JTextField txtCodigo = new JTextField();
+    private JComboBox cmbCategoria = new JComboBox();
 
-     private CuentaNavegaForm() {
-          INSTANCE = this;
-          initCuentaNavegaForm();
-     }
+    private CuentaNavegaForm() {
+        INSTANCE = this;
+        initCuentaNavegaForm();
+    }
 
-     public static CuentaNavegaForm getInstancia() {
-          if (INSTANCE == null) {
-               new CuentaNavegaForm();
-          }
-          if((cuentas==null || cuentas.size()<1) && JOptionPane.showConfirmDialog(INSTANCE,
-                  "No se encontraron registro en la base de datos, ¿Desea agregar un nuevo registro?",
-                  INSTANCE.getTitle(),
-                  JOptionPane.YES_NO_OPTION)==JOptionPane.NO_OPTION){
-               JOptionPane.showMessageDialog(INSTANCE,"El navegador se cerrara hasta que agregue registro");
-               return null;
-          }
+    public static CuentaNavegaForm getInstancia() {
+        if (INSTANCE == null) {
+            new CuentaNavegaForm();
+        }
+        if ((cuentas == null || cuentas.size() < 1) && JOptionPane.showConfirmDialog(INSTANCE,
+                "No se encontraron registro en la base de datos, ¿Desea agregar un nuevo registro?",
+                INSTANCE.getTitle(),
+                JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+            JOptionPane.showMessageDialog(INSTANCE, "El navegador se cerrara hasta que agregue registro");
+            return null;
+        }
 
-          return INSTANCE;
-     }
+        return INSTANCE;
+    }
 
-     private void initCuentaNavegaForm() {
-          cuentaTableModel = new CuentaTableModel();
-          table = new JTable(cuentaTableModel);
-          var pnlTop = new JPanel(new CenterLayout());
-          var pnlCentral = new JPanel(new CenterLayout());
-          var pnlButton = new JPanel();
-          var btnCerrar = new CerrarButton();
-          var btnNuevo = ButtonContructor.createButtonDialogo("Nuevo", "/org/tango-project/tango-icon-theme/32x32/actions/document-new.png");
-          var btnBorrar = ButtonContructor.createButtonDialogo("Nuevo", "/org/tango-project/tango-icon-theme/32x32/actions/edit-delete.png");
-          var btnAyuda = ButtonContructor.createButtonDialogo("Ayuda", "/org/tango-project/tango-icon-theme/32x32/apps/help-browser.png");
-          var scrollPane = new JScrollPane(table);
+    private void initCuentaNavegaForm() {
+        cuentaTableModel = new CuentaTableModel();
+        table = new JTable(cuentaTableModel);
+        chkActivo = new JCheckBox();
+        chkInactivo = new JCheckBox();
+        chkBalance = new JCheckBox();
+        var pnlTop = new JPanel(new GridLayout(2, 2, 5, 5));
+        var pnlButton = new JPanel();
+        var btnCerrar = new CerrarButton();
+        var btnNuevo = ButtonContructor.createButtonDialogo("Nuevo", "/org/tango-project/tango-icon-theme/32x32/actions/document-new.png");
+        var btnBorrar = ButtonContructor.createButtonDialogo("Nuevo", "/org/tango-project/tango-icon-theme/32x32/actions/edit-delete.png");
+        var btnAyuda = ButtonContructor.createButtonDialogo("Ayuda", "/org/tango-project/tango-icon-theme/32x32/apps/help-browser.png");
+        var scrollPane = new JScrollPane(table);
 
-          btnCerrar.addActionListener((ActionEvent arg0) -> {
-               cerrar();
-          });
-          btnNuevo.addActionListener((ActionEvent arg0) -> {
-               MenuPrincipalAcciones.mostrarNuevoVentanaCuenta();
-          });
-          //TODO: prueba de tabla
+        //Contenedores de los componentes de filtrado
+        var hbxNombre = Box.createHorizontalBox();
+        var hbxCodigo = Box.createHorizontalBox();
+        var hbxCategoria = Box.createHorizontalBox();
+        var hbxActivo = Box.createHorizontalBox();
+
+        // ******** Casracterisiticas de los objetos que contiene el formulario**********
+        //se crear una etiqueta para titulo del formulario
+        pnlTop.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Buscar", TitledBorder.DEFAULT_JUSTIFICATION, TitledBorder.DEFAULT_POSITION, null, Color.black));
+        txtNombre.setMaximumSize(new Dimension(460, 36));
+        txtCodigo.setMaximumSize(new Dimension(460, 36));
+        cmbCategoria.setMaximumSize(new Dimension(460, 36));
+        txtNombre.setToolTipText("Ingrese el nombre de la cuenta");
+        txtCodigo.setToolTipText("Ingrese el codigo de la cuenta");
+        cmbCategoria.setToolTipText("Seleccione la categoria");
+
+        // se agrega caracteristicas para los checkbox
+        chkActivo.setText("Activos");
+        chkInactivo.setText("Inactivas");
+        chkBalance.setText("Saldo = 0");
+        chkActivo.setToolTipText("Presenta las cuentas activas");
+        chkActivo.setToolTipText("Presenta las cuentas Inactivas");
+        chkBalance.setToolTipText("Presenta las cuenta con saldo cero");
+        chkActivo.addActionListener(a -> {
+            enableActivoInactivo();
+        });
+        chkInactivo.addActionListener(a -> {
+            enableActivoInactivo();
+        });
+
+        btnCerrar.addActionListener((ActionEvent arg0) -> {
+            cerrar();
+        });
+        btnNuevo.addActionListener((ActionEvent arg0) -> {
+            MenuPrincipalAcciones.mostrarNuevoVentanaCuenta();
+        });
+        //Caracteristica del panel superior
+
+        //TODO: prueba de tabla
 /*          cuentas.add(new Cuenta("01-000-001", "Caja", 1, 1, "Deudora", new CuentaTipo("Activo"), new Estado("Activa")));
           cuentas.add(new Cuenta("01-000-002", "Banco", 1, 1, "Deudora", new CuentaTipo("Activo"), new Estado("Activa")));
           cuentas.add(new Cuenta("01-000-003", "Edificio", 1, 1, "Deudora", new CuentaTipo("Activo"), new Estado("Activa")));
           cuentas.add(new Cuenta("01-000-004", "Terreno", 1, 1, "Deudora", new CuentaTipo("Activo"), new Estado("Activa")));
           cuentas.add(new Cuenta("01-000-005", "documento", 1, 1, "Deudora", new CuentaTipo("Activo"), new Estado("Activa")));*/
-          cuentaTableModel.fireTableDataChanged();
+        cuentaTableModel.fireTableDataChanged();
 
-          //Especifica el ancho de las columnas
-          renderizarColumna(0, 140, SwingConstants.LEFT);
-          renderizarColumna(1, 280, SwingConstants.LEFT);
-          renderizarColumna(2, 120, SwingConstants.LEFT);
-          renderizarColumna(3, 120, SwingConstants.LEFT);
-          renderizarColumna(4, 170, SwingConstants.RIGHT);
-          renderizarColumna(5, 170, SwingConstants.RIGHT);
-          renderizarColumna(6, 170, SwingConstants.RIGHT);
+        //Especifica el ancho de las columnas
+        renderizarColumna(0, 140, SwingConstants.LEFT);
+        renderizarColumna(1, 280, SwingConstants.LEFT);
+        renderizarColumna(2, 120, SwingConstants.LEFT);
+        renderizarColumna(3, 120, SwingConstants.LEFT);
+        renderizarColumna(4, 170, SwingConstants.RIGHT);
+        renderizarColumna(5, 170, SwingConstants.RIGHT);
+        renderizarColumna(6, 170, SwingConstants.RIGHT);
 
-          table.setPreferredScrollableViewportSize(new Dimension(1180, 120));
-          table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-          table.setAutoscrolls(true);
-          //Enumera todas las columnas que se encuentra en la tabla
-          Enumeration<TableColumn> en = table.getColumnModel().getColumns();
-          while (en.hasMoreElements()) {//ciclo mientras exista mas elemento de la enumeracion
-               TableColumn tc = en.nextElement(); //instancia el elemento de la enumeracion en tc
-               tc.setHeaderRenderer(new CabezeraRenderer()); //Aplica renderizado a la TableColumn de la enumeracion
-          }
-          pnlCentral.add(scrollPane);
+        //    table.setPreferredScrollableViewportSize(new Dimension(1180, 220));
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        table.setAutoscrolls(true);
+        //Enumera todas las columnas que se encuentra en la tabla
+        Enumeration<TableColumn> en = table.getColumnModel().getColumns();
+        while (en.hasMoreElements()) {//ciclo mientras exista mas elemento de la enumeracion
+            TableColumn tc = en.nextElement(); //instancia el elemento de la enumeracion en tc
+            tc.setHeaderRenderer(new CabezeraRenderer()); //Aplica renderizado a la TableColumn de la enumeracion
+        }
+        hbxNombre.add(new JLabel("Nombre : "));
+        hbxNombre.add(txtNombre);
+        hbxCodigo.add(new JLabel("Codigo : "));
+        hbxCodigo.add(txtCodigo);
+        hbxCategoria.add(new JLabel("Categoria : "));
+        hbxCategoria.add(cmbCategoria);
 
-          pnlButton.add(btnBorrar);
-          pnlButton.add(Box.createRigidArea(new Dimension(100, 10)));
-          pnlButton.add(btnAyuda);
-          pnlButton.add(Box.createRigidArea(new Dimension(60, 10)));
-          pnlButton.add(btnNuevo);
-          pnlButton.add(btnCerrar);
-          getContentPane().add(pnlTop, BorderLayout.NORTH);
-          getContentPane().add(pnlCentral, BorderLayout.CENTER);
-          getContentPane().add(pnlButton, BorderLayout.SOUTH);
-          this.setToolTipText("Navegador de registro  Catalogo de cuentas");
-          this.setOpaque(true);
-          this.setBorder(new LineBorder(new Color(0, 0, 0)));
-          this.setIconifiable(false);
-          this.setTitle("Navegar Catalogo de cuentas");
-          this.setClosable(true);
-          this.setName("Nave_De_Cuenta");
+        //Se agregan los componentes del contenedor hbxactivo
+        hbxActivo.add(chkActivo);
+        hbxActivo.add(Box.createHorizontalStrut(4));
+        hbxActivo.add(chkInactivo);
+        hbxActivo.add(Box.createHorizontalStrut(10));
+        hbxActivo.add(chkBalance);
+
+        pnlTop.add(hbxNombre);
+        pnlTop.add(hbxCategoria);
+        pnlTop.add(hbxCodigo);
+        pnlTop.add(hbxActivo);
+
+        pnlButton.add(btnBorrar);
+        pnlButton.add(Box.createRigidArea(new Dimension(100, 10)));
+        pnlButton.add(btnAyuda);
+        pnlButton.add(Box.createRigidArea(new Dimension(60, 10)));
+        pnlButton.add(btnNuevo);
+        pnlButton.add(btnCerrar);
+        getContentPane().add(pnlTop, BorderLayout.NORTH);
+        getContentPane().add(scrollPane, BorderLayout.CENTER);
+
+//        getContentPane().add(pnlCentral, BorderLayout.CENTER);
+        getContentPane().add(pnlButton, BorderLayout.SOUTH);
+        this.setToolTipText("Navegador de registro  Catalogo de cuentas");
+        this.setOpaque(true);
+        this.setBorder(new LineBorder(new Color(0, 0, 0)));
+        this.setIconifiable(false);
+        this.setTitle("Navegar Catalogo de cuentas");
+        this.setClosable(true);
+        this.setName("Nave_De_Cuenta");
 //          getContentPane().setPreferredSize(new Dimension(800, 280));
-          this.setPreferredSize(new Dimension(1180, 280));
-          pack();
-     }
+        this.setPreferredSize(new Dimension(1150, 450));
+        pack();
+    }
 
-     protected void cerrar() {
-          this.dispose();
-          INSTANCE = null;
-     }
+    protected void cerrar() {
+        this.dispose();
+        INSTANCE = null;
+    }
 
-     //Renderiza las columnas dando tamaño y orientacion a las columna, aplica color a las filas  
-     private void renderizarColumna(int columna, int ancho, int Alineacion) {
-          table.getColumnModel().getColumn(columna).setPreferredWidth(ancho);
-          table.getColumnModel().getColumn(columna).setResizable(false);
-          table.getColumnModel().getColumn(columna).setCellRenderer(new ColorCeldaRenderer(Alineacion));
-     }
+    //Renderiza las columnas dando tamaño y orientacion a las columna, aplica color a las filas  
+    private void renderizarColumna(int columna, int ancho, int Alineacion) {
+        table.getColumnModel().getColumn(columna).setPreferredWidth(ancho);
+        table.getColumnModel().getColumn(columna).setResizable(false);
+        table.getColumnModel().getColumn(columna).setCellRenderer(new ColorCeldaRenderer(Alineacion));
+    }
 
-     /**
-      * Clase tablemodel de la tabla cuenta
-      */
-     public class CuentaTableModel extends AbstractTableModel {
+    private void enableActivoInactivo() {
+        chkActivo.setEnabled(!chkInactivo.isSelected());
+        chkInactivo.setEnabled(!chkActivo.isSelected());
+    }
 
-          String[] cabezera = {"Codigo", "Nombre de la cuenta", "Tipo", "Naturaleza", "Debe", "Haber", "Saldo"};
+    /**
+     * Clase tablemodel de la tabla cuenta
+     */
+    class CuentaTableModel extends AbstractTableModel {
 
-          public CuentaTableModel() {
-               cuentas = new ArrayList<>();
-          }
+        String[] cabezera = {"Codigo", "Nombre de la cuenta", "Tipo", "Naturaleza", "Debe", "Haber", "Saldo"};
+        List<Cuenta> registrosCuentas;
 
-          @Override
-          public String getColumnName(int column) {
-               return cabezera[column];
-          }
+        public CuentaTableModel() {
+            cuentas = new ArrayList<>();
+        }
 
-          @Override
-          public int getRowCount() {
-               return cuentas.size();
-          }
+        protected void update() {
+            registrosCuentas= new ArrayList<>(cuentas);
+            if (txtNombre.getText().trim().isEmpty()) {
+                registrosCuentas.removeIf(c -> !c.getDescripcion().contains(txtNombre.getText().trim()));
+            }
+            if (txtCodigo.getText().trim().isEmpty()) {
+                registrosCuentas.removeIf(c -> !c.getId().contains(txtCodigo.getText().trim()));
+            }
+            if (cmbCategoria.getSelectedIndex() > -1) {
+                registrosCuentas.removeIf(c ->
+                      !c.getCuentaTipo().getDescripcion().contains(
+                              cmbCategoria.getSelectedItem().toString()
+                      ));
+            }
+            if(chkActivo.isSelected() && !chkInactivo.isSelected()){
+                registrosCuentas.removeIf(e -> e.getEstado())
+            }
+        }
 
-          @Override
-          public int getColumnCount() {
-               return cabezera.length;
-          }
+        @Override
+        public String getColumnName(int column) {
+            return cabezera[column];
+        }
 
-          @Override
-          public Object getValueAt(int fila, int col) {
-               Object obj;
-               switch (col) {
-                    case 0: //Columna codigo
-                         obj = cuentas.get(fila).getId();
-                         break;
-                    case 1: //Columna Nombre de la cuenta
-                         obj = cuentas.get(fila).getDescripcion();
-                         break;
-                    case 2: //Columna tipo de cuenta
-                         obj = "discrip";
-                         break;
-                    case 3: //Columna Naturaleza
-                         obj = cuentas.get(fila).getNaturaleza();
-                         break;
-                    case 4: //Columna debe
-                         obj = "1,500.00";
-                         break;
-                    case 5: //Columna haber
-                         obj = "1,500.00";
-                         break;
-                    case 6: //Columna Saldo
-                         obj = "0.00";
-                         break;
-                    default:
-                         obj = null;
-               }
-               return obj;
-          }
+        @Override
+        public int getRowCount() {
+            return registrosCuentas.size();
+        }
 
-          @Override
-          public boolean isCellEditable(int rowIndex, int columnIndex) {
-               return false; //Los registro de solo lectura
-          }
+        @Override
+        public int getColumnCount() {
+            return cabezera.length;
+        }
 
-     }
+        @Override
+        public Object getValueAt(int fila, int col) {
+            Object obj;
+            switch (col) {
+                case 0: //Columna codigo
+                    obj = registrosCuentas.get(fila).getId();
+                    break;
+                case 1: //Columna Nombre de la cuenta
+                    obj = registrosCuentas.get(fila).getDescripcion();
+                    break;
+                case 2: //Columna tipo de cuenta
+                    obj = "discrip";
+                    break;
+                case 3: //Columna Naturaleza
+                    obj = registrosCuentas.get(fila).getNaturaleza();
+                    break;
+                case 4: //Columna debe
+                    obj = "1,500.00";
+                    break;
+                case 5: //Columna haber
+                    obj = "1,500.00";
+                    break;
+                case 6: //Columna Saldo
+                    obj = "0.00";
+                    break;
+                default:
+                    obj = null;
+            }
+            return obj;
+        }
+
+        @Override
+        public boolean isCellEditable(int rowIndex, int columnIndex) {
+            return false; //Los registro de solo lectura
+        }
+
+    }
+
+    public static void main(String[] args) {
+        List<String> ls,filterls;
+        filterls=new ArrayList<>();
+        ls=new ArrayList<>();
+        ls.add("Gustavo"); ls.add("Juan"); ls.add("Jose");  ls.add("Jesus");   ls.add("Maria");
+        ls.removeIf(e -> !e.startsWith("J"));
+        ls.forEach(System.out::println);
+        /*ls.stream().filter(e ->e.startsWith("J")).forEach(filterls::add);
+        filterls.forEach(System.out::println);
+        ls=new ArrayList<>(filterls);
+        System.out.println("---------imprime ls--------");
+        ls.remove("Jose");
+        ls.forEach(System.out::println);
+        System.out.println("--------imprime filter---------");
+        filterls.forEach(System.out::println);
+        */
+    }
 
 }
