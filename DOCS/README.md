@@ -1,11 +1,11 @@
 # Especificaciones de Requisitos del Software.
-  Consdierando
+  Considerando
 ## Introducción.
 ...
 
 
 ### Proposito.
-Deben ser un sistema sencillo apto par pymes.
+Deben ser un sistema sencillo apto para pymes.
 
 ### Ámbito del Sistema.
 
@@ -18,7 +18,7 @@ El sistema no pretende dar solución a problemas contables complejos como:
  2. Proceso de contabilidad de costos complejos (por procesos o estandares).
  3. Contabilidad multi moneda.
 
-El sistema debera cumplir con la siguiente funcionalidad:
+El sistema deberá cumplir con la siguiente funcionalidad:
 
  1. Ser un sistema contable para pequeñas y medianas empresas.
  2. Brindar acceso a los modulos de:
@@ -28,7 +28,7 @@ El sistema debera cumplir con la siguiente funcionalidad:
     2.3 Ventas
     2.4 Manufactura (Costos por Procesos).
 
-Adicionalmente ll sistema debe cumplir con los requisitos de las disposiciones
+Adicionalmente el sistema debe cumplir con los requisitos de las disposiciones
 técnicas vigentes:
 
 1. 03-2007: FORMALIDADES PARA USO DE SISTEMAS CONTABLES COMPUTARIZADOS
