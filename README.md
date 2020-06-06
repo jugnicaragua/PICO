@@ -53,7 +53,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaraguenses. Didactico y Colabo
 
 
 # Licencia
-Copyright (c) 2018 Grupo de Usuarios Java de Nicaragua.
+Copyright (c) 2018-2020 Grupo de Usuarios Java de Nicaragua.
 
 Pico Accounting is free libre open source software (FLOSS), licensed under the GNU General Public License version 3 (GPLv3), see the COPYING file or a copy at: https://www.gnu.org/licenses/gpl.txt
 
