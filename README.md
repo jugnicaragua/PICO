@@ -44,14 +44,20 @@ Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Cola
 
 ## Estilo de Código:
 Para el estilo de codificación, usaremos el estilo creado por Google:
-https://google.github.io/styleguide/javaguide.html
-Donde descargar los archivos para los IDE.
+[](https://google.github.io/styleguide/javaguide.html)
+
+
+### Donde descargar los archivos para los IDE.
 https://github.com/google/styleguide
-Eclipse:
+
+
+#### Eclipse:
 https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml
-IntelliJIDEa
+
+#### IntelliJIDEa
 https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml
-NetBeans
+
+#### NetBeans
 --> notiene, por ahora.
 
 
