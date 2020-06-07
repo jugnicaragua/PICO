@@ -101,8 +101,8 @@ mvn install -DskipTests=true
   UI <enlace a las interfaces>
 
 # Como colaborar (¡IMPORTANTE!).
-1) Todo colaboracion de codígo debe hacerce mediante PULL PULL REQUEST desde la rama/branch "develop"
-2) Reporte de errores, bugs, se hacen mediante issue, solicitudes de mejoras tambien. 
+1) Todo colaboracion de codígo debe hacerce mediante [PULL REQUEST](https://help.github.com/es/github/collaborating-with-issues-and-pull-requests/about-pull-requests) desde la rama/branch "develop"
+2) Reporte de errores, bugs, se hacen mediante [issues](https://guides.github.com/features/issues/), solicitudes de mejoras tambien. 
 
 
 
