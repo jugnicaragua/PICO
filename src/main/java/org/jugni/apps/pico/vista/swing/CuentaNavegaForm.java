@@ -1,6 +1,5 @@
 package org.jugni.apps.pico.vista.swing;
 
-import net.sf.jasperreports.engine.util.JsonUtil;
 import org.jugni.apps.pico.modelos.Cuenta;
 import org.jugni.apps.pico.vista.utils.ButtonContructor;
 import org.jugni.apps.pico.vista.utils.CabezeraRenderer;
@@ -38,9 +37,9 @@ public class CuentaNavegaForm extends JInternalFrame {
     private JCheckBox chkActivo, chkInactivo, chkBalance;
     private JTable table;
     private JPanel pnlTop;
-    private JTextField txtNombre = new JTextField();
-    private JTextField txtCodigo = new JTextField();
-    private JComboBox cmbCategoria = new JComboBox();
+    private final JTextField txtNombre = new JTextField();
+    private final JTextField txtCodigo = new JTextField();
+    private final JComboBox cmbCategoria = new JComboBox();
 
     private CuentaNavegaForm() {
         INSTANCE = this;
@@ -226,7 +225,7 @@ public class CuentaNavegaForm extends JInternalFrame {
                       ));
             }
             if(chkActivo.isSelected() && !chkInactivo.isSelected()){
-                registrosCuentas.removeIf(e -> e.getEstado())
+   //TODO             registrosCuentas.removeIf( e  -> e.getEstado());
             }
         }
 
@@ -281,24 +280,6 @@ public class CuentaNavegaForm extends JInternalFrame {
             return false; //Los registro de solo lectura
         }
 
-    }
-
-    public static void main(String[] args) {
-        List<String> ls,filterls;
-        filterls=new ArrayList<>();
-        ls=new ArrayList<>();
-        ls.add("Gustavo"); ls.add("Juan"); ls.add("Jose");  ls.add("Jesus");   ls.add("Maria");
-        ls.removeIf(e -> !e.startsWith("J"));
-        ls.forEach(System.out::println);
-        /*ls.stream().filter(e ->e.startsWith("J")).forEach(filterls::add);
-        filterls.forEach(System.out::println);
-        ls=new ArrayList<>(filterls);
-        System.out.println("---------imprime ls--------");
-        ls.remove("Jose");
-        ls.forEach(System.out::println);
-        System.out.println("--------imprime filter---------");
-        filterls.forEach(System.out::println);
-        */
     }
 
 }
