@@ -19,7 +19,7 @@ import org.jugni.apps.pico.vista.swing.dialogos.Respaldo;
  */
 public class MenuPrincipalAcciones {
 
-     private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger(MenuPrincipalAcciones.class);
 
      public MenuPrincipalAcciones() {
      }
