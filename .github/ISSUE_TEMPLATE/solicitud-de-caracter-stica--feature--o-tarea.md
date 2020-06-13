@@ -1,11 +1,15 @@
 ---
-name: Solicitud de característica (feature) o tarea
+name: Solicitud de característica (feature)
 about: Sugiere una idea a este Proyecto
-title: ''
-labels: ''
+title: "[FEATURE] - "
+labels: enhancement
 assignees: ''
 
 ---
+
+** ¿Su solicitud de característica (feature) está relacionada con un problema? Por favor describa **
+Una descripción clara y concisa de cuál es el problema.
+Ejemplo: Siempre estoy frustrado cuando en la característica X sucede el comportamiento Y [...]
 
 ** Describe la solución que deseas **
 Una descripción clara y concisa de lo que quieres que suceda.
@@ -24,5 +28,6 @@ Ejemplo: Mockups, Screenshots, Docs (texto, calculo, presentaciones, etc.).
 [ ] Pruebas de Integración
 [ ] Pruebas de Aceptación
 [ ] Pruebas de Carga y Perfil
+[ ] Evidencias
 [ ] Peer Review con Diseño
 [ ] Peer Review con Líder Técnico
