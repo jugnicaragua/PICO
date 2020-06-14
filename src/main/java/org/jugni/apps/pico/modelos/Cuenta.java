@@ -24,11 +24,10 @@ import javax.persistence.Table;
         indexes = {
             @Index(name = "idx_cuenta", columnList = "Descripcion"),
             @Index(name = "idx_cuenta", columnList = "Naturaleza")})
-public class Cuenta {
+public class Cuenta extends Identificador<Integer>{
 
-    @Id()
-    @Column(name = "Id", length = 25)
-    private String id;
+    @Column(name = "cuenta", length = 25)
+    private String cuenta;
 
     @Column(name = "Descripcion", length = 50)
     private String descripcion;
@@ -42,6 +41,8 @@ public class Cuenta {
     @Column(name = "Naturaleza", length = 50)
     private String naturaleza;
 
+    private Boolean estado;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CuentaTipoId")
     private CuentaTipo cuentaTipo;
@@ -54,9 +55,7 @@ public class Cuenta {
             cascade = CascadeType.ALL)
     private List<CuentaCierre> cuentaCierre;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EstadoId")
-    private Estado estado;
+
 
 
     /**
@@ -67,14 +66,13 @@ public class Cuenta {
 
     }
 
-    public Cuenta(String id, String descripcion, int nivel, int padre, String naturaleza, CuentaTipo cuentaTipo,  Estado estado) {
-        this.id = id;
+    public Cuenta(String cuenta, String descripcion, int nivel, int padre, String naturaleza, CuentaTipo cuentaTipo) {
+        this.cuenta = cuenta;
         this.descripcion = descripcion;
         this.nivel = nivel;
         this.padre = padre;
         this.naturaleza = naturaleza;
         this.cuentaTipo = cuentaTipo;
-        this.estado = estado;
     }
 
     
@@ -85,17 +83,17 @@ public class Cuenta {
      *
      * @return String
      */
-    public String getId() {
-        return id;
+    public String getCuenta() {
+        return cuenta;
     }
 
     /**
      * Establece el valor de id de cuenta
      *
-     * @param id
+     * @param cuenta
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setCuenta(String cuenta) {
+        this.cuenta = cuenta;
     }
 
     /**
@@ -208,48 +206,18 @@ public class Cuenta {
         this.cuentaCierre = cuentaCierre;
     }
 
-    public Estado getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 
     
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        Cuenta other = (Cuenta) obj;
-        if (id == null) {
-            if (other.id != null) {
-                return false;
-            }
-        } else if (!id.equals(other.id)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
+       @Override
     public String toString() {
-        return "Cuenta{" + "id=" + id + ", descripcion=" + descripcion + ", nivel=" + nivel + ", padre=" + padre + ", naturaleza=" + naturaleza + ", cuentaTipo=" + cuentaTipo + ", comprobantesCuenta=" + comprobantesCuenta + ", cuentaCierre=" + cuentaCierre + ", estado=" + estado + '}';
+        return "Cuenta{" + "id=" + id + " ,cuenta "+cuenta+ ", descripcion=" + descripcion + ", nivel=" + nivel + ", padre=" + padre + ", naturaleza=" + naturaleza + ", cuentaTipo=" + cuentaTipo + ", comprobantesCuenta=" + comprobantesCuenta + ", cuentaCierre=" + cuentaCierre + ", estado=" + estado + '}';
     }
     
 }

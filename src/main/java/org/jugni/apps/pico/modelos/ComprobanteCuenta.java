@@ -19,12 +19,9 @@ import javax.persistence.ManyToOne;
  *  @license  : GPLv3
  */
 @Entity
-public class ComprobanteCuenta {
-    @Id
-    @GeneratedValue 
-    @Column(name="Id")
-    private Long id;
-/*    @Column(name="Fecha")
+public class ComprobanteCuenta extends Identificador<Long>{
+
+    /*    @Column(name="Fecha")
     private LocalDate fecha; */
     @Column(name="Credito")
     private Float credito;
@@ -50,17 +47,6 @@ public class ComprobanteCuenta {
     public ComprobanteCuenta( Float credito, Float debito) {
         this.credito = credito;
         this.debito = debito;
-    }
-  
-  
-  
-  
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public Float getCredito() {
