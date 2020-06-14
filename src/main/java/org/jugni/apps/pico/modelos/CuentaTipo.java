@@ -2,8 +2,6 @@ package org.jugni.apps.pico.modelos;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Table;
 
@@ -11,18 +9,15 @@ import javax.persistence.Table;
 /**
  * Clase que representa la entidad o tabla CuentaTipo.
  *
- * @author gacs
+ * @author :Gustavo Castro <gacsnic75@gmail.com>
+ * @license : GPLv3
  *
  */
 @Entity
 @Table(name="CuentaTipo" ,
 indexes = {@Index(name = "idx_tipocuenta", columnList="Descripcion")})
-public class CuentaTipo {
-    @Id
-    @GeneratedValue
-    @Column(name = "Id")
-    private Integer id;
-    
+public class CuentaTipo extends Identificador<Byte> {
+
     @Column(name = "Descripcion", length = 50)
     private String descripcion;
 
@@ -41,20 +36,6 @@ public class CuentaTipo {
     public CuentaTipo() {
     }
 
-    /**
-     * Devuelve el valor del Id
-     * @return Long 
-     */
-    public Integer getId() {
-	return id;
-    }
-    /**
-     * Establce el valor del id
-     * @param id Long, puede recibir balor null
-     */
-    public void setId(Integer id) {
-    	this.id = id;
-    }
     /**
      * Devuelve el nombre del tipo de cuenta
      * @return String
@@ -86,29 +67,6 @@ public class CuentaTipo {
     	this.cuentas = cuentas;
     }
 */
-@Override
-    public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((id == null) ? 0 : id.hashCode());
-	return result;
-    }
-    @Override
-    public boolean equals(Object obj) {
-    	if (this == obj)
-            return true;
-	if (obj == null)
-            return false;
-	if (getClass() != obj.getClass())
-            return false;
-	CuentaTipo other = (CuentaTipo) obj;
-	if (id == null) {
-            if (other.id != null)
-		return false;
-	} else if (!id.equals(other.id))
-            return false;
-		return true;
-	}
 
     @Override
     public String toString() {
