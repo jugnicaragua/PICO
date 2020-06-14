@@ -216,7 +216,7 @@ public class CuentaNavegaForm extends JInternalFrame {
                 registrosCuentas.removeIf(c -> !c.getDescripcion().contains(txtNombre.getText().trim()));
             }
             if (txtCodigo.getText().trim().isEmpty()) {
-                registrosCuentas.removeIf(c -> !c.getId().contains(txtCodigo.getText().trim()));
+                registrosCuentas.removeIf(c -> !c.getId().equals(txtCodigo.getText().trim()));
             }
             if (cmbCategoria.getSelectedIndex() > -1) {
                 registrosCuentas.removeIf(c ->

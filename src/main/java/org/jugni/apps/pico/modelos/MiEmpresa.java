@@ -9,9 +9,9 @@ import javax.persistence.*;
  * @author gacs
  */
 @Entity
-public class MiEmpresa implements Serializable {
-     @Id
-     @Column(name = "Ruc", length = 25)
+public class MiEmpresa extends Identificador<Byte> {
+
+    @Column(name = "Ruc", length = 25)
      private String ruc;
      
      @Column(name = "RazonSocial", length = 35)
@@ -40,6 +40,7 @@ public class MiEmpresa implements Serializable {
 
      public MiEmpresa() {
      }
+
 
      public MiEmpresa(String ruc, String razonSocial, String emitirA, String direccion, String representanteLegal, String contacto, String webSite, String correo, String telefono) {
           this.ruc = ruc;
@@ -127,30 +128,8 @@ public class MiEmpresa implements Serializable {
 
 
      @Override
-     public int hashCode() {
-          int hash = 7;
-          hash = 79 * hash + Objects.hashCode(this.ruc);
-          return hash;
-     }
-
-     @Override
-     public boolean equals(Object obj) {
-          if (this == obj) {
-               return true;
-          }
-          if (obj == null) {
-               return false;
-          }
-          if (getClass() != obj.getClass()) {
-               return false;
-          }
-          final MiEmpresa other = (MiEmpresa) obj;
-          return Objects.equals(this.ruc, other.ruc);
-     }
-
-     @Override
      public String toString() {
-          return "Empresa{" + "ruc=" + ruc + ", razonSocial=" + razonSocial + ", EmitirA=" + emitirA + ", Direccion=" + direccion + ", representanteLegal=" + representanteLegal + ", contacto=" + contacto + ", webSite=" + webSite + ", correo=" + correo + ", telefono=" + telefono +  '}';
+          return "Empresa{" +"id"+id + "ruc=" + ruc + ", razonSocial=" + razonSocial + ", EmitirA=" + emitirA + ", Direccion=" + direccion + ", representanteLegal=" + representanteLegal + ", contacto=" + contacto + ", webSite=" + webSite + ", correo=" + correo + ", telefono=" + telefono +  '}';
      }
      
      

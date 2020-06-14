@@ -27,10 +27,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Comprobantes" ,
 indexes = {@Index(name = "idx_tipocuenta", columnList="Descripcion")})
-public class Comprobante {
-    @Id
-    @GeneratedValue
-    private Long id;
+public class Comprobante extends Identificador<Long> {
+
     @Column(name = "Numero",length = 8)
     private String numero; 
     @Column(name = "Concepto",length = 300)
@@ -141,31 +139,6 @@ public class Comprobante {
 
     public void setEstadoId(int estadoId) {
 	this.estadoId = estadoId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Comprobante other = (Comprobante) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
     }
 
     @Override
