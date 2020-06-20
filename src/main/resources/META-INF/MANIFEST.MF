@@ -1,7 +1,0 @@
-Manifest-Version: 1.0
-Built-By: lkf
-Build-Jdk: 1.8.0_181
-Created-By: Maven Integration for Eclipse
-
-<SplashScreen-Image>resources/splash.gif</SplashScreen-Image>
-SplashScreen-Image:resources/splash.gif
