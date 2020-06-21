@@ -4,7 +4,7 @@
  * @author Gustavo Castro -GACS
  * Con esta se evita repetir algunas sentencia y se le cargan al contructor
  */
-package org.ni.jug.pico.vista.util;
+package org.ni.jug.pico.ui.util;
 
 public class ItemMenuUtils extends javax.swing.JMenuItem {
 

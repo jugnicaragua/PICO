@@ -1,15 +1,13 @@
 /*
  * Ejecuta las acciones del menu
  */
-package org.ni.jug.pico.vista;
+package org.ni.jug.pico.ui.core;
 
 import java.beans.PropertyVetoException;
 import javax.swing.JInternalFrame;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import org.ni.jug.pico.vista.reporte.Utils;
-import org.ni.jug.pico.vista.dialogo.Acercade;
-import org.ni.jug.pico.vista.dialogo.Respaldo;
+import org.ni.jug.pico.ui.reporte.Utils;
 
 /**
  * Clase que ejecuta las intrucciones del menu
@@ -17,11 +15,11 @@ import org.ni.jug.pico.vista.dialogo.Respaldo;
  * @author gacs
  *
  */
-public class MenuPrincipalAcciones {
+public class MenuPrincipalAccion {
 
-    private static final Logger LOGGER = LogManager.getLogger(MenuPrincipalAcciones.class);
+    private static final Logger LOGGER = LogManager.getLogger(MenuPrincipalAccion.class);
 
-     public MenuPrincipalAcciones() {
+     public MenuPrincipalAccion() {
      }
 
      public void ejecutarAcercaDe() {

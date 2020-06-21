@@ -2,9 +2,9 @@
  * @author Gustavo Castro - GACS
  * Menu principal, este menu sera instanciado desde la VentanaPrincipal
  */
-package org.ni.jug.pico.vista;
+package org.ni.jug.pico.ui.core;
 
-import org.ni.jug.pico.vista.util.ItemMenuUtils;
+import org.ni.jug.pico.ui.util.ItemMenuUtils;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
 public class MenuPrincipal extends JMenuBar implements ActionListener {
 
      private static final long serialVersionUID = 1L;
-     private MenuPrincipalAcciones menuPrincipalAcciones;   // ejecuta las acciones del menu
+     private MenuPrincipalAccion menuPrincipalAccion;   // ejecuta las acciones del menu
      private JMenu mnArchivo, //Menu Archivo
              mnCatalogo, //Menu Catalogo agrupa todos los sub menu de catalos
              mnCaptacion, //Menu Captacion Agrupa los sub menu con movimiento periodico( comprobantes, cxp,cxc)
@@ -47,7 +47,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
       *
       */
      private void initMenuPrincipal() {
-          menuPrincipalAcciones = new MenuPrincipalAcciones();
+          menuPrincipalAccion = new MenuPrincipalAccion();
           setName("MenuPrincipal");
           // Inicia la declaracion de menus
           mnArchivo = new JMenu("Archivo");
@@ -93,15 +93,15 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
           /**
            * Agrega Eventos o acciones para Las opciones del menu Archivo
            */
-          mntmSalir.addActionListener(ActionEvent -> MenuPrincipalAcciones.salir());
-          mntmEmpresa.addActionListener(ActioEvent -> MenuPrincipalAcciones.mostrarVentanaDatosEmpresa());
+          mntmSalir.addActionListener(ActionEvent -> MenuPrincipalAccion.salir());
+          mntmEmpresa.addActionListener(ActioEvent -> MenuPrincipalAccion.mostrarVentanaDatosEmpresa());
 
           //**Se instancia los submenu del menu mnCatalogo
           mntmCatalogoTipoCuentas = new ItemMenuUtils("Catalogo tipo de Cuentas", "Administra catalogo de tipo de cuenta", 'T');
           mntmCatalogoContable = new ItemMenuUtils("Catalogo Contable", "Administra el catalogo de cuentas", 'c');
           //**Agrega el metodo de escucha para los sub menu de mnCatalogo
-          mntmCatalogoTipoCuentas.addActionListener(ActioEvent -> MenuPrincipalAcciones.mostrarVentanaCuentaTipo());
-          mntmCatalogoContable.addActionListener(ActioEvent -> MenuPrincipalAcciones.mostrarVentanaCuenta());
+          mntmCatalogoTipoCuentas.addActionListener(ActioEvent -> MenuPrincipalAccion.mostrarVentanaCuentaTipo());
+          mntmCatalogoContable.addActionListener(ActioEvent -> MenuPrincipalAccion.mostrarVentanaCuenta());
           //**Se agrega los submenu al menu mnCatalogo
           mnCatalogo.add(mntmCatalogoTipoCuentas);
           mnCatalogo.add(mntmCatalogoContable);
@@ -121,7 +121,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
           mntmBalanceGeneral = new ItemMenuUtils("Balance General","Balance general de la empresa",'b');
           //**Agrega el metodo de escucha para los submenu de mnInforme
           mntmBalanceGeneral.addActionListener(e -> {
-               MenuPrincipalAcciones.mostrarBalanceGeneral();
+               MenuPrincipalAccion.mostrarBalanceGeneral();
           });
           //**Se agrega los submenu al menu mnInforme
           mnInforme.add(mntmBalanceGeneral);
@@ -131,7 +131,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
 
           //**Agrega el metodo de escucha para los sub menu de mnHerramientas
           mntmHerramientaRespaldo.addActionListener(e -> {
-               menuPrincipalAcciones.ejecutarRespaldo();
+               menuPrincipalAccion.ejecutarRespaldo();
           });
           //**Se agrega los submenu al menu Herramienta
           mnHerramienta.add(mntmHerramientaRespaldo);
@@ -145,7 +145,7 @@ public class MenuPrincipal extends JMenuBar implements ActionListener {
           mntmManualEnLina.addActionListener(this);
           mntmIrAlForo.addActionListener(this);
           mntmAcercaDe.addActionListener(e -> {
-               menuPrincipalAcciones.ejecutarAcercaDe();
+               menuPrincipalAccion.ejecutarAcercaDe();
           });
 
           //**Se agrega los submenu al menu mnAyuda

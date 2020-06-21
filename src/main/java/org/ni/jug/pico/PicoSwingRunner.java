@@ -1,6 +1,6 @@
 package org.ni.jug.pico;
 
-import org.ni.jug.pico.vista.VentanaPrincipal;
+import org.ni.jug.pico.ui.core.VentanaPrincipal;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;

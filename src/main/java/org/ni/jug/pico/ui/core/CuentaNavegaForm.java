@@ -1,10 +1,10 @@
-package org.ni.jug.pico.vista;
+package org.ni.jug.pico.ui.core;
 
 import org.ni.jug.pico.core.model.Cuenta;
-import org.ni.jug.pico.vista.util.ButtonContructor;
-import org.ni.jug.pico.vista.util.CabezeraRenderer;
-import org.ni.jug.pico.vista.util.CerrarButton;
-import org.ni.jug.pico.vista.util.ColorCeldaRenderer;
+import org.ni.jug.pico.ui.util.ButtonContructor;
+import org.ni.jug.pico.ui.util.CabezeraRenderer;
+import org.ni.jug.pico.ui.util.CerrarButton;
+import org.ni.jug.pico.ui.util.ColorCeldaRenderer;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -109,7 +109,7 @@ public class CuentaNavegaForm extends JInternalFrame {
             cerrar();
         });
         btnNuevo.addActionListener((ActionEvent arg0) -> {
-            MenuPrincipalAcciones.mostrarNuevoVentanaCuenta();
+            MenuPrincipalAccion.mostrarNuevoVentanaCuenta();
         });
         //Caracteristica del panel superior
 

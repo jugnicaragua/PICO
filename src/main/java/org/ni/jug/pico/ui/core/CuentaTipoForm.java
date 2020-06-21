@@ -1,4 +1,4 @@
-package org.ni.jug.pico.vista;
+package org.ni.jug.pico.ui.core;
 
 import java.awt.*;
 import java.util.List;
@@ -12,9 +12,9 @@ import javax.swing.border.TitledBorder;
 import org.ni.jug.pico.PicoCoreApplication;
 import org.ni.jug.pico.core.boundary.CuentaTipoService;
 import org.ni.jug.pico.core.model.CuentaTipo;
-import org.ni.jug.pico.vista.util.ButtonContructor;
-import org.ni.jug.pico.vista.util.CerrarButton;
-import org.ni.jug.pico.vista.util.GuardarButton;
+import org.ni.jug.pico.ui.util.ButtonContructor;
+import org.ni.jug.pico.ui.util.CerrarButton;
+import org.ni.jug.pico.ui.util.GuardarButton;
 
 /**
  * @author Gustavo Castro <gacsnic75@gmail.com>

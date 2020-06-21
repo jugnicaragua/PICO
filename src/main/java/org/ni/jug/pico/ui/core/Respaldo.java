@@ -1,7 +1,7 @@
-package org.ni.jug.pico.vista.dialogo;
+package org.ni.jug.pico.ui.core;
 
-import org.ni.jug.pico.vista.util.JDialogoUtil;
-import org.ni.jug.pico.vista.util.Utilities;
+import org.ni.jug.pico.ui.util.JDialogoUtil;
+import org.ni.jug.pico.ui.util.Utilities;
 
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;

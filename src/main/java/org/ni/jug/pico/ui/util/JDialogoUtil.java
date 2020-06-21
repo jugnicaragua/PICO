@@ -1,4 +1,4 @@
-package org.ni.jug.pico.vista.util;
+package org.ni.jug.pico.ui.util;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;

@@ -1,5 +1,5 @@
 
-package org.ni.jug.pico.vista.util;
+package org.ni.jug.pico.ui.util;
 
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
@@ -13,13 +13,12 @@ import javax.swing.JButton;
  *
  *   Clase CerrarButton : clase util hereda de jbutton
  */
-public class GuardarButton extends JButton{
-     public GuardarButton(){
-          setText("Guardar");
-          setIcon(new ImageIcon(getClass().getResource("/org/tango-project/tango-icon-theme/32x32/actions/document-save.png")));
+public class CerrarButton extends JButton{
+     public CerrarButton(){
+          setText("Cerrar");
+          setIcon(new ImageIcon(getClass().getResource("/org/tango-project/tango-icon-theme/32x32/actions/process-stop.png")));
           setPreferredSize(new Dimension(120, 50));
           setFocusable(false);
-          setEnabled(false);
-          setToolTipText("Guarda los cambios de los campos del Formulario");
+          setToolTipText("Cierra el Formulario");
      }
 }

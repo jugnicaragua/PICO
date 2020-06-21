@@ -1,4 +1,4 @@
-package org.ni.jug.pico.vista.util;
+package org.ni.jug.pico.ui.util;
 
 // Sample code file: Utilities.java
 // Warning: This code has been marked up for HTML

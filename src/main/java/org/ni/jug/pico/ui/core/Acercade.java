@@ -1,4 +1,4 @@
-package org.ni.jug.pico.vista.dialogo;
+package org.ni.jug.pico.ui.core;
 
 import java.awt.BorderLayout;
 import java.awt.Desktop;
@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.HyperlinkEvent;
-import org.ni.jug.pico.vista.util.JDialogoUtil;
+import org.ni.jug.pico.ui.util.JDialogoUtil;
 
 /**
  * Acerca de PICO

@@ -1,4 +1,4 @@
-package org.ni.jug.pico.vista;
+package org.ni.jug.pico.ui.core;
 
 
 /***************************************************************************
@@ -22,7 +22,7 @@ CUSTOMERS WITH RESPECT TO THIS CODE.
 
 //package com.novell.application.console.shell;
 
-import org.ni.jug.pico.vista.util.Utilities;
+import org.ni.jug.pico.ui.util.Utilities;
 
 import javax.swing.*;
 import java.awt.*;

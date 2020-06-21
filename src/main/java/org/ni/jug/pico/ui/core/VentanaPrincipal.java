@@ -1,4 +1,4 @@
-package org.ni.jug.pico.vista;
+package org.ni.jug.pico.ui.core;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;

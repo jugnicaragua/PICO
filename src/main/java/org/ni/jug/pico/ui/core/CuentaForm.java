@@ -1,10 +1,10 @@
-package org.ni.jug.pico.vista;
+package org.ni.jug.pico.ui.core;
 
 import org.ni.jug.pico.core.boundary.CuentaTipoService;
 import org.ni.jug.pico.core.model.CuentaTipo;
-import org.ni.jug.pico.vista.util.ButtonContructor;
-import org.ni.jug.pico.vista.util.CerrarButton;
-import org.ni.jug.pico.vista.util.GuardarButton;
+import org.ni.jug.pico.ui.util.ButtonContructor;
+import org.ni.jug.pico.ui.util.CerrarButton;
+import org.ni.jug.pico.ui.util.GuardarButton;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -88,7 +88,7 @@ public class CuentaForm extends JInternalFrame {
             cerrar();
         });
         btnCuentaTipo.addActionListener((ActionEvent arg0) -> {
-            MenuPrincipalAcciones.mostrarVentanaCuentaTipo();
+            MenuPrincipalAccion.mostrarVentanaCuentaTipo();
         });
 
         btnCuentaTipo.setToolTipText("Llama al formulario de tipo de cuenta");

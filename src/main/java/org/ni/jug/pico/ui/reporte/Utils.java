@@ -1,4 +1,4 @@
-package org.ni.jug.pico.vista.reporte;
+package org.ni.jug.pico.ui.reporte;
 
 import java.awt.Dialog;
 import java.awt.image.BufferedImage;

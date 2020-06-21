@@ -1,4 +1,4 @@
-package org.ni.jug.pico.vista.dialogo;
+package org.ni.jug.pico.ui.core;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

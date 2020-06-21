@@ -1,4 +1,4 @@
-package org.ni.jug.pico.vista;
+package org.ni.jug.pico.ui.core;
 
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
@@ -7,7 +7,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import org.ni.jug.pico.PicoCoreApplication;
 import org.ni.jug.pico.core.boundary.EmpresaService;
 import org.ni.jug.pico.core.model.MiEmpresa;
-import org.ni.jug.pico.vista.util.Utilities;
+import org.ni.jug.pico.ui.util.Utilities;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

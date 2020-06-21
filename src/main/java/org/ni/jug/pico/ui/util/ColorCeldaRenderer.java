@@ -1,4 +1,4 @@
-package org.ni.jug.pico.vista.util;
+package org.ni.jug.pico.ui.util;
 
 import java.awt.Color;
 import java.awt.Component;
