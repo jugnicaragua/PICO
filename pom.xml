@@ -34,8 +34,7 @@
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <sqlite-jdbc.version>3.23.1</sqlite-jdbc.version>
-        <sqlite-dialect.version>master</sqlite-dialect.version>
+        <hsqldb.version>2.5.0</hsqldb.version>
         <tango-icon.version>0.8.0</tango-icon.version>
         <jgoodies-forms.version>1.8.0</jgoodies-forms.version>
         <jasperreports.version>6.7.0</jasperreports.version>
@@ -56,16 +55,11 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- SQLite -->
+        <!-- HSQLDB -->
         <dependency>
-            <groupId>org.xerial</groupId>
-            <artifactId>sqlite-jdbc</artifactId>
-            <version>${sqlite-jdbc.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.gwenn</groupId>
-            <artifactId>sqlite-dialect</artifactId>
-            <version>${sqlite-dialect.version}</version>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>${hsqldb.version}</version>
         </dependency>
 
         <!-- GUI -->
