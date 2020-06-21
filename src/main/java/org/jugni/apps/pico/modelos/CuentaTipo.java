@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="CuentaTipo" ,
 indexes = {@Index(name = "idx_tipocuenta", columnList="Descripcion")})
-public class CuentaTipo extends Identificador<Byte> {
+public class CuentaTipo extends Identificador<Short> {
 
     @Column(name = "Descripcion", length = 50)
     private String descripcion;

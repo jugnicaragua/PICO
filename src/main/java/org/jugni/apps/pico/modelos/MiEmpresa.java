@@ -9,7 +9,7 @@ import javax.persistence.*;
  * @author gacs
  */
 @Entity
-public class MiEmpresa extends Identificador<Byte> {
+public class MiEmpresa extends Identificador<Short> {
 
     @Column(name = "Ruc", length = 25)
      private String ruc;
