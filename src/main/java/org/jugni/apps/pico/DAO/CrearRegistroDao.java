@@ -1,5 +1,6 @@
-package org.jugni.apps.pico.DAO.utils;
+package org.jugni.apps.pico.DAO;
 
+import java.util.List;
 
 /**
  * 
@@ -7,6 +8,6 @@ package org.jugni.apps.pico.DAO.utils;
  * @version :1.0 
  * @param <T> En la clase que lo implemente se sustituye por la clase entidad
  */
-public interface BorrarRegistroDao<T> {
-     void borrarRegistros(T registro);
+public interface CrearRegistroDao<T> {
+     void insertarRegistro(T registro);
 }

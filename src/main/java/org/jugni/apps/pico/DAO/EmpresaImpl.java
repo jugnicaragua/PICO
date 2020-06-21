@@ -1,7 +1,5 @@
 package org.jugni.apps.pico.DAO;
 
-import org.jugni.apps.pico.DAO.utils.ObtenerRegistroDao;
-import org.jugni.apps.pico.DAO.utils.ActualizarRegistroDao;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.jugni.apps.pico.modelos.MiEmpresa;

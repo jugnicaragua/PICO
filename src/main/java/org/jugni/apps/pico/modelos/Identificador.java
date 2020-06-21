@@ -17,8 +17,8 @@ import javax.persistence.MappedSuperclass;
 public abstract class Identificador<T> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
- //   @GeneratedValue(generator = "default_gen", strategy = GenerationType.SEQUENCE)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "default_gen", strategy = GenerationType.SEQUENCE)
     @Column(name = "Id")
     protected T id;
 
