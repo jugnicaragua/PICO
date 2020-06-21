@@ -9,16 +9,13 @@ import javax.persistence.MappedSuperclass;
 
 /**
  * Clase que proporciona identificador a entidades 
- * @author :Gustavo Castro <gacsnic75@gmail.com>
- * @param <T>
- * @license : GPLv3
+ * @author Gustavo Castro <gacsnic75@gmail.com>
  */
 @MappedSuperclass
 public abstract class Identificador<T> {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @GeneratedValue(generator = "default_gen", strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(generator = "sequence", strategy = GenerationType.SEQUENCE)
     @Column(name = "Id")
     protected T id;
 

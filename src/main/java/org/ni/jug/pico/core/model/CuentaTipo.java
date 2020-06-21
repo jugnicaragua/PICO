@@ -3,6 +3,7 @@ package org.ni.jug.pico.core.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Index;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
@@ -13,57 +14,29 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CuentaTipo",
-        indexes = {@Index(name = "idx_tipocuenta", columnList = "Descripcion")})
-public class CuentaTipo extends Identificador<Byte> {
+        indexes = {@Index(name = "idx_cuenta_tipo", columnList = "Descripcion")})
+@SequenceGenerator(name = "sequence")
+public class CuentaTipo extends Identificador<Short> {
 
     @Column(name = "Descripcion", length = 50)
     private String descripcion;
 
-    public CuentaTipo(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public CuentaTipo() {
     }
 
-    /**
-     * Devuelve el nombre del tipo de cuenta
-     *
-     * @return String
-     */
     public String getDescripcion() {
         return descripcion;
     }
 
-    /**
-     * Establece la descripcion del tipo de cuenta
-     *
-     * @param descripcion
-     */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    /**
-     * Nos devuelve las cuentas que se relacionan con el tipo de cuenta
-     *
-     * @return List<Cuenta>
-     */
-  /*  public List<Cuenta> getCuentas() {
-	return cuentas;
-    }
-	
-    /**
-     * Establece las cuentas que le corresponde a tipo de cuenta
-     * @param cuentas
-     */
-  /*  public void setCuentas(List<Cuenta> cuentas) {
-    	this.cuentas = cuentas;
-    }
-*/
     @Override
     public String toString() {
-        return "CuentaTipo{" + "id=" + id + ", descripcion=" + descripcion + ", cuentas=" + '}';
+        return "CuentaTipo{" +
+                "descripcion='" + descripcion + '\'' +
+                ", id=" + id +
+                '}';
     }
-
 }

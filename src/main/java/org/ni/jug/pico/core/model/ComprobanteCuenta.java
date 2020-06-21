@@ -1,4 +1,3 @@
-
 package org.ni.jug.pico.core.model;
 
 import javax.persistence.Column;
@@ -6,43 +5,30 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 
 /**
- * Clase que representa la entidad o tabla ComprobanteCuenta.
-* org.jugni.apps.pico.modelos.ComprobanteCuenta
- * 
- *  @author   :Gustavo Castro <gacsnic75@gmail.com>
- *  @license  : GPLv3
+ * @author Gustavo Castro <gacsnic75@gmail.com>
  */
 @Entity
-public class ComprobanteCuenta extends Identificador<Long>{
+@SequenceGenerator(name = "sequence")
+public class ComprobanteCuenta extends Identificador<Long> {
 
-    /*    @Column(name="Fecha")
-    private LocalDate fecha; */
-    @Column(name="Credito")
+    @Column(name = "Credito")
     private Float credito;
-    @Column(name="Debito")
-    private Float debito;
-    
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="ComprobanteId")
-    private Comprobante comprobante;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="CuentaId")
-    private Cuenta cuenta;
-    
-  /**
-   * Constructor Vacio requerido, para cuando no se tiene los valores 
-   * al instanciar la clase comprobantecuenta
-   */
-    public ComprobanteCuenta() {
-    }
 
-    public ComprobanteCuenta( Float credito, Float debito) {
-        this.credito = credito;
-        this.debito = debito;
+    @Column(name = "Debito")
+    private Float debito;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ComprobanteId")
+    private Comprobante comprobante;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CuentaId")
+    private Cuenta cuenta;
+
+    public ComprobanteCuenta() {
     }
 
     public Float getCredito() {

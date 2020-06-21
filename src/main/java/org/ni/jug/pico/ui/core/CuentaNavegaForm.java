@@ -29,17 +29,17 @@ import java.util.List;
  */
 public class CuentaNavegaForm extends JInternalFrame {
 
-    private GridBagConstraints constraints;
-    private GridBagLayout grid;
     private static CuentaNavegaForm INSTANCE;
     private static List<Cuenta> cuentas;
+    private final JTextField txtNombre = new JTextField();
+    private final JTextField txtCodigo = new JTextField();
+    private final JComboBox cmbCategoria = new JComboBox();
+    private GridBagConstraints constraints;
+    private GridBagLayout grid;
     private CuentaTableModel cuentaTableModel;
     private JCheckBox chkActivo, chkInactivo, chkBalance;
     private JTable table;
     private JPanel pnlTop;
-    private final JTextField txtNombre = new JTextField();
-    private final JTextField txtCodigo = new JTextField();
-    private final JComboBox cmbCategoria = new JComboBox();
 
     private CuentaNavegaForm() {
         INSTANCE = this;
@@ -211,7 +211,7 @@ public class CuentaNavegaForm extends JInternalFrame {
         }
 
         protected void update() {
-            registrosCuentas= new ArrayList<>(cuentas);
+            registrosCuentas = new ArrayList<>(cuentas);
             if (txtNombre.getText().trim().isEmpty()) {
                 registrosCuentas.removeIf(c -> !c.getDescripcion().contains(txtNombre.getText().trim()));
             }
@@ -220,12 +220,12 @@ public class CuentaNavegaForm extends JInternalFrame {
             }
             if (cmbCategoria.getSelectedIndex() > -1) {
                 registrosCuentas.removeIf(c ->
-                      !c.getCuentaTipo().getDescripcion().contains(
-                              cmbCategoria.getSelectedItem().toString()
-                      ));
+                        !c.getCuentaTipo().getDescripcion().contains(
+                                cmbCategoria.getSelectedItem().toString()
+                        ));
             }
-            if(chkActivo.isSelected() && !chkInactivo.isSelected()){
-   //TODO             registrosCuentas.removeIf( e  -> e.getEstado());
+            if (chkActivo.isSelected() && !chkInactivo.isSelected()) {
+                //TODO             registrosCuentas.removeIf( e  -> e.getEstado());
             }
         }
 

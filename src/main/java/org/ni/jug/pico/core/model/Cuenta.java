@@ -1,6 +1,5 @@
 package org.ni.jug.pico.core.model;
 
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,20 +8,19 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.util.List;
 
 /**
- * Clase que representa la entidad o tabla Cuentas.
- *
  * @author gacs
- * @license : GPLv3
  */
 @Entity
 @Table(name = "Cuentas",
         indexes = {
-            @Index(name = "idx_cuenta", columnList = "Descripcion"),
-            @Index(name = "idx_cuenta", columnList = "Naturaleza")})
-public class Cuenta extends Identificador<Integer>{
+                @Index(name = "idx_cuenta", columnList = "Descripcion,Naturaleza")})
+@SequenceGenerator(name = "sequence")
+public class Cuenta extends Identificador<Integer> {
 
     @Column(name = "cuenta", length = 25)
     private String cuenta;
@@ -44,7 +42,7 @@ public class Cuenta extends Identificador<Integer>{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CuentaTipoId")
     private CuentaTipo cuentaTipo;
-    
+
     @OneToMany(mappedBy = "cuenta",
             cascade = CascadeType.ALL)
     private List<ComprobanteCuenta> comprobantesCuenta;
@@ -52,8 +50,6 @@ public class Cuenta extends Identificador<Integer>{
     @OneToMany(mappedBy = "cuenta",
             cascade = CascadeType.ALL)
     private List<CuentaCierre> cuentaCierre;
-
-
 
 
     /**
@@ -73,9 +69,7 @@ public class Cuenta extends Identificador<Integer>{
         this.cuentaTipo = cuentaTipo;
     }
 
-    
 
-    
     /**
      * Devuelve el valor del id de cuenta
      *
@@ -165,16 +159,20 @@ public class Cuenta extends Identificador<Integer>{
     public void setPadre(int padre) {
         this.padre = padre;
     }
+
     /**
      * devuelve Nataruleza de la cuenta
-     * @return 
+     *
+     * @return
      */
     public String getNaturaleza() {
         return naturaleza;
     }
+
     /**
      * Establece la nu
-     * @param naturaleza 
+     *
+     * @param naturaleza
      */
     public void setNaturaleza(String naturaleza) {
         this.naturaleza = naturaleza;
@@ -212,10 +210,10 @@ public class Cuenta extends Identificador<Integer>{
         this.estado = estado;
     }
 
-    
-       @Override
+
+    @Override
     public String toString() {
-        return "Cuenta{" + "id=" + id + " ,cuenta "+cuenta+ ", descripcion=" + descripcion + ", nivel=" + nivel + ", padre=" + padre + ", naturaleza=" + naturaleza + ", cuentaTipo=" + cuentaTipo + ", comprobantesCuenta=" + comprobantesCuenta + ", cuentaCierre=" + cuentaCierre + ", estado=" + estado + '}';
+        return "Cuenta{" + "id=" + id + " ,cuenta " + cuenta + ", descripcion=" + descripcion + ", nivel=" + nivel + ", padre=" + padre + ", naturaleza=" + naturaleza + ", cuentaTipo=" + cuentaTipo + ", comprobantesCuenta=" + comprobantesCuenta + ", cuentaCierre=" + cuentaCierre + ", estado=" + estado + '}';
     }
-    
+
 }

@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "Comprobantes")
+@SequenceGenerator(name = "sequence")
 public class Comprobante extends Identificador<Long> {
 
     @Column(name = "Numero", length = 8)

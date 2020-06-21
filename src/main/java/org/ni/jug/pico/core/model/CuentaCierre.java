@@ -1,7 +1,5 @@
 package org.ni.jug.pico.core.model;
 
-import java.util.Date;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,13 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.util.Date;
+import java.util.Objects;
 
 /**
- * Clase que representa la entidad o tabla CuentaCierre.
- * org.jugni.apps.pico.modelos.CuentaCierre
- *
- * @author :Gustavo Castro <gacsnic75@gmail.com>
- * @license : GPLv3
+ * @author Gustavo Castro <gacsnic75@gmail.com>
  */
 @Entity
 public class CuentaCierre {
@@ -53,29 +49,7 @@ public class CuentaCierre {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CuentaId")
     private Cuenta cuenta;
-    /**
-     * Constructor Vacio requerido, para cuando no se tiene los valores al
-     * instanciar la clase CuentaCierre
-     */
 
-    public CuentaCierre() {
-    }
-
-    public CuentaCierre(Long id, Float saldoInicialCredito, Float saldoInicialDebito, Float saldoFinalCredito, Float saldoFinalDebito, Float debito, Float credito, Date fecha, Cierre cierre, Cuenta cuenta) {
-        this.id = id;
-        this.saldoInicialCredito = saldoInicialCredito;
-        this.saldoInicialDebito = saldoInicialDebito;
-        this.saldoFinalCredito = saldoFinalCredito;
-        this.saldoFinalDebito = saldoFinalDebito;
-        this.debito = debito;
-        this.credito = credito;
-        this.fecha = fecha;
-        this.cierre = cierre;
-        this.cuenta = cuenta;
-    }
-
-    
-    
     public Long getId() {
         return id;
     }
@@ -183,9 +157,17 @@ public class CuentaCierre {
 
     @Override
     public String toString() {
-        return "CuentaCierre{" + "id=" + id + ", saldoInicialCredito=" + saldoInicialCredito + ", saldoInicialDebito=" + saldoInicialDebito + ", saldoFinalCredito=" + saldoFinalCredito + ", saldoFinalDebito=" + saldoFinalDebito + ", debito=" + debito + ", credito=" + credito + ", fecha=" + fecha + ", cierre=" + cierre + ", cuenta=" + cuenta + '}';
+        return "CuentaCierre{" +
+                "id=" + id +
+                ", saldoInicialCredito=" + saldoInicialCredito +
+                ", saldoInicialDebito=" + saldoInicialDebito +
+                ", saldoFinalCredito=" + saldoFinalCredito +
+                ", saldoFinalDebito=" + saldoFinalDebito +
+                ", debito=" + debito +
+                ", credito=" + credito +
+                ", fecha=" + fecha +
+                ", cierre=" + cierre +
+                ", cuenta=" + cuenta +
+                '}';
     }
-    
-    
-
 }
