@@ -5,8 +5,6 @@
  */
 package org.jugni.apps.pico.DAO;
 
-import org.jugni.apps.pico.DAO.utils.ObtenerRegistrosDao;
-import org.jugni.apps.pico.DAO.utils.ActualizarRegistroDao;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
