@@ -3,11 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.jug-ni.apps.pico</groupId>
-    <artifactId>PICO</artifactId>
+    <artifactId>pico</artifactId>
     <packaging>jar</packaging>
     <version>0.0.1-SNAPSHOT</version>
-    <name>pico</name>
-    <description>Proyecto funcional y pedagogico de la comunidad JAVA de Nicaragua</description>
 
     <url>https://github.com/jug-ni/PICO</url>
     <organization>
@@ -74,7 +72,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>org.jugni.apps.pico.MiAplicacionPICO</mainClass>
+                            <mainClass>org.ni.jug.pico.MiAplicacionPICO</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -98,7 +96,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>org.jugni.apps.pico.MiAplicacionPICO</mainClass>
+                    <mainClass>org.ni.jug.pico.MiAplicacionPICO</mainClass>
                 </configuration>
             </plugin>
 
