@@ -52,7 +52,7 @@ public class MenuPrincipalAcciones {
      }
 
      public static void mostrarVentanaDatosEmpresa() {
-          mostrarVentana(Empresa.getInstancia());
+          mostrarVentana(EmpresaForm.getInstancia());
      }
 
      //Muestra la ventana de formulario catalogo de tipo de cuenta

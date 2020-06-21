@@ -1,7 +1,7 @@
 package org.ni.jug.pico.vista;
 
-import org.ni.jug.pico.dao.CuentaTipoImpl;
-import org.ni.jug.pico.modelo.CuentaTipo;
+import org.ni.jug.pico.core.boundary.CuentaTipoService;
+import org.ni.jug.pico.core.model.CuentaTipo;
 import org.ni.jug.pico.vista.util.ButtonContructor;
 import org.ni.jug.pico.vista.util.CerrarButton;
 import org.ni.jug.pico.vista.util.GuardarButton;
@@ -183,7 +183,7 @@ public class CuentaForm extends JInternalFrame {
         }
 
         public void update() {
-            cuentaTipos = new CuentaTipoImpl().obtenerRegistros();
+            cuentaTipos = new CuentaTipoService().buscarTodos();
         }
 
         @Override

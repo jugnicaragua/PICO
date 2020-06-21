@@ -1,6 +1,6 @@
 package org.ni.jug.pico.vista;
 
-import org.ni.jug.pico.modelo.Cuenta;
+import org.ni.jug.pico.core.model.Cuenta;
 import org.ni.jug.pico.vista.util.ButtonContructor;
 import org.ni.jug.pico.vista.util.CabezeraRenderer;
 import org.ni.jug.pico.vista.util.CerrarButton;

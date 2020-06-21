@@ -1,5 +1,5 @@
 
-package org.ni.jug.pico.modelo;
+package org.ni.jug.pico.core.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

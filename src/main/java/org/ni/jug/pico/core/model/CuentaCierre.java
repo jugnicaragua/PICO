@@ -1,4 +1,4 @@
-package org.ni.jug.pico.modelo;
+package org.ni.jug.pico.core.model;
 
 import java.util.Date;
 import java.util.Objects;

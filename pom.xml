@@ -1,7 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.2.6.RELEASE</version>
+    </parent>
     <groupId>org.jug-ni.apps.pico</groupId>
     <artifactId>pico</artifactId>
     <packaging>jar</packaging>
@@ -26,13 +30,16 @@
         <url>https://github.com/jug-ni/PICO/issues</url>
     </issueManagement>
 
-    <!-- Propiedades del proyecto -->
     <properties>
         <java.version>11</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
-        <skipTests>true</skipTests>
+
+        <sqlite-jdbc.version>3.23.1</sqlite-jdbc.version>
+        <sqlite-dialect.version>master</sqlite-dialect.version>
+        <tango-icon.version>0.8.0</tango-icon.version>
+        <jgoodies-forms.version>1.8.0</jgoodies-forms.version>
+        <jasperreports.version>6.7.0</jasperreports.version>
+        <jasperreports-font.version>1.0</jasperreports-font.version>
     </properties>
 
     <repositories>
@@ -42,146 +49,69 @@
         </repository>
     </repositories>
 
-
-    <!-- Configuracion pra la construccion del Paquete -->
-    <build>
-        <!-- etableciendo un nombre definitivo a nuestro jar -->
-        <finalName>PICO</finalName>
-
-        <!-- plugins -->
-        <plugins>
-
-            <!--Plugin: Estableciendo el nivel de version del compilador -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-
-
-            <!-- Plugin: Crear un fat jar -->
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <!-- Clase main -->
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <archive>
-                        <manifest>
-                            <mainClass>org.ni.jug.pico.MiAplicacionPICO</mainClass>
-                        </manifest>
-                    </archive>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase> <!-- bind to the packaging phase -->
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- Plugin: para que se ejecute desde Maven Comando -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <configuration>
-                    <mainClass>org.ni.jug.pico.MiAplicacionPICO</mainClass>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
-
-    <!--  Todas las librerias necesarias -->
     <dependencies>
-        <!-- Logging -->
+        <!-- Spring Boot starters  -->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.11.0</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- ORM  (Base de datos manejo) -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>5.4.8.Final</version>
-        </dependency>
-
-        <!-- Dependencies for SQLite (Base de datos)  -->
+        <!-- SQLite -->
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.23.1</version>
+            <version>${sqlite-jdbc.version}</version>
         </dependency>
-
-        <!-- sqlite-dialect -->
         <dependency>
             <groupId>com.github.gwenn</groupId>
             <artifactId>sqlite-dialect</artifactId>
-            <version>master</version>
+            <version>${sqlite-dialect.version}</version>
         </dependency>
 
-        <!--  GUI  -->
+        <!-- GUI -->
         <dependency>
             <groupId>org.tango-project</groupId>
             <artifactId>tango-icon-theme</artifactId>
-            <version>0.8.0</version>
+            <version>${tango-icon.version}</version>
         </dependency>
         <dependency>
             <groupId>com.jgoodies</groupId>
             <artifactId>jgoodies-forms</artifactId>
-            <version>1.8.0</version>
+            <version>${jgoodies-forms.version}</version>
         </dependency>
 
-        <!-- JasperReports-->
+        <!-- JasperReports -->
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.7.0</version>
+            <version>${jasperreports.version}</version>
         </dependency>
         <!-- Fuentes -->
         <dependency>
             <groupId>ar.com.fdvs</groupId>
             <artifactId>DynamicJasper-core-fonts</artifactId>
-            <version>1.0</version>
+            <version>${jasperreports-font.version}</version>
         </dependency>
 
-        <!-- TODO Aun no sé que hace esta dependencia aquí -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>3.2.18.RELEASE</version>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- pruebas unitarias -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-
-        <!-- Plugin de compilacion -->
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.8.1</version>
-        </dependency>
-
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

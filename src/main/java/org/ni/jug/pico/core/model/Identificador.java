@@ -1,4 +1,4 @@
-package org.ni.jug.pico.modelo;
+package org.ni.jug.pico.core.model;
 
 import java.util.Objects;
 import javax.persistence.Column;

@@ -1,4 +1,4 @@
-package org.ni.jug.pico.modelo;
+package org.ni.jug.pico.core.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,50 +9,44 @@ import javax.persistence.Table;
 /**
  * Clase que representa la entidad o tabla CuentaTipo.
  *
- * @author :Gustavo Castro <gacsnic75@gmail.com>
- * @license : GPLv3
- *
+ * @author Gustavo Castro <gacsnic75@gmail.com>
  */
 @Entity
-@Table(name="CuentaTipo" ,
-indexes = {@Index(name = "idx_tipocuenta", columnList="Descripcion")})
+@Table(name = "CuentaTipo",
+        indexes = {@Index(name = "idx_tipocuenta", columnList = "Descripcion")})
 public class CuentaTipo extends Identificador<Byte> {
 
     @Column(name = "Descripcion", length = 50)
     private String descripcion;
 
-//    @OneToMany(mappedBy = "cuentaTipo",
-//        cascade = CascadeType.ALL)
- //   private List<Cuenta> cuentas= new ArrayList<>() ;
-    
-    public CuentaTipo(String descripcion){
-	this.id = null;
-	this.descripcion = descripcion;
+    public CuentaTipo(String descripcion) {
+        this.descripcion = descripcion;
     }
-    /**
-    * Constructor Vacio requerido, para cuando no se tiene los valores 
-    * al instanciar la clase TipoCuenta
-   */
+
     public CuentaTipo() {
     }
 
     /**
      * Devuelve el nombre del tipo de cuenta
+     *
      * @return String
      */
     public String getDescripcion() {
-	return descripcion;
+        return descripcion;
     }
+
     /**
      * Establece la descripcion del tipo de cuenta
+     *
      * @param descripcion
      */
     public void setDescripcion(String descripcion) {
-    	this.descripcion = descripcion;
+        this.descripcion = descripcion;
     }
-	
+
     /**
      * Nos devuelve las cuentas que se relacionan con el tipo de cuenta
+     *
      * @return List<Cuenta>
      */
   /*  public List<Cuenta> getCuentas() {
@@ -67,7 +61,6 @@ public class CuentaTipo extends Identificador<Byte> {
     	this.cuentas = cuentas;
     }
 */
-
     @Override
     public String toString() {
         return "CuentaTipo{" + "id=" + id + ", descripcion=" + descripcion + ", cuentas=" + '}';
