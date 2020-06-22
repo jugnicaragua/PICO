@@ -52,22 +52,50 @@ public class BaseDao<T, ID extends Object> implements Closeable {
   }
 
   public T get(ID id) {
-    Query<T> query = this.SESSION.createQuery(" From " + this.TABLE_NAME + " where Id = id");
+    Query<T> query = this.SESSION.createQuery(" From " + this.TABLE_NAME + " where Id = :id");
     query.setParameter("id", id);
     return query.getSingleResult();
   }
 
   public List<T> getAll() {
-    Query<T> query = this.SESSION.createQuery(" From " + this.TABLE_NAME + " q ");
+    Query<T> query = this.SESSION.createQuery(" From " + this.TABLE_NAME);
     return query.getResultList();
   }
 
   public void save(T entity) {
-    this.SESSION.saveOrUpdate(entity);
+    Transaction transaction = this.SESSION.beginTransaction();
+    try {
+      this.SESSION.saveOrUpdate(entity);
+      transaction.commit();
+    } catch (Exception e) {
+      transaction.rollback();
+      throw e;
+    }
+  }
+
+  public void saveAll(List<T> entities) {
+    Transaction transaction = this.SESSION.beginTransaction();
+    try {
+      for (var entity : entities) {
+        this.SESSION.persist(entity);
+      }
+      this.SESSION.flush();
+      transaction.commit();
+    } catch (Exception e) {
+      transaction.rollback();
+      throw e;
+    }
   }
 
   public void remove(T entity) {
-    this.SESSION.remove(entity);
+    Transaction transaction = this.SESSION.beginTransaction();
+    try {
+      this.SESSION.remove(entity);
+      transaction.commit();
+    } catch (Exception e) {
+      transaction.rollback();
+      throw e;
+    }
   }
 
   public void removeAll() {

@@ -2,6 +2,8 @@ package org.jugni.apps.pico;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -78,14 +80,22 @@ public class TestCuentaTipoDao {
 
         cuentaTipoDao.removeAll();
 
-        CuentaTipo cuentaTipo = new CuentaTipo();
-        cuentaTipo.setDescripcion("Prueba");
-        cuentaTipoDao.save(cuentaTipo);
+        {
+          CuentaTipo cuentaTipo = new CuentaTipo();
+          cuentaTipo.setDescripcion("Prueba");
+          CuentaTipo cuentaTipo2 = new CuentaTipo();
+          cuentaTipo2.setDescripcion("Prueba2");
+
+          cuentaTipoDao.saveAll(Arrays.asList(cuentaTipo, cuentaTipo2));
+        }
 
         List<CuentaTipo> cuentaTipos = cuentaTipoDao.getAll();
         assertNotNull("La lista no puede ser null", cuentaTipos);
-        assertEquals(1, cuentaTipos.size());
+        assertEquals(2, cuentaTipos.size());
         System.out.println("Size is " + cuentaTipos.size());
+        for (var cuentaTipo : cuentaTipos) {
+          System.out.println(cuentaTipo);
+        }
       }
     }
   }
@@ -102,7 +112,7 @@ public class TestCuentaTipoDao {
         cuentaTipoDao.save(cuentaTipo);
 
         List<CuentaTipo> cuentaTipos = cuentaTipoDao.getAll();
-        Byte id = cuentaTipos.get(0).getId();
+        Short id = cuentaTipos.get(0).getId();
         CuentaTipo result = cuentaTipoDao.get(id);
         assertNotNull(result);
       }
@@ -138,7 +148,7 @@ public class TestCuentaTipoDao {
         cuentaTipoDao.save(cuentaTipo);
 
         List<CuentaTipo> cuentaTipos = cuentaTipoDao.getAll();
-        Byte id = cuentaTipos.get(0).getId();
+        Short id = cuentaTipos.get(0).getId();
         CuentaTipo result = cuentaTipoDao.get(id);
         assertNotNull(result);
 
