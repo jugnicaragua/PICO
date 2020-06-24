@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.jugni.apps.pico.dao;
+package org.jugni.apps.pico.data.dao;
 
 import java.util.List;
 import org.hibernate.Session;

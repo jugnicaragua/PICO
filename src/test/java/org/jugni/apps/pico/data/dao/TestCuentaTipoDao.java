@@ -1,14 +1,12 @@
-package org.jugni.apps.pico;
+package org.jugni.apps.pico.data.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.jugni.apps.pico.dao.CuentaTipoDao;
 import org.jugni.apps.pico.modelos.CuentaTipo;
 import org.junit.Test;
 

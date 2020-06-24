@@ -1,4 +1,4 @@
-package org.jugni.apps.pico.dao;
+package org.jugni.apps.pico.data.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;

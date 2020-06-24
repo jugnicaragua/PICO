@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.jugni.apps.pico.dao.EmpresaImpl;
+import org.jugni.apps.pico.data.dao.EmpresaImpl;
 import org.jugni.apps.pico.modelos.MiEmpresa;
 import org.jugni.apps.pico.vista.utils.Utilities;
 

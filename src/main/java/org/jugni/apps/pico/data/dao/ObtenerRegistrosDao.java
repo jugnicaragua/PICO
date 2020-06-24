@@ -1,4 +1,4 @@
-package org.jugni.apps.pico.dao;
+package org.jugni.apps.pico.data.dao;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package org.jugni.apps.pico.dao;
+package org.jugni.apps.pico.data.dao;
 
 import java.io.Closeable;
 import java.lang.annotation.Annotation;
