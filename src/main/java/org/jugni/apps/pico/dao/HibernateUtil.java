@@ -1,4 +1,4 @@
-package org.jugni.apps.pico.DAO;
+package org.jugni.apps.pico.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;

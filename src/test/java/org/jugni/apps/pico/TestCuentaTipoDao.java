@@ -8,7 +8,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.jugni.apps.pico.DAO.CuentaTipoDao;
+import org.jugni.apps.pico.dao.CuentaTipoDao;
 import org.jugni.apps.pico.modelos.CuentaTipo;
 import org.junit.Test;
 

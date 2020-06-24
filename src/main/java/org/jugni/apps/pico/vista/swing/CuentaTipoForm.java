@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-import org.jugni.apps.pico.DAO.CuentaTipoImpl;
+import org.jugni.apps.pico.dao.CuentaTipoImpl;
 import org.jugni.apps.pico.modelos.CuentaTipo;
 import org.jugni.apps.pico.vista.utils.ButtonContructor;
 import org.jugni.apps.pico.vista.utils.CerrarButton;
