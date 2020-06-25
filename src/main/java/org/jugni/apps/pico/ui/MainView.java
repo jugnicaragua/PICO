@@ -1,22 +1,28 @@
 package org.jugni.apps.pico.ui;
 
 import javax.swing.*;
-import javax.swing.border.BevelBorder;
 import org.jugni.apps.pico.PicoApplication;
 import org.jugni.apps.pico.security.UserSession;
 import org.jugni.apps.pico.ui.menu.MainMenu;
 import java.awt.*;
 
 @SuppressWarnings("serial")
-public final class MainView extends JFrame {
+public final class MainView extends JFrame implements MainMenu.MenuAction {
 
-  private final PicoApplication application;
-  private final UserSession session;
-  private JDesktopPane desktopPane;
+  private PicoApplication application;
+  private UserSession session;
+
+  private JDesktopPane container;
+  private JToolBar mState;
+  private JLabel mCurrentStatus;
+
+  private final MainMenu mainMenu;
 
   public MainView(PicoApplication application) {
     this.application = application;
     this.session = new UserSession(application.getHibernateHelper());
+    this.mainMenu = new MainMenu(application, this);
+    this.session.verifyAdmin();
     initView();
   }
 
@@ -26,6 +32,14 @@ public final class MainView extends JFrame {
 
   public final UserSession getUserSession() {
     return this.session;
+  }
+
+  public final MainMenu getMenu() {
+    return this.mainMenu;
+  }
+
+  public void setCurrentStatus(String status) {
+    this.mCurrentStatus.setText(status);
   }
 
   /**
@@ -38,57 +52,42 @@ public final class MainView extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setExtendedState(MAXIMIZED_BOTH);
 
-    JToolBar toolBar_1 = new JToolBar();
-    getContentPane().add(toolBar_1, BorderLayout.SOUTH);
+    {// Toolbar State
+      this.mState = new JToolBar();
+      this.mState.setMargin(new Insets(8, 8, 8, 8));
+      this.mState.setFloatable(false);
+      this.mState.setLayout(new BorderLayout());
 
-    JLabel lblFecha = new JLabel("Fecha: ");
-    lblFecha.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-    toolBar_1.add(lblFecha);
+      getContentPane().add(mState, BorderLayout.SOUTH);
 
-    JLabel lblPeriodoFiscal = new JLabel("Periodo Fiscal");
-    toolBar_1.add(lblPeriodoFiscal);
+      this.mCurrentStatus = new JLabel("");
+      this.mState.add(this.mCurrentStatus, BorderLayout.WEST);
+    }
 
-    JLabel lblNewLabel = new JLabel("New label");
-    toolBar_1.add(lblNewLabel);
+    container = new JDesktopPane();
+    getContentPane().add(container, BorderLayout.CENTER);
 
-    JProgressBar progressBar = new JProgressBar();
-    toolBar_1.add(progressBar);
-
-    JToolBar toolBar = new JToolBar();
-    getContentPane().add(toolBar, BorderLayout.NORTH);
-
-    JButton btnNewButton = new JButton("Nuevo CD");
-    btnNewButton.setIcon(new ImageIcon(MainView.class
-        .getResource("/org/tango-project/tango-icon-theme/16x16/actions/document-new.png")));
-    toolBar.add(btnNewButton);
-
-    desktopPane = new JDesktopPane();
-    getContentPane().add(desktopPane, BorderLayout.CENTER);
-    // Agregando el menu principal a la ventana
-    setJMenuBar(new MainMenu());
+    setJMenuBar(this.mainMenu);
   }
 
   /**
-   * Metodo para mostrar, porque esta es una clase estandart, que no hereda ninguna otra clase,
-   * ergo, debemos usar un Wrapper.
-   */
-  public void mostrar() {
-    setVisible(true);
-  }
-
-  public void agregar(JInternalFrame ventanaInterna) {
-    add(ventanaInterna);
-  }
-
-  /**
-   * Agrega las ventanas JInternalFrame al escritorio(desktopPane) Centra la ventada en el
-   * desktopPane
+   * Agrega y centra la ventana hija al contenedor
    *
    * @param ventanaInterna
    */
+  @Override
+  public void addView(JInternalFrame view) {
+    container.add(view);
+    Dimension dskSize = container.getSize();
+    Dimension frmSize = view.getSize();
+    view.setLocation((dskSize.width - frmSize.width) / 2, (dskSize.height - frmSize.height) / 2);
+    view.setVisible(true);
+  }
+
+
   public void agregarAlEscritorio(JInternalFrame ventanaInterna) {
-    desktopPane.add(ventanaInterna);
-    Dimension dskSize = desktopPane.getSize();
+    container.add(ventanaInterna);
+    Dimension dskSize = container.getSize();
     Dimension frmSize = ventanaInterna.getSize();
     ventanaInterna.setLocation((dskSize.width - frmSize.width) / 2,
         (dskSize.height - frmSize.height) / 2);

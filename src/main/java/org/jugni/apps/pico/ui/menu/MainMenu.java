@@ -1,172 +1,200 @@
+package org.jugni.apps.pico.ui.menu;
+
+import org.jugni.apps.pico.PicoApplication;
+import org.jugni.apps.pico.ui.LoginView;
+import org.jugni.apps.pico.ui.catalogue.CuentaNavegaForm;
+import org.jugni.apps.pico.ui.catalogue.CuentaTipoForm;
+import org.jugni.apps.pico.ui.catalogue.EmpresaView;
+import org.jugni.apps.pico.ui.dialog.Acercade;
+import org.jugni.apps.pico.ui.dialog.Respaldo;
+import org.jugni.apps.pico.ui.reportes.Utils;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JInternalFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 /**
  * @author Gustavo Castro - GACS Menu principal, este menu sera instanciado desde la
  *         VentanaPrincipal
  */
-package org.jugni.apps.pico.ui.menu;
-
-import javax.swing.*;
-import org.jugni.apps.pico.ui.util.ItemMenuUtils;
-import org.jugni.apps.pico.ui.util.MenuPrincipalAcciones;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-
+@SuppressWarnings("serial")
 public class MainMenu extends JMenuBar implements ActionListener {
 
-  private static final long serialVersionUID = 1L;
-  private MenuPrincipalAcciones menuPrincipalAcciones; // ejecuta las acciones del menu
-  private JMenu mnArchivo, // Menu Archivo
-      mnCatalogo, // Menu Catalogo agrupa todos los sub menu de catalos
-      mnCaptacion, // Menu Captacion Agrupa los sub menu con movimiento periodico( comprobantes,
-                   // cxp,cxc)
-      mnInforme, // Menu de Informe Agrupa los sub menu que generan informes ;
-      mnHerramienta, // Menu de Herramientas agrupa los menus de herramientas
-      mnAyuda; // Agrupa los menus de ayuda y acerca de
+  private final MenuAction action;
+  private final PicoApplication application;
 
-  private ItemMenuUtils mntmIniciarSession, // Submenu que llama a formulario de inicio de session
-      mntmEmpresa, mntmParametrosGenerales, // Submenu que llama al formulario de configuracion
-      mntmCicloFiscal, // Submenu que llama al formulario de configuracion de siclo fiscal
-      mntmSalir, // Submenu que cierra la aplicacion
-      mntmCatalogoTipoCuentas, // Submenu que llama al formulario de Tipos de cuenta
-      mntmCatalogoContable, // Submenu que llama al formulario de catalogo de cuenta
-      mntmCaptacionDiario, // Submenu que llama al formulario de captacion de comprobante diario
-      mntmCaptacionAjuste, // Submenu que llama al formulario de captacion de comprobante Ajuste
-      mntmHerramientaRespaldo, // Submenu que llama al formulario de Respaldo del la base de datos
-      mntmManualEnLina, // Submenu que llama al manual que se encuentra en linea
-      mntmIrAlForo, // submenu que lo traslada a un foro de los desarrolladores
-      mntmAcercaDe, // Submenu que muestra un dialogo acerca de
-      mntmBalanceGeneral; // submenu para mostrar un reporte del balance general
-
-  public MainMenu() {
-    initMenuPrincipal();
+  public MainMenu(PicoApplication application, MenuAction action) {
+    this.application = application;
+    this.action = action;
+    initMenu();
   }
 
   /**
    * Inicializa las propiedades del MenuPrincipal
    *
    */
-  private void initMenuPrincipal() {
-    menuPrincipalAcciones = new MenuPrincipalAcciones();
+  private void initMenu() {
     setName("MenuPrincipal");
-    // Inicia la declaracion de menus
-    mnArchivo = new JMenu("Archivo");
-    mnCatalogo = new JMenu("Catalogo");
-    mnCaptacion = new JMenu("Captacion");
-    mnInforme = new JMenu("Informes");
-    mnHerramienta = new JMenu("Herramientas");
-    mnAyuda = new JMenu("Ayuda");
-    mnArchivo.setMnemonic('A');
-    mnCatalogo.setMnemonic('C');
-    mnCaptacion.setMnemonic('p');
-    mnInforme.setMnemonic('I');
-    mnHerramienta.setMnemonic('H');
-    mnAyuda.setMnemonic('y');
 
-    // Se agregan los menus a la barra de menu
-    add(mnArchivo);
-    add(mnCatalogo);
-    add(mnCaptacion);
-    add(mnInforme);
-    add(mnHerramienta);
-    add(mnAyuda);
-    // Finaliza la declaracion de menus
+    { // Menu Archivo
+      JMenu mArchivo = new JMenu("Archivo");
+      mArchivo.setMnemonic('A');
+      add(mArchivo);
 
-    // *Inicia declaracion de sub menu e item
-    // **Se instancia los submenu de archivo
-    mntmIniciarSession = new ItemMenuUtils("Iniciar Session", "Inicia Session de usuario", 'I');
-    mntmEmpresa = new ItemMenuUtils("Datos Empresa", "Configurar los datos de la Emprsa");
-    mntmParametrosGenerales = new ItemMenuUtils("Parametros Generales",
-        "Administra las configuraciones del Sistema", 'P');
-    mntmCicloFiscal = new ItemMenuUtils("Ciclo Fiscal", "Establece el Periodo Fiscal", 'C');
-    mntmSalir =
-        new ItemMenuUtils("Salir", "Sale del Sistema", 'S', KeyEvent.VK_Q, InputEvent.CTRL_MASK,
-            "/org/tango-project/tango-icon-theme/16x16/actions/system-log-out.png");
+      // Sub-menu
+      addSubMenu(mArchivo, "Iniciar Session", "Inicia Session de usuario", 'I', v -> {
+        try {
+          showInternalView(LoginView.getInstance(application));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      });
 
-    // **Se agregan los sub menu al menu mnArchivo
-    mnArchivo.add(mntmIniciarSession);
-    mnArchivo.add(mntmEmpresa);
-    mnArchivo.add(mntmCicloFiscal);
-    mnArchivo.add(mntmParametrosGenerales);
-    mnArchivo.addSeparator();
-    mnArchivo.add(mntmSalir);
+      addSubMenu(mArchivo, "Datos Empresa", "Configurar los datos de la Empresa", ' ', v -> {
+        try {
+          showInternalView(EmpresaView.getInstance(application));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      });
 
-    /**
-     * Agrega Eventos o acciones para Las opciones del menu Archivo
+      addSubMenu(mArchivo, "Ciclo Fiscal", "Establece el Periodo Fiscal", 'C', this);
+
+      addSubMenu(mArchivo, "Parametros Generales", "Administra las configuraciones del Sistema",
+          'P', this);
+
+      mArchivo.addSeparator();
+
+      addSubMenu(mArchivo, "Salir", "Sale del Sistema", 'S', v -> System.exit(0));
+    }
+
+    { // Menu Catalogo agrupa todos los sub menu de catalos
+      JMenu mCatalogo = new JMenu("Catalogo");
+      mCatalogo.setMnemonic('C');
+      add(mCatalogo);
+
+      // Sub-menu
+      addSubMenu(mCatalogo, "Catalogo tipo de Cuentas", "Administra catalogo de tipo de cuenta",
+          'T', v -> {
+            try {
+              showInternalView(CuentaTipoForm.getInstance(application));
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          });
+
+      addSubMenu(mCatalogo, "Catalogo Contable", "Administra el catalogo de cuentas", 'c', v -> {
+        try {
+          showInternalView(CuentaNavegaForm.getInstance(application));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      });
+    }
+
+    { // Menu Captacion Agrupa los sub menu con movimiento periodico (comprobantes, cxp,cxc)
+      JMenu mCaptacion = new JMenu("Captacion");
+      mCaptacion.setMnemonic('p');
+      add(mCaptacion);
+
+      // Sub-menu
+      addSubMenu(mCaptacion, "Comprobante de diario", "Administrador de comprobante diario", 'd',
+          this);
+      addSubMenu(mCaptacion, "Comprobante de ajuste", "Administrador de comprobante Ajuste", 'a',
+          this);
+    }
+
+    { // Menu de Informe Agrupa los sub menu que generan informes
+      JMenu mInforme = new JMenu("Informes");
+      mInforme.setMnemonic('I');
+      add(mInforme);
+
+      // Sub-menu
+      addSubMenu(mInforme, "Balance General", "Balance general de la empresa", 'b', v -> {
+        try {
+          Utils.showReporte("BalanceGeneral.jrxml");
+        } catch (Exception e1) {
+          e1.printStackTrace();
+        }
+      });
+    }
+
+    { // Menu de Herramientas agrupa los menus de herramientas
+      JMenu mHerramienta = new JMenu("Herramientas");
+      mHerramienta.setMnemonic('H');
+      add(mHerramienta);
+
+      // Sub-menu
+      addSubMenu(mHerramienta, "Respaldo", "Respalda la base de datos", 'R', v -> {
+        Respaldo respaldo = new Respaldo();
+        respaldo.setVisible(true);
+      });
+    }
+
+    { // Agrupa los menus de ayuda y acerca de
+      JMenu mAyuda = new JMenu("Ayuda");
+      mAyuda.setMnemonic('y');
+      add(mAyuda);
+
+      // Sub-menu
+      addSubMenu(mAyuda, "Manual en lina", "Presenta un manual del sistema", 'M', this);
+      addSubMenu(mAyuda, "Ir al Foro", "Los traslada al foro de los desarrolladores", 'I', this);
+
+      mAyuda.addSeparator();
+
+      addSubMenu(mAyuda, "Acerca de ", "Acerca de Pico", 'A', v -> {
+        Acercade about = new Acercade();
+        about.setVisible(true);
+      });
+    }
+
+    /*
+     * mntmSalir = new ItemMenuUtils("Salir", "Sale del Sistema", 'S', KeyEvent.VK_Q,
+     * InputEvent.CTRL_MASK,
+     * "/org/tango-project/tango-icon-theme/16x16/actions/system-log-out.png");
      */
-    mntmSalir.addActionListener(ActionEvent -> MenuPrincipalAcciones.salir());
-    mntmEmpresa.addActionListener(ActioEvent -> MenuPrincipalAcciones.mostrarVentanaDatosEmpresa());
+  }
 
-    // **Se instancia los submenu del menu mnCatalogo
-    mntmCatalogoTipoCuentas =
-        new ItemMenuUtils("Catalogo tipo de Cuentas", "Administra catalogo de tipo de cuenta", 'T');
-    mntmCatalogoContable =
-        new ItemMenuUtils("Catalogo Contable", "Administra el catalogo de cuentas", 'c');
-    // **Agrega el metodo de escucha para los sub menu de mnCatalogo
-    mntmCatalogoTipoCuentas
-        .addActionListener(ActioEvent -> MenuPrincipalAcciones.mostrarVentanaCuentaTipo());
-    mntmCatalogoContable
-        .addActionListener(ActioEvent -> MenuPrincipalAcciones.mostrarVentanaCuenta());
-    // **Se agrega los submenu al menu mnCatalogo
-    mnCatalogo.add(mntmCatalogoTipoCuentas);
-    mnCatalogo.add(mntmCatalogoContable);
+  private void showInternalView(JInternalFrame view) {
+    try {
+      if (!view.isVisible()) {
+        this.action.addView(view);
+      } else {
+        view.moveToFront();
 
-    // **Se Instancia los submenu al menu mnCaptacion
-    mntmCaptacionDiario =
-        new ItemMenuUtils("Comprobante de diario", "Administrador de comprobante diario", 'd');
-    mntmCaptacionAjuste =
-        new ItemMenuUtils("Comprobante de ajuste", "Administrador de comprobante Ajuste", 'a');
+        if (!view.isSelected()) {
+          view.setSelected(true);
+        }
+      }
 
-    // **Agrega el metodo de escucha para los sub menu de mnCaptacion
-    mntmCaptacionDiario.addActionListener(this);
-    mntmCaptacionAjuste.addActionListener(this);
-    // **Se agrega los submenu al menu mnCaptacion
-    mnCaptacion.add(mntmCaptacionDiario);
-    mnCaptacion.add(mntmCaptacionAjuste);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
-    // **Se instancia los submenu al menu mnInforme
-    mntmBalanceGeneral = new ItemMenuUtils("Balance General", "Balance general de la empresa", 'b');
-    // **Agrega el metodo de escucha para los submenu de mnInforme
-    mntmBalanceGeneral.addActionListener(e -> {
-      MenuPrincipalAcciones.mostrarBalanceGeneral();
-    });
-    // **Se agrega los submenu al menu mnInforme
-    mnInforme.add(mntmBalanceGeneral);
+  private void addSubMenu(JMenu parent, String text, String toolTip, char mnemonic,
+      ActionListener actionListener) {
 
-    // **Se Instancia los submenu al menu mnAyuda
-    mntmHerramientaRespaldo = new ItemMenuUtils("Respaldo", "Respalda la base de datos", 'R');
+    JMenuItem item = new JMenuItem(text, mnemonic);
+    item.setToolTipText(toolTip);
+    item.addActionListener(actionListener);
 
-    // **Agrega el metodo de escucha para los sub menu de mnHerramientas
-    mntmHerramientaRespaldo.addActionListener(e -> {
-      menuPrincipalAcciones.ejecutarRespaldo();
-    });
-    // **Se agrega los submenu al menu Herramienta
-    mnHerramienta.add(mntmHerramientaRespaldo);
-
-    // **Se Instancia los submenu al menu mnAyuda
-    mntmManualEnLina = new ItemMenuUtils("Manual en lina", "Presenta un manual del sistema", 'M');
-    mntmIrAlForo =
-        new ItemMenuUtils("Ir al Foro", "Los traslada al foro de los desarrolladores", 'I');
-    mntmAcercaDe = new ItemMenuUtils("Acerca de ", "Acerca de Pico", 'A');
-
-    // **Agrega el metodo de escucha para los sub menu de mnAyuda
-    mntmManualEnLina.addActionListener(this);
-    mntmIrAlForo.addActionListener(this);
-    mntmAcercaDe.addActionListener(e -> {
-      menuPrincipalAcciones.ejecutarAcercaDe();
-    });
-
-    // **Se agrega los submenu al menu mnAyuda
-    mnAyuda.add(mntmManualEnLina);
-    mnAyuda.add(mntmIrAlForo);
-    mnAyuda.addSeparator();
-    mnAyuda.add(mntmAcercaDe);
-
+    parent.add(item);
   }
 
   @Override
-  public void actionPerformed(ActionEvent arg0) {
-    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "No Terminado ", "menu no definido",
-        JOptionPane.ERROR_MESSAGE);
+  public void actionPerformed(ActionEvent actionEvent) {
+    JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), "En construcción", "Aviso",
+        JOptionPane.INFORMATION_MESSAGE);
+
+    application.getRootView().setCurrentStatus("Info: Opción en construcción");
   }
+
+  public interface MenuAction {
+    void addView(JInternalFrame view);
+  }
+
 }

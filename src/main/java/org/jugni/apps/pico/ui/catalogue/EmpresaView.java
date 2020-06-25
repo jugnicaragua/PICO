@@ -19,8 +19,9 @@ import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.jugni.apps.pico.PicoApplication;
 import org.jugni.apps.pico.data.dao.EmpresaDao;
-import org.jugni.apps.pico.security.Rol;
 import org.jugni.apps.pico.security.annotation.Access;
+import org.jugni.apps.pico.security.exception.InvalidAccessException;
+import org.jugni.apps.pico.security.model.Rol;
 import org.jugni.apps.pico.ui.util.BaseInternalView;
 import org.jugni.apps.pico.ui.util.Utilities;
 import org.jugni.apps.pico.data.model.Empresa;
@@ -29,12 +30,19 @@ import org.jugni.apps.pico.data.model.Empresa;
 @Access(name = "registro-empresa", rol = Rol.ADMIN)
 public class EmpresaView extends BaseInternalView {
 
-  private final EmpresaDao empresaDao;
+  private static EmpresaView instance;
 
-  public EmpresaView(PicoApplication application) {
-    super(application);
-    this.empresaDao = new EmpresaDao(getHibernateHelper().getSessionFactory());
+  public static EmpresaView getInstance(PicoApplication application) throws InvalidAccessException {
+    if (instance == null) {
+      synchronized (EmpresaView.class) {
+        instance = new EmpresaView(application);
+      }
+    }
+
+    return instance;
   }
+
+  private EmpresaDao empresaDao;
 
   private JTextField txtRuc;
   private JTextField txtRazonSocial;
@@ -48,10 +56,24 @@ public class EmpresaView extends BaseInternalView {
   private JLabel lblImagen;
   private Empresa datosEmpresa;
   final String IMAGENPATH = System.getProperty("user.dir") + "/var/db/logo.png";
-  JButton btnGuardar = new JButton("Guardar");
+  private JButton btnGuardar;
   ImageIcon imgLogo;
+
+  private EmpresaView(PicoApplication application) throws InvalidAccessException {
+    super(application);
+  }
+
+  @Override
+  protected void initView() {
+    this.empresaDao = new EmpresaDao(getHibernateHelper().getSessionFactory());
+    // establciendo el valor del Sigleton
+    initEmpresa();
+    rellenarCamposForm();
+  }
+
+
+
   // Area de definicion de Variables Globales
-  static EmpresaView miInstancia;
 
   private void initEmpresa() {
     setToolTipText("Datos de la empresa");
@@ -60,6 +82,9 @@ public class EmpresaView extends BaseInternalView {
     setIconifiable(false);
     setTitle("Datos de la empresa");
     setClosable(true);
+
+    this.btnGuardar = new JButton("Guardar");
+
     Color bgCampoObligatorio = new Color(255, 228, 181); // Color de fondo para los campos que son
                                                          // obligatorios
 
@@ -96,17 +121,27 @@ public class EmpresaView extends BaseInternalView {
     Box boxImagen = Box.createVerticalBox();
     JButton btnImagen = new JButton("Imagen");
     btnImagen.addActionListener((ActionEvent arg0) -> {
-      btnGuardar.setEnabled(true);
+      this.btnGuardar.setEnabled(true);
       obtenerImagen();
     });
     btnImagen.setAlignmentX(CENTER_ALIGNMENT);
     btnImagen.setFocusable(false);
     // verifica que la imagen del logo existe
-    if (new File(IMAGENPATH).exists()) {
-      imgLogo = new javax.swing.ImageIcon(IMAGENPATH);
-    } else {
-      imgLogo = new javax.swing.ImageIcon(getClass().getResource("/jugnica.jpg"));
+    try {
+      if (IMAGENPATH != null) {
+        File file = new File(IMAGENPATH);
+        if (file != null && file.exists()) {
+          imgLogo = new javax.swing.ImageIcon(IMAGENPATH);
+        } else {
+          imgLogo = new javax.swing.ImageIcon(getClass().getResource("/jugnica.jpg"));
+        }
+      } else {
+        imgLogo = new javax.swing.ImageIcon(getClass().getResource("/jugnica.jpg"));
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+
     lblImagen = new JLabel(imgLogo);
     lblImagen.setPreferredSize(new Dimension(20, 100));
     lblImagen.setAlignmentX(CENTER_ALIGNMENT);
@@ -258,8 +293,8 @@ public class EmpresaView extends BaseInternalView {
           // Habilita el boton guardar cuando digitamos algun caracter en el textfield
           @Override
           public void keyPressed(java.awt.event.KeyEvent evt) {
-            if (!btnGuardar.isEnabled()) {
-              btnGuardar.setEnabled(true);
+            if (!EmpresaView.this.btnGuardar.isEnabled()) {
+              EmpresaView.this.btnGuardar.setEnabled(true);
             }
           }
         });
@@ -272,16 +307,16 @@ public class EmpresaView extends BaseInternalView {
     btnCerrar.addActionListener((ActionEvent arg0) -> {
       cerrar();
     });
-    btnGuardar.setFocusable(false);
-    btnGuardar.setToolTipText("Guardar los datos de la empresa");
-    btnGuardar.setPreferredSize(new Dimension(120, 40));
-    btnGuardar.setEnabled(false);
-    btnGuardar.addActionListener((ActionEvent arg0) -> {
+    // this.btnGuardar.setFocusable(false);
+    this.btnGuardar.setToolTipText("Guardar los datos de la empresa");
+    this.btnGuardar.setPreferredSize(new Dimension(120, 40));
+    this.btnGuardar.setEnabled(false);
+    this.btnGuardar.addActionListener((ActionEvent arg0) -> {
       guardar();
     });
 
     panel_button.add(btnCerrar);
-    panel_button.add(btnGuardar);
+    panel_button.add(this.btnGuardar);
     pack();
   }
 
@@ -423,18 +458,15 @@ public class EmpresaView extends BaseInternalView {
     this.dispose();
   }
 
-  @Override
-  protected void initView() {
-    // establciendo el valor del Sigleton
-    initEmpresa();
-    miInstancia = this;
-    rellenarCamposForm();
-  }
 
   @Override
   protected void close() {
-    super.close();
-    empresaDao.close();
+
+    if (empresaDao != null) {
+      empresaDao.close();
+    }
+
+    instance = null;
   }
 
 }

@@ -37,6 +37,7 @@ public class BaseDao<T, ID extends Object> implements Closeable {
 
   private final Session SESSION;
   private final String TABLE_NAME;
+  private final String HQL_TABLE_NAME;
 
   /**
    * Constructor por defecto
@@ -58,6 +59,7 @@ public class BaseDao<T, ID extends Object> implements Closeable {
       this.TABLE_NAME = entityClass.getName();
     }
 
+    this.HQL_TABLE_NAME = entityClass.getName();
     this.SESSION = factory.openSession();
   }
 
@@ -68,6 +70,15 @@ public class BaseDao<T, ID extends Object> implements Closeable {
    */
   public String getTableName() {
     return this.TABLE_NAME;
+  }
+
+  /**
+   * Devuelve el nombre de la tabla para consultas HQL.
+   * 
+   * @return Table Name.
+   */
+  public String getHqlTableName() {
+    return this.HQL_TABLE_NAME;
   }
 
   /**
@@ -86,7 +97,7 @@ public class BaseDao<T, ID extends Object> implements Closeable {
    * @return Una instancia de <T> o null.
    */
   public T get(ID id) {
-    Query<T> query = this.SESSION.createQuery(" From " + this.TABLE_NAME + " where Id = :id");
+    Query<T> query = this.SESSION.createQuery(" From " + this.HQL_TABLE_NAME + " where Id = :id");
     query.setParameter("id", id);
     return query.getSingleResult();
   }
@@ -97,7 +108,7 @@ public class BaseDao<T, ID extends Object> implements Closeable {
    * @return una lista de elementos <T> o una lista vacia.
    */
   public List<T> getAll() {
-    Query<T> query = this.SESSION.createQuery(" From " + this.TABLE_NAME);
+    Query<T> query = this.SESSION.createQuery(" From " + this.HQL_TABLE_NAME);
     return query.getResultList();
   }
 

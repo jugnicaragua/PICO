@@ -1,11 +1,15 @@
 package org.jugni.apps.pico.ui.catalogue;
 
+import org.jugni.apps.pico.PicoApplication;
 import org.jugni.apps.pico.data.model.Cuenta;
+import org.jugni.apps.pico.security.annotation.Access;
+import org.jugni.apps.pico.security.exception.InvalidAccessException;
+import org.jugni.apps.pico.security.model.Rol;
+import org.jugni.apps.pico.ui.util.BaseInternalView;
 import org.jugni.apps.pico.ui.util.ButtonContructor;
 import org.jugni.apps.pico.ui.util.CabezeraRenderer;
 import org.jugni.apps.pico.ui.util.CerrarButton;
 import org.jugni.apps.pico.ui.util.ColorCeldaRenderer;
-import org.jugni.apps.pico.ui.util.MenuPrincipalAcciones;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -27,7 +31,22 @@ import java.util.List;
  *          <p>
  *          Clase CuentaTipoForm : Formulario para navegar en los registros de catalogo de cuentas
  */
-public class CuentaNavegaForm extends JInternalFrame {
+@SuppressWarnings("serial")
+@Access(name = "catalogo-contable", rol = Rol.ADMIN)
+public class CuentaNavegaForm extends BaseInternalView {
+
+  private static CuentaNavegaForm instance;
+
+  public static CuentaNavegaForm getInstance(PicoApplication application)
+      throws InvalidAccessException {
+    if (instance == null) {
+      synchronized (CuentaNavegaForm.class) {
+        instance = new CuentaNavegaForm(application);
+      }
+    }
+
+    return instance;
+  }
 
   private GridBagConstraints constraints;
   private GridBagLayout grid;
@@ -37,27 +56,12 @@ public class CuentaNavegaForm extends JInternalFrame {
   private JCheckBox chkActivo, chkInactivo, chkBalance;
   private JTable table;
   private JPanel pnlTop;
-  private final JTextField txtNombre = new JTextField();
-  private final JTextField txtCodigo = new JTextField();
-  private final JComboBox cmbCategoria = new JComboBox();
+  private JTextField txtNombre;
+  private JTextField txtCodigo;
+  private JComboBox cmbCategoria;
 
-  private CuentaNavegaForm() {
-    INSTANCE = this;
-    initCuentaNavegaForm();
-  }
-
-  public static CuentaNavegaForm getInstancia() {
-    if (INSTANCE == null) {
-      new CuentaNavegaForm();
-    }
-    if ((cuentas == null || cuentas.size() < 1) && JOptionPane.showConfirmDialog(INSTANCE,
-        "No se encontraron registro en la base de datos, ¿Desea agregar un nuevo registro?",
-        INSTANCE.getTitle(), JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
-      JOptionPane.showMessageDialog(INSTANCE, "El navegador se cerrara hasta que agregue registro");
-      return null;
-    }
-
-    return INSTANCE;
+  private CuentaNavegaForm(PicoApplication application) throws InvalidAccessException {
+    super(application);
   }
 
   private void initCuentaNavegaForm() {
@@ -66,6 +70,10 @@ public class CuentaNavegaForm extends JInternalFrame {
     chkActivo = new JCheckBox();
     chkInactivo = new JCheckBox();
     chkBalance = new JCheckBox();
+    this.txtNombre = new JTextField();
+    this.txtCodigo = new JTextField();
+    this.cmbCategoria = new JComboBox();
+
     var pnlTop = new JPanel(new GridLayout(2, 2, 5, 5));
     var pnlButton = new JPanel();
     var btnCerrar = new CerrarButton();
@@ -112,7 +120,11 @@ public class CuentaNavegaForm extends JInternalFrame {
       cerrar();
     });
     btnNuevo.addActionListener((ActionEvent arg0) -> {
-      MenuPrincipalAcciones.mostrarNuevoVentanaCuenta();
+      try {
+        getApplication().getRootView().addView(CuentaForm.getInstance(getApplication()));
+      } catch (Exception ignore) {
+
+      }
     });
     // Caracteristica del panel superior
 
@@ -213,22 +225,21 @@ public class CuentaNavegaForm extends JInternalFrame {
 
     String[] cabezera =
         {"Codigo", "Nombre de la cuenta", "Tipo", "Naturaleza", "Debe", "Haber", "Saldo"};
-    List<Cuenta> registrosCuentas;
+    List<Cuenta> cuentas;
 
     public CuentaTableModel() {
       cuentas = new ArrayList<>();
     }
 
     protected void update() {
-      registrosCuentas = new ArrayList<>(cuentas);
       if (txtNombre.getText().trim().isEmpty()) {
-        registrosCuentas.removeIf(c -> !c.getDescripcion().contains(txtNombre.getText().trim()));
+        cuentas.removeIf(c -> !c.getDescripcion().contains(txtNombre.getText().trim()));
       }
       if (txtCodigo.getText().trim().isEmpty()) {
-        registrosCuentas.removeIf(c -> !c.getId().equals(txtCodigo.getText().trim()));
+        cuentas.removeIf(c -> !c.getId().equals(txtCodigo.getText().trim()));
       }
       if (cmbCategoria.getSelectedIndex() > -1) {
-        registrosCuentas.removeIf(c -> !c.getCuentaTipo().getDescripcion()
+        cuentas.removeIf(c -> !c.getCuentaTipo().getDescripcion()
             .contains(cmbCategoria.getSelectedItem().toString()));
       }
       if (chkActivo.isSelected() && !chkInactivo.isSelected()) {
@@ -243,7 +254,7 @@ public class CuentaNavegaForm extends JInternalFrame {
 
     @Override
     public int getRowCount() {
-      return registrosCuentas.size();
+      return cuentas.size();
     }
 
     @Override
@@ -256,16 +267,16 @@ public class CuentaNavegaForm extends JInternalFrame {
       Object obj;
       switch (col) {
         case 0: // Columna codigo
-          obj = registrosCuentas.get(fila).getId();
+          obj = cuentas.get(fila).getId();
           break;
         case 1: // Columna Nombre de la cuenta
-          obj = registrosCuentas.get(fila).getDescripcion();
+          obj = cuentas.get(fila).getDescripcion();
           break;
         case 2: // Columna tipo de cuenta
           obj = "discrip";
           break;
         case 3: // Columna Naturaleza
-          obj = registrosCuentas.get(fila).getNaturaleza();
+          obj = cuentas.get(fila).getNaturaleza();
           break;
         case 4: // Columna debe
           obj = "1,500.00";
@@ -287,6 +298,16 @@ public class CuentaNavegaForm extends JInternalFrame {
       return false; // Los registro de solo lectura
     }
 
+  }
+
+  @Override
+  protected void initView() {
+    initCuentaNavegaForm();
+  }
+
+  @Override
+  protected void close() {
+    instance = null;
   }
 
 }

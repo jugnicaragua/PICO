@@ -6,11 +6,6 @@ import org.jugni.apps.pico.ui.MainView;
 import java.awt.*;
 import java.util.logging.Logger;
 
-/**
- * 
- * Hello world!
- *
- */
 public class PicoApplication {
 
   private static PicoApplication application;
@@ -81,7 +76,7 @@ public class PicoApplication {
 
   private void showMainWindow() {
     fLogger.info("Mostrando la Ventana Principal.");
-    this.rootView.mostrar();
+    this.rootView.setVisible(true);
   }
 
   private void showSplashScreen(ImageInfo test) throws Exception {
@@ -90,7 +85,7 @@ public class PicoApplication {
     if (splashScreen == null) {
       throw new RuntimeException("Splash screen is not shown!");
     }
-    Graphics2D g = splashScreen.createGraphics();
+    splashScreen.createGraphics();
     Rectangle splashBounds = splashScreen.getBounds();
     int screenX = (int) splashBounds.getCenterX();
     int screenY = (int) splashBounds.getCenterY();
@@ -110,6 +105,8 @@ public class PicoApplication {
     dialog.setSize(100, 100);
     dialog.setModal(true);
     float[] scaleFactors = new float[1];
+
+    @SuppressWarnings("serial")
     Panel panel = new Panel() {
 
       @Override

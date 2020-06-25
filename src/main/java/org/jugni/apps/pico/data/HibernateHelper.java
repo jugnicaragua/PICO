@@ -6,6 +6,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import org.jugni.apps.pico.data.model.*;
+import org.jugni.apps.pico.security.model.User;
 
 /**
  * Asistente para el manejo de la configuración y la obtención de session factory.
@@ -28,6 +29,8 @@ public final class HibernateHelper implements Closeable {
 
       config.addAnnotatedClass(Empresa.class);
       config.addAnnotatedClass(CuentaTipo.class);
+      config.addAnnotatedClass(User.class);
+      
       /*
        * config.addAnnotatedClass(Cierre.class); config.addAnnotatedClass(CierreTipo.class);
        * config.addAnnotatedClass(Comprobante.class);

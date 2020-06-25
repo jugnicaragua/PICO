@@ -1,42 +1,27 @@
 package org.jugni.apps.pico.security.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import org.jugni.apps.pico.security.Rol;
-
-@Entity
-@Table(name = "user")
 public class UserInfo {
-
-  @Id
   private String username;
-
+  private Boolean active;
   private Rol rol;
 
-  private Boolean active;
-
-  public String getUsername() {
-    return this.username;
-  }
-
-  public Rol getRol() {
-    return this.rol;
-  }
-
-  public void setRol(Rol rol) {
+  public UserInfo(String username, Boolean active, Rol rol) {
+    this.username = username;
+    this.active = active;
     this.rol = rol;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-  public void setActive(Boolean active) {
-    this.active = active;
+  public String getUsername() {
+    return username;
   }
 
   public Boolean getActive() {
-    return this.active;
+    return active;
   }
+
+  public Rol getRol() {
+    return rol;
+  }
+
+
 }

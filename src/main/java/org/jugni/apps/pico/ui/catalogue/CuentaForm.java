@@ -1,16 +1,16 @@
 package org.jugni.apps.pico.ui.catalogue;
 
 import org.jugni.apps.pico.PicoApplication;
-import org.jugni.apps.pico.data.HibernateHelper;
-import org.jugni.apps.pico.data.dao.CuentaTipoDao;
+import org.jugni.apps.pico.data.dao.CuentaDao;
+import org.jugni.apps.pico.data.model.Cuenta;
 import org.jugni.apps.pico.data.model.CuentaTipo;
-import org.jugni.apps.pico.security.Rol;
 import org.jugni.apps.pico.security.annotation.Access;
+import org.jugni.apps.pico.security.exception.InvalidAccessException;
+import org.jugni.apps.pico.security.model.Rol;
 import org.jugni.apps.pico.ui.util.BaseInternalView;
 import org.jugni.apps.pico.ui.util.ButtonContructor;
 import org.jugni.apps.pico.ui.util.CerrarButton;
 import org.jugni.apps.pico.ui.util.GuardarButton;
-import org.jugni.apps.pico.ui.util.MenuPrincipalAcciones;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
@@ -33,14 +33,33 @@ import static javax.swing.Box.*;
  * 
  *          Clase CuentaForm : Formulario para los catalogo de cuentas
  */
+@SuppressWarnings("serial")
 @Access(name = "registro-cuenta", rol = Rol.ADMIN)
 public class CuentaForm extends BaseInternalView {
 
-  private final CuentaTipoDao cuentaTipoDao;
+  private static CuentaForm instance;
 
-  public CuentaForm(PicoApplication application) {
+  public static CuentaForm getInstance(PicoApplication application) throws InvalidAccessException {
+    if (instance == null) {
+      synchronized (CuentaForm.class) {
+        instance = new CuentaForm(application);
+      }
+    }
+
+    return instance;
+  }
+
+  private CuentaDao cuentaDao;
+
+  private CuentaForm(PicoApplication application) throws InvalidAccessException {
     super(application);
-    this.cuentaTipoDao = new CuentaTipoDao(getHibernateHelper().getSessionFactory());
+  }
+
+  @Override
+  protected void initView() {
+    this.cuentaDao = new CuentaDao(getHibernateHelper().getSessionFactory());
+    INSTANCE = this;
+    initCuentaForm();
   }
 
   private static CuentaForm INSTANCE;
@@ -59,7 +78,7 @@ public class CuentaForm extends BaseInternalView {
     constraints = new GridBagConstraints();
     grid = new GridBagLayout();
     pnlCentral = new JPanel(grid);
-    cuentaTipoModel = new CuentaTipoCBModel(this.cuentaTipoDao.getAll());
+    cuentaTipoModel = new CuentaTipoCBModel(this.cuentaDao.getAll());
     cmbCuentaTipo = new JComboBox();
     var bgCampoObligatorio = new Color(255, 228, 181); // Color de fondo para los campos que son
                                                        // obligatorios
@@ -94,7 +113,11 @@ public class CuentaForm extends BaseInternalView {
       cerrar();
     });
     btnCuentaTipo.addActionListener((ActionEvent arg0) -> {
-      MenuPrincipalAcciones.mostrarVentanaCuentaTipo();
+      try {
+        getApplication().getRootView().addView(CuentaTipoForm.getInstance(getApplication()));
+      } catch (Exception ignore) {
+
+      }
     });
 
     btnCuentaTipo.setToolTipText("Llama al formulario de tipo de cuenta");
@@ -181,11 +204,11 @@ public class CuentaForm extends BaseInternalView {
   class CuentaTipoCBModel extends AbstractListModel implements ComboBoxModel {
 
     private String id;
-    private final List<CuentaTipo> cuentaTipos;
+    private final List<Cuenta> cuentas;
 
 
-    public CuentaTipoCBModel(List<CuentaTipo> cuentaTipos) {
-      this.cuentaTipos = cuentaTipos;
+    public CuentaTipoCBModel(List<Cuenta> cuentas) {
+      this.cuentas = cuentas;
     }
 
     @Override
@@ -210,16 +233,14 @@ public class CuentaForm extends BaseInternalView {
 
   }
 
-  @Override
-  protected void initView() {
-    INSTANCE = this;
-    initCuentaForm();
-  }
+
 
   @Override
   protected void close() {
-    super.close();
-    this.cuentaTipoDao.close();
+    if (this.cuentaDao != null) {
+      this.cuentaDao.close();
+    }
+    instance = null;
   }
 
 }

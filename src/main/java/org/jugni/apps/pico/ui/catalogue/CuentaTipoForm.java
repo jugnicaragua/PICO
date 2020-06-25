@@ -9,11 +9,11 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import org.jugni.apps.pico.PicoApplication;
-import org.jugni.apps.pico.data.HibernateHelper;
 import org.jugni.apps.pico.data.dao.CuentaTipoDao;
 import org.jugni.apps.pico.data.model.CuentaTipo;
-import org.jugni.apps.pico.security.Rol;
 import org.jugni.apps.pico.security.annotation.Access;
+import org.jugni.apps.pico.security.exception.InvalidAccessException;
+import org.jugni.apps.pico.security.model.Rol;
 import org.jugni.apps.pico.ui.util.BaseInternalView;
 import org.jugni.apps.pico.ui.util.ButtonContructor;
 import org.jugni.apps.pico.ui.util.CerrarButton;
@@ -28,23 +28,39 @@ import org.jugni.apps.pico.ui.util.GuardarButton;
  *
  *          Clase CuentaTipoForm : Formulario para los tipos de cuenta
  */
+@SuppressWarnings("serial")
 @Access(name = "registro-cuenta-tipo", rol = Rol.ADMIN)
 public class CuentaTipoForm extends BaseInternalView {
 
-  private static CuentaTipoForm INSTANCE;
+  private static CuentaTipoForm instance;
+
+  public static CuentaTipoForm getInstance(PicoApplication application) throws InvalidAccessException {
+    if (instance == null) {
+      synchronized (CuentaTipoForm.class) {
+        instance = new CuentaTipoForm(application);
+      }
+    }
+
+    return instance;
+  }
+
   private JComboBox cmbCuentaTipo;
   private List<CuentaTipo> cuentaTipos;
   private CuentaTipoCBModel cuentaTipoModel;
-  private final CuentaTipoDao cuentaTipoDao;
+  private CuentaTipoDao cuentaTipoDao;
 
-  public CuentaTipoForm(PicoApplication application) {
+  private CuentaTipoForm(PicoApplication application) throws InvalidAccessException {
     super(application);
+  }
+
+  @Override
+  protected void initView() {
     this.cuentaTipoDao = new CuentaTipoDao(getHibernateHelper().getSessionFactory());
+    initCuentaTipoForm();
   }
 
   protected void cerrar() {
     this.dispose();
-    INSTANCE = null;
   }
 
   private void initCuentaTipoForm() {
@@ -168,15 +184,11 @@ public class CuentaTipoForm extends BaseInternalView {
   }
 
   @Override
-  protected void initView() {
-    INSTANCE = this;
-    initCuentaTipoForm();
-  }
-
-  @Override
   protected void close() {
-    super.close();
-
+    if (this.cuentaTipoDao != null) {
+      this.cuentaTipoDao.close();
+    }
+    instance = null;
   }
 
 }
