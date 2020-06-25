@@ -9,7 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import com.sun.istack.NotNull;
 
 
 /**
@@ -67,7 +66,6 @@ public class BaseDao<T, ID extends Object> implements Closeable {
    * 
    * @return Table Name.
    */
-  @NotNull
   public String getTableName() {
     return this.TABLE_NAME;
   }
@@ -77,7 +75,6 @@ public class BaseDao<T, ID extends Object> implements Closeable {
    * 
    * @return Session
    */
-  @NotNull
   protected Session getSession() {
     return this.SESSION;
   }
@@ -88,7 +85,7 @@ public class BaseDao<T, ID extends Object> implements Closeable {
    * @param id
    * @return Una instancia de <T> o null.
    */
-  public T get(@NotNull ID id) {
+  public T get(ID id) {
     Query<T> query = this.SESSION.createQuery(" From " + this.TABLE_NAME + " where Id = :id");
     query.setParameter("id", id);
     return query.getSingleResult();
@@ -109,7 +106,7 @@ public class BaseDao<T, ID extends Object> implements Closeable {
    * 
    * @param entity La entidad a actualizar o insertar.
    */
-  public void save(@NotNull T entity) {
+  public void save(T entity) {
     Transaction transaction = this.SESSION.beginTransaction();
     try {
       this.SESSION.saveOrUpdate(entity);
@@ -125,7 +122,7 @@ public class BaseDao<T, ID extends Object> implements Closeable {
    * 
    * @param entities La lista de elementos a guardar.
    */
-  public void saveAll(@NotNull List<T> entities) {
+  public void saveAll(List<T> entities) {
     Transaction transaction = this.SESSION.beginTransaction();
     try {
       for (var entity : entities) {
@@ -144,7 +141,7 @@ public class BaseDao<T, ID extends Object> implements Closeable {
    * 
    * @param entity Entidad a ser eliminada.
    */
-  public void remove(@NotNull T entity) {
+  public void remove(T entity) {
     Transaction transaction = this.SESSION.beginTransaction();
     try {
       this.SESSION.remove(entity);

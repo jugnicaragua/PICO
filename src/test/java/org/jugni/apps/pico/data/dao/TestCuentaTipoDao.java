@@ -4,19 +4,40 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.jugni.apps.pico.modelos.CuentaTipo;
+import org.hibernate.cfg.Environment;
+import org.jugni.apps.pico.data.HibernateHelper;
+import org.jugni.apps.pico.data.model.CuentaTipo;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class TestCuentaTipoDao {
 
+  private static Configuration configuration;
+
+  @BeforeClass
+  public static void setup() {
+    Properties settings = new Properties();
+    settings.put(Environment.DRIVER, "org.sqlite.JDBC");
+    settings.put(Environment.URL, "jdbc:sqlite:pico.db");
+    settings.put(Environment.DIALECT, "org.hibernate.dialect.SQLiteDialect");
+    settings.put(Environment.SHOW_SQL, "true");
+    settings.put(Environment.HBM2DDL_AUTO, "update");
+
+    configuration = new Configuration();
+    configuration.setProperties(settings);
+    configuration.addAnnotatedClass(CuentaTipo.class);
+  }
+
   @Test
   public void testCreateSession() {
-    try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      assertNotNull("El factory debe ser no null", factory);
-      Session session = factory.openSession();
+    try (var hibernateHelper = new HibernateHelper(configuration)) {
+      SessionFactory sessionFactory = hibernateHelper.getSessionFactory();
+      assertNotNull("El factory debe ser no null", sessionFactory);
+      Session session = sessionFactory.openSession();
       assertNotNull("La session no puede ser null", session);
       session.close();
     }
@@ -24,8 +45,9 @@ public class TestCuentaTipoDao {
 
   @Test
   public void testInsertData() {
-    try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+    try (var hibernateHelper = new HibernateHelper(configuration)) {
+      SessionFactory sessionFactory = hibernateHelper.getSessionFactory();
+      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(sessionFactory)) {
 
         cuentaTipoDao.removeAll();
 
@@ -47,8 +69,9 @@ public class TestCuentaTipoDao {
 
   @Test
   public void testUpdateData() {
-    try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+    try (var hibernateHelper = new HibernateHelper(configuration)) {
+      SessionFactory sessionFactory = hibernateHelper.getSessionFactory();
+      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(sessionFactory)) {
 
         cuentaTipoDao.removeAll();
 
@@ -73,8 +96,9 @@ public class TestCuentaTipoDao {
 
   @Test
   public void testGetAllRows() {
-    try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+    try (var hibernateHelper = new HibernateHelper(configuration)) {
+      SessionFactory sessionFactory = hibernateHelper.getSessionFactory();
+      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(sessionFactory)) {
 
         cuentaTipoDao.removeAll();
 
@@ -100,8 +124,9 @@ public class TestCuentaTipoDao {
 
   @Test
   public void testGetSingleRow() {
-    try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+    try (var hibernateHelper = new HibernateHelper(configuration)) {
+      SessionFactory sessionFactory = hibernateHelper.getSessionFactory();
+      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(sessionFactory)) {
 
         cuentaTipoDao.removeAll();
 
@@ -119,8 +144,9 @@ public class TestCuentaTipoDao {
 
   @Test
   public void testClearAllData() {
-    try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+    try (var hibernateHelper = new HibernateHelper(configuration)) {
+      SessionFactory sessionFactory = hibernateHelper.getSessionFactory();
+      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(sessionFactory)) {
 
         CuentaTipo cuentaTipo = new CuentaTipo();
         cuentaTipo.setDescripcion("Prueba");
@@ -136,8 +162,9 @@ public class TestCuentaTipoDao {
 
   @Test
   public void testRemoveSingleRow() {
-    try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+    try (var hibernateHelper = new HibernateHelper(configuration)) {
+      SessionFactory sessionFactory = hibernateHelper.getSessionFactory();
+      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(sessionFactory)) {
 
         cuentaTipoDao.removeAll();
 

@@ -74,7 +74,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>org.jugni.apps.pico.MiAplicacionPICO</mainClass>
+                            <mainClass>org.jugni.apps.pico.PicoApplication</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
