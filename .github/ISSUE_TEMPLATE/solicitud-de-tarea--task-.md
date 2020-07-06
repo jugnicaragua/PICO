@@ -20,10 +20,10 @@ Agregue cualquier otro contexto o capturas de pantalla sobre la solicitud de fun
 Ejemplo: Mockups, Screenshots, Docs (texto, calculo, presentaciones, etc.).
 
 ** Criterios de aceptación (hay que ver si alguna de ellas son necesarias) **
-[ ] Pruebas Unitarias.
-[ ] Pruebas de Integración
-[ ] Pruebas de Aceptación
-[ ] Pruebas de Carga y Perfil
-[ ] Evidencias
-[ ] Peer Review con Diseño
-[ ] Peer Review con Líder Técnico
+- [ ] Pruebas Unitarias.
+- [ ] Pruebas de Integración
+- [ ] Pruebas de Aceptación
+- [ ] Pruebas de Carga y Perfil
+- [ ] Evidencias
+- [ ] Peer Review con Diseño
+- [ ] Peer Review con Líder Técnico
