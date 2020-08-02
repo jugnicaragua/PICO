@@ -1,9 +1,13 @@
 # PICO
 Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Colaborativo.
+### Status
+![GitHub All Releases](https://img.shields.io/github/downloads/jugnicaragua/subtiava/total?label=Descargas&style=plastic)
+![GitHub](https://img.shields.io/github/license/jugnicaragua/subtiava)
+![GitHub manifest version](https://img.shields.io/github/manifest-json/v/jugnicaragua/subtiava)
+[![Build Status](https://travis-ci.org/jug-ni/PICO.svg?branch=master)](https://travis-ci.org/jug-ni/PICO)
 
 ### >> ¡Importante!, Aun no tenemos release, para el desarrollo estamos usando la rama develop
 
-[![Build Status](https://travis-ci.org/jug-ni/PICO.svg?branch=master)](https://travis-ci.org/jug-ni/PICO)
 
 # Objetivo
 * Ser Didáctico para los que pretenden aprender Java utilizando las mejores prácticas.
