@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+ 
+<hibernate-configuration>
+    <session-factory>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+        <property name="dialect">org.hibernate.dialect.SQLiteDialect</property>
+        <property name="connection.driver_class">org.sqlite.JDBC</property>
+        <property name="connection.url">jdbc:sqlite:pico.db</property>
+        <property name="connection.username"></property>
+        <property name="connection.password"></property>
+         
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <!-- En desarrollo una conecction pool  
+        <property name="hibernate.connection.pool_size">2</property>  -->  
+              
+        <mapping class="org.jugni.apps.pico.modelos.MiEmpresa"/>
+        <mapping class="org.jugni.apps.pico.modelos.CuentaTipo"/>
+    </session-factory>
+</hibernate-configuration>
