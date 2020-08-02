@@ -1,6 +1,7 @@
 # PICO
 Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Colaborativo.
 ### Status
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jugnicaragua_PICO&metric=alert_status)](https://sonarcloud.io/dashboard?id=jugnicaragua_PICO)
 ![GitHub All Releases](https://img.shields.io/github/downloads/jugnicaragua/subtiava/total?label=Descargas&style=plastic)
 ![GitHub](https://img.shields.io/github/license/jugnicaragua/subtiava)
 ![GitHub manifest version](https://img.shields.io/github/manifest-json/v/jugnicaragua/subtiava)
