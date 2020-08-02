@@ -13,7 +13,7 @@
         <property name="connection.username"></property>
         <property name="connection.password"></property>
          
-        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.hbm2ddl.auto">validate</property>
         <!-- En desarrollo una conecction pool  
         <property name="hibernate.connection.pool_size">2</property>  -->  
               
