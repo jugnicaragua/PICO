@@ -8,7 +8,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Cola
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jugnicaragua_PICO&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=jugnicaragua_PICO)
 [![Build Status](https://travis-ci.org/jug-ni/PICO.svg?branch=master)](https://travis-ci.org/jug-ni/PICO)
 ![GitHub All Releases](https://img.shields.io/github/downloads/jugnicaragua/subtiava/total?label=Descargas&style=plastic)
-![GitHub](https://img.shields.io/github/license/jugnicaragua/picoo)
+![GitHub](https://img.shields.io/github/license/jugnicaragua/pico)
 ![GitHub manifest version](https://img.shields.io/github/manifest-json/v/jugnicaragua/pico)
 
 
