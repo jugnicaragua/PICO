@@ -2,10 +2,15 @@
 Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Colaborativo.
 ### Status
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jugnicaragua_PICO&metric=alert_status)](https://sonarcloud.io/dashboard?id=jugnicaragua_PICO)
-![GitHub All Releases](https://img.shields.io/github/downloads/jugnicaragua/subtiava/total?label=Descargas&style=plastic)
-![GitHub](https://img.shields.io/github/license/jugnicaragua/subtiava)
-![GitHub manifest version](https://img.shields.io/github/manifest-json/v/jugnicaragua/subtiava)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=jugnicaragua_PICO&metric=bugs)](https://sonarcloud.io/dashboard?id=jugnicaragua_PICO)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=jugnicaragua_PICO&metric=coverage)](https://sonarcloud.io/dashboard?id=jugnicaragua_PICO)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=jugnicaragua_PICO&metric=sqale_index)](https://sonarcloud.io/dashboard?id=jugnicaragua_PICO)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jugnicaragua_PICO&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=jugnicaragua_PICO)
 [![Build Status](https://travis-ci.org/jug-ni/PICO.svg?branch=master)](https://travis-ci.org/jug-ni/PICO)
+![GitHub All Releases](https://img.shields.io/github/downloads/jugnicaragua/subtiava/total?label=Descargas&style=plastic)
+![GitHub](https://img.shields.io/github/license/jugnicaragua/picoo)
+![GitHub manifest version](https://img.shields.io/github/manifest-json/v/jugnicaragua/pico)
+
 
 ### >> ¡Importante!, Aun no tenemos release, para el desarrollo estamos usando la rama develop
 
