@@ -36,12 +36,11 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <skipTests>true</skipTests>
              <!-- sonar -- >        
-         <sonar.projectKey>jugnicaragua_PICO</sonar.projectKey>
-         <sonar.organization>jugnicaragua</sonar.organization>
-         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-
+            <sonar.projectKey>jugnicaragua_PICO</sonar.projectKey>
+            <sonar.organization>jugnicaragua</sonar.organization>
+            <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
-
+   
     <repositories>
         <repository>
             <id>jitpack.io</id>

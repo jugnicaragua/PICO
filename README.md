@@ -1,15 +1,22 @@
 # PICO
 Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Colaborativo.
-
+### Status
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jugnicaragua_PICO&metric=alert_status)](https://sonarcloud.io/dashboard?id=jugnicaragua_PICO)
+![GitHub All Releases](https://img.shields.io/github/downloads/jugnicaragua/subtiava/total?label=Descargas&style=plastic)
+![GitHub](https://img.shields.io/github/license/jugnicaragua/subtiava)
+![GitHub manifest version](https://img.shields.io/github/manifest-json/v/jugnicaragua/subtiava)
 [![Build Status](https://travis-ci.org/jug-ni/PICO.svg?branch=master)](https://travis-ci.org/jug-ni/PICO)
 
-# Objetivo
-* Ser Didáctico para los que pretenden aprender Java utilizando las mejores prácticas.
-* Ser una solución para MicroEmpresas que necesitan llevar contabilidad.
-* Ser un reductor de la cantidad de proyectos de graduación en centros técnicos y universidades enfocados en Contabilidad.
+### >> ¡Importante!, Aun no tenemos release, para el desarrollo estamos usando la rama develop
 
-# Características Funcionales
-* Didáctico
+
+# Objetivo
+* Ser Didactico para los que pretenden aprender Java utilizando las mejores practicas.
+* Ser una solucion para MicroEmpresas que necesitan llevar contabilidad.
+* Ser un reductor de la cantidad de proyectos de graduacion en centros tecnicos y universidades enfocados en Contabilidad.
+
+# Caracteristicas Funcionales
+* Didactico
   - Totalmente comentado.
 * Sencillo
 * Intuitivo
@@ -17,7 +24,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Cola
 * mono empresa
 * Reportes contables
 
-# Características Técnicas.
+# Caracteristicas Técnicas.
 * De escritorio
 * Portable
 * Base de datos Empotrada
@@ -29,7 +36,7 @@ Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Cola
 
 # Stack
 ```
-  STACK : Conjunto de Tecnologías utilizadas
+  Conjunto de Tecnologias utilizadas
 ```
 * Base: JVM OpenJDK (AdoptOpenJDK) Version 11 LTS
 * Manejador: maven
@@ -38,27 +45,13 @@ Un Sistema Contable básico para MicroEmpresas Nicaragüenses. Didáctico y Cola
 * ORM: Hibernate
 * Swing
 * Reportes: JasperReport
-* MVC
+* MVC 
 * POO
 * Multi IDE
 
 ## Estilo de Código:
-Para el estilo de codificación, usaremos el estilo creado por Google:
-[](https://google.github.io/styleguide/javaguide.html)
-
-
-### Donde descargar los archivos para los IDE.
-https://github.com/google/styleguide
-
-
-#### Eclipse:
-https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml
-
-#### IntelliJIDEa
-https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml
-
-#### NetBeans
---> notiene, por ahora.
+Para el estilo de codificacion, usaremoes el estilo creado por google: 
+https://google.github.io/styleguide/javaguide.html
 
 
 # Preparando  el IDE
@@ -101,8 +94,8 @@ mvn install -DskipTests=true
   UI <enlace a las interfaces>
 
 # Como colaborar (¡IMPORTANTE!).
-1) Todo colaboracion de codígo debe hacerce mediante [PULL REQUEST](https://help.github.com/es/github/collaborating-with-issues-and-pull-requests/about-pull-requests) desde la rama/branch "develop"
-2) Reporte de errores, bugs, se hacen mediante [issues](https://guides.github.com/features/issues/), solicitudes de mejoras tambien. 
+1) Todo colaboracion de codígo debe hacerce mediante PULL PULL REQUEST desde la rama/branch "develop"
+2) Reporte de errores, bugs, se hacen mediante issue, solicitudes de mejoras tambien. 
 
 
 
