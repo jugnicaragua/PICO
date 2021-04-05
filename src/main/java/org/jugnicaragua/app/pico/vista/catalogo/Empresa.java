@@ -1,4 +1,4 @@
-package org.jugnicaragua.app.pico.vista;
+package org.jugnicaragua.app.pico.vista.catalogo;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

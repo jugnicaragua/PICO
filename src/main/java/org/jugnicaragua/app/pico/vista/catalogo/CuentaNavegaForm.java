@@ -1,5 +1,6 @@
-package org.jugnicaragua.app.pico.vista;
+package org.jugnicaragua.app.pico.vista.catalogo;
 
+import org.jugnicaragua.app.pico.vista.menu.MenuPrincipalAcciones;
 import org.jugnicaragua.app.pico.modelo.Cuenta;
 import org.jugnicaragua.app.pico.vista.utils.ButtonContructor;
 import org.jugnicaragua.app.pico.vista.utils.CabezeraRenderer;

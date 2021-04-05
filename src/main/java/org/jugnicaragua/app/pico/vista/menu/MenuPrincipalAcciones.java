@@ -1,13 +1,18 @@
 /*
  * Ejecuta las acciones del menu
  */
-package org.jugnicaragua.app.pico.vista;
+package org.jugnicaragua.app.pico.vista.menu;
 
+import org.jugnicaragua.app.pico.vista.catalogo.CuentaTipoForm;
+import org.jugnicaragua.app.pico.vista.catalogo.Empresa;
 import org.jugnicaragua.app.pico.vista.VentanaPrincipal;
 import java.beans.PropertyVetoException;
 import javax.swing.JInternalFrame;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.jugnicaragua.app.pico.vista.catalogo.CuentaForm;
+import org.jugnicaragua.app.pico.vista.catalogo.CuentaNavegaForm;
+import org.jugnicaragua.app.pico.vista.VentanaPrincipal;
 import org.jugnicaragua.app.pico.vista.reportes.Utils;
 import org.jugnicaragua.app.pico.vista.dialogo.Acercade;
 import org.jugnicaragua.app.pico.vista.dialogo.Respaldo;

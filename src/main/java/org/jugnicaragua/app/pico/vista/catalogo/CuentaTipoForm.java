@@ -1,4 +1,4 @@
-package org.jugnicaragua.app.pico.vista;
+package org.jugnicaragua.app.pico.vista.catalogo;
 
 import java.awt.*;
 import java.util.List;

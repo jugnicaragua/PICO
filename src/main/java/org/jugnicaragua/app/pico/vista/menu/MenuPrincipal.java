@@ -2,7 +2,7 @@
  * @author Gustavo Castro - GACS
  * Menu principal, este menu sera instanciado desde la VentanaPrincipal
  */
-package org.jugnicaragua.app.pico.vista;
+package org.jugnicaragua.app.pico.vista.menu;
 
 import org.jugnicaragua.app.pico.vista.utils.ItemMenuUtils;
 
