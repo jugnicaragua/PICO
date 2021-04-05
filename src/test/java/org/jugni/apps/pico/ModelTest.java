@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.jugni.apps.pico.modelos.CuentaTipo;
-import org.jugni.apps.pico.DAO.HibernateUtil;
+import org.jugnicaragua.app.pico.modelo.CuentaTipo;
+import org.jugnicaragua.app.pico.dao.HibernateUtil;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
