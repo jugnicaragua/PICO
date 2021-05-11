@@ -78,7 +78,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>org.jugnicaragua.app.pico.ApicacionPICO</mainClass>
+                            <mainClass>org.jugnicaragua.app.pico.AplicacionPICO</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -102,7 +102,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>org.jugnicaragua.app.pico.ApicacionPICO</mainClass>
+                    <mainClass>org.jugnicaragua.app.pico.AplicacionPICO</mainClass>
                 </configuration>
             </plugin>
 
