@@ -1,5 +1,7 @@
 package org.jugnicaragua.app.pico.vista;
 
+import org.jugnicaragua.app.pico.vista.menu.MenuPrincipal;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
