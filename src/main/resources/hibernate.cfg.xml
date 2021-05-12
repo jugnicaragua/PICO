@@ -13,6 +13,6 @@
     <property name="connection.username"/>
     <property name="connection.password"/>
 
-    <property name="hibernate.hbm2ddl.auto">update</property>
+    <property name="hibernate.hbm2ddl.auto">create-drop</property>
   </session-factory>
 </hibernate-configuration>
