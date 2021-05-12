@@ -2,6 +2,10 @@ package org.jugnicaragua.app.pico.vista;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.Closeable;
+import java.io.IOException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
@@ -11,9 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JToolBar;
 import javax.swing.border.BevelBorder;
+import org.jugnicaragua.app.pico.AplicacionPICO;
 import org.jugnicaragua.app.pico.vista.menu.MenuPrincipal;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaPrincipal extends JFrame implements Closeable {
 
   private final JDesktopPane desktopPane;
 
@@ -37,6 +42,19 @@ public class VentanaPrincipal extends JFrame {
     setName("vPrincipal");
     setBounds(100, 100, 626, 375);
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosing(WindowEvent e) {
+        try {
+          VentanaPrincipal.this.close();
+        } catch (IOException ioException) {
+          ioException.printStackTrace();
+        }
+        super.windowClosing(e);
+      }
+    });
+
     setExtendedState(MAXIMIZED_BOTH);
 
     JToolBar toolBar_1 = new JToolBar();
@@ -89,5 +107,10 @@ public class VentanaPrincipal extends JFrame {
     ventanaInterna
         .setLocation((dskSize.width - frmSize.width) / 2, (dskSize.height - frmSize.height) / 2);
     ventanaInterna.setVisible(true);
+  }
+
+  @Override
+  public void close() throws IOException {
+    AplicacionPICO.getINSTANCE().close();
   }
 }

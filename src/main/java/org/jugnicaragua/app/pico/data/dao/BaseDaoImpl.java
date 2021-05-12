@@ -1,4 +1,4 @@
-package org.jugnicaragua.app.pico.dao;
+package org.jugnicaragua.app.pico.data.dao;
 
 import java.io.Closeable;
 import java.lang.annotation.Annotation;
@@ -14,19 +14,18 @@ import org.hibernate.query.Query;
 /**
  * Clase base para la creación de clases dao, la clase define las operaciones DML básicas dentro de
  * una base de datos relacional como son SELECT, UPDATE, DELETE.
- * 
- * @author jselva
  *
- * @param <T> Clase de entidad
+ * @param <T>  Clase de entidad
  * @param <ID> Identificador de la entidad.
+ * @author jselva
  */
 @SuppressWarnings("unchecked")
-public class BaseDao<T, ID extends Object> implements Closeable {
+public class BaseDaoImpl<T, ID> implements BaseDao<T, ID>, Closeable {
 
   private final Session SESSION;
   private final String TABLE_NAME;
 
-  public BaseDao(SessionFactory factory, Class<T> entityClass) {
+  public BaseDaoImpl(SessionFactory factory, Class<T> entityClass) {
     Annotation entityAnnotation = entityClass.getAnnotation(Entity.class);
     if (entityAnnotation == null) {
       throw new RuntimeException(
@@ -43,25 +42,30 @@ public class BaseDao<T, ID extends Object> implements Closeable {
     this.SESSION = factory.openSession();
   }
 
+  @Override
   public String getTableName() {
     return this.TABLE_NAME;
   }
 
-  protected Session getSession() {
+  @Override
+  public Session getSession() {
     return this.SESSION;
   }
 
+  @Override
   public T get(ID id) {
     Query<T> query = this.SESSION.createQuery(" From " + this.TABLE_NAME + " where Id = :id");
     query.setParameter("id", id);
     return query.getSingleResult();
   }
 
+  @Override
   public List<T> getAll() {
     Query<T> query = this.SESSION.createQuery(" From " + this.TABLE_NAME);
     return query.getResultList();
   }
 
+  @Override
   public void save(T entity) {
     Transaction transaction = this.SESSION.beginTransaction();
     try {
@@ -73,6 +77,7 @@ public class BaseDao<T, ID extends Object> implements Closeable {
     }
   }
 
+  @Override
   public void saveAll(List<T> entities) {
     Transaction transaction = this.SESSION.beginTransaction();
     try {
@@ -87,6 +92,7 @@ public class BaseDao<T, ID extends Object> implements Closeable {
     }
   }
 
+  @Override
   public void remove(T entity) {
     Transaction transaction = this.SESSION.beginTransaction();
     try {
@@ -98,6 +104,7 @@ public class BaseDao<T, ID extends Object> implements Closeable {
     }
   }
 
+  @Override
   public void removeAll() {
     Transaction transaction = this.SESSION.beginTransaction();
     try {

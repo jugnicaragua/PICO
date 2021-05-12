@@ -2,14 +2,14 @@ package org.jugni.apps.pico;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.jugnicaragua.app.pico.dao.CuentaTipoDao;
-import org.jugnicaragua.app.pico.modelo.CuentaTipo;
+import org.jugnicaragua.app.pico.data.dao.CuentaTipoDaoImpl;
+import org.jugnicaragua.app.pico.data.entidades.CuentaTipo;
 import org.junit.Test;
 
 public class TestCuentaTipoDao {
@@ -27,7 +27,7 @@ public class TestCuentaTipoDao {
   @Test
   public void testInsertData() {
     try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+      try (CuentaTipoDaoImpl cuentaTipoDao = new CuentaTipoDaoImpl(factory)) {
 
         cuentaTipoDao.removeAll();
 
@@ -50,7 +50,7 @@ public class TestCuentaTipoDao {
   @Test
   public void testUpdateData() {
     try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+      try (CuentaTipoDaoImpl cuentaTipoDao = new CuentaTipoDaoImpl(factory)) {
 
         cuentaTipoDao.removeAll();
 
@@ -76,7 +76,7 @@ public class TestCuentaTipoDao {
   @Test
   public void testGetAllRows() {
     try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+      try (CuentaTipoDaoImpl cuentaTipoDao = new CuentaTipoDaoImpl(factory)) {
 
         cuentaTipoDao.removeAll();
 
@@ -103,7 +103,7 @@ public class TestCuentaTipoDao {
   @Test
   public void testGetSingleRow() {
     try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+      try (CuentaTipoDaoImpl cuentaTipoDao = new CuentaTipoDaoImpl(factory)) {
 
         cuentaTipoDao.removeAll();
 
@@ -122,7 +122,7 @@ public class TestCuentaTipoDao {
   @Test
   public void testClearAllData() {
     try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+      try (CuentaTipoDaoImpl cuentaTipoDao = new CuentaTipoDaoImpl(factory)) {
 
         CuentaTipo cuentaTipo = new CuentaTipo();
         cuentaTipo.setDescripcion("Prueba");
@@ -139,7 +139,7 @@ public class TestCuentaTipoDao {
   @Test
   public void testRemoveSingleRow() {
     try (SessionFactory factory = new Configuration().configure().buildSessionFactory()) {
-      try (CuentaTipoDao cuentaTipoDao = new CuentaTipoDao(factory)) {
+      try (CuentaTipoDaoImpl cuentaTipoDao = new CuentaTipoDaoImpl(factory)) {
 
         cuentaTipoDao.removeAll();
 

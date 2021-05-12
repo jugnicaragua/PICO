@@ -1,4 +1,4 @@
-package org.jugnicaragua.app.pico.dao;
+package org.jugnicaragua.app.pico.data.dao;
 
 /**
   * 
@@ -8,6 +8,6 @@ package org.jugnicaragua.app.pico.dao;
  *
  *   Interface ObtenerUnRegistroDao : Interfas para obtener un registro de la base de datos condicionado por la clase registro
  */
-public interface ObtenerRegistroDao <T> {
-      T obtenerRegistro();
+public interface ObtenerRegistroSiDao <T> {
+      T obtenerRegistroSi(T registro);
 }
