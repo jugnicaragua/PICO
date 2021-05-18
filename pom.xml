@@ -46,6 +46,11 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
+
+        <repository>
+            <id>jaspersoft-third-party</id>
+            <url>http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
+        </repository>
     </repositories>
 
 
