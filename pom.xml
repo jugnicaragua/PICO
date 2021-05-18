@@ -46,11 +46,6 @@
             <id>jitpack.io</id>
             <url>https://jitpack.io</url>
         </repository>
-
-        <repository>
-            <id>jaspersoft-third-party</id>
-            <url>http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/</url>
-        </repository>
     </repositories>
 
 
@@ -160,7 +155,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.7.0</version>
+            <version>6.17.0</version>
         </dependency>
         <!-- Fuentes -->
         <dependency>
