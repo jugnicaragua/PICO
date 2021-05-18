@@ -1,8 +1,9 @@
-package org.jugnicaragua.app.pico.dao;
+package org.jugnicaragua.app.pico.data.dao;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.jugnicaragua.app.pico.modelo.MiEmpresa;
+import org.jugnicaragua.app.pico.AplicacionPICO;
+import org.jugnicaragua.app.pico.data.entidades.MiEmpresa;
 
 /**
  * Clase implementar persistencia de datos
@@ -14,7 +15,7 @@ import org.jugnicaragua.app.pico.modelo.MiEmpresa;
  */
 public class EmpresaImpl implements ActualizarRegistroDao<MiEmpresa>,ObtenerRegistroDao<MiEmpresa>{
 
-     private final Session session = HibernateUtil.getSessionFactory().openSession();
+     private final Session session =  AplicacionPICO.getINSTANCE().getDatabaseSession().openSession();
 
      /**
       * Agrega el regsitro de la empresa si no existe, si existe actauliza las modificaciones 

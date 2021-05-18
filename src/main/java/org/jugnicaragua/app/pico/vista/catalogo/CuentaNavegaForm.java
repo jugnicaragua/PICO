@@ -1,7 +1,7 @@
 package org.jugnicaragua.app.pico.vista.catalogo;
 
 import org.jugnicaragua.app.pico.vista.menu.MenuPrincipalAcciones;
-import org.jugnicaragua.app.pico.modelo.Cuenta;
+import org.jugnicaragua.app.pico.data.entidades.Cuenta;
 import org.jugnicaragua.app.pico.vista.utils.ButtonContructor;
 import org.jugnicaragua.app.pico.vista.utils.CabezeraRenderer;
 import org.jugnicaragua.app.pico.vista.utils.CerrarButton;

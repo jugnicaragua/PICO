@@ -17,8 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import org.jugnicaragua.app.pico.dao.EmpresaImpl;
-import org.jugnicaragua.app.pico.modelo.MiEmpresa;
+import org.jugnicaragua.app.pico.data.dao.EmpresaImpl;
+import org.jugnicaragua.app.pico.data.entidades.MiEmpresa;
 import org.jugnicaragua.app.pico.vista.utils.Utilities;
 
 public class Empresa extends JInternalFrame {

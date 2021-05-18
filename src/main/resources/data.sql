@@ -1,0 +1,1 @@
+insert into menu (label, tipo_menu) values ('Prueba', 'LISTA');

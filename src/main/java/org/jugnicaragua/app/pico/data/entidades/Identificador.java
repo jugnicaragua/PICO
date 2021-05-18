@@ -1,4 +1,4 @@
-package org.jugnicaragua.app.pico.modelo;
+package org.jugnicaragua.app.pico.data.entidades;
 
 import java.util.Objects;
 import javax.persistence.GeneratedValue;

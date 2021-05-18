@@ -1,4 +1,4 @@
-package org.jugnicaragua.app.pico.modelo;
+package org.jugnicaragua.app.pico.data.entidades;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

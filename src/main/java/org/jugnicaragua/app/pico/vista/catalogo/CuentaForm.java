@@ -1,8 +1,8 @@
 package org.jugnicaragua.app.pico.vista.catalogo;
 
 import org.jugnicaragua.app.pico.vista.menu.MenuPrincipalAcciones;
-import org.jugnicaragua.app.pico.dao.CuentaTipoImpl;
-import org.jugnicaragua.app.pico.modelo.CuentaTipo;
+import org.jugnicaragua.app.pico.data.dao.CuentaTipoImpl;
+import org.jugnicaragua.app.pico.data.entidades.CuentaTipo;
 import org.jugnicaragua.app.pico.vista.utils.ButtonContructor;
 import org.jugnicaragua.app.pico.vista.utils.CerrarButton;
 import org.jugnicaragua.app.pico.vista.utils.GuardarButton;

@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.jugnicaragua.app.pico.dao;
+package org.jugnicaragua.app.pico.data.dao;
 
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.jugnicaragua.app.pico.modelo.CuentaTipo;
+import org.jugnicaragua.app.pico.AplicacionPICO;
+import org.jugnicaragua.app.pico.data.entidades.CuentaTipo;
 
 /**
  * <strong> org.jugni.apps.pico.DAO </strong>
@@ -21,7 +22,7 @@ import org.jugnicaragua.app.pico.modelo.CuentaTipo;
  */
 public class CuentaTipoImpl implements ObtenerRegistrosDao<CuentaTipo>, ActualizarRegistroDao<CuentaTipo> {
 
-     private final Session session = HibernateUtil.getSessionFactory().openSession();
+     private final Session session = AplicacionPICO.getINSTANCE().getDatabaseSession().openSession();
 
      @Override
      public List<CuentaTipo> obtenerRegistros() {

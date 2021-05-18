@@ -78,7 +78,7 @@
                     <appendAssemblyId>false</appendAssemblyId>
                     <archive>
                         <manifest>
-                            <mainClass>org.jugnicaragua.app.pico.MiAplicacionPICO</mainClass>
+                            <mainClass>org.jugnicaragua.app.pico.AplicacionPICO</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
@@ -102,7 +102,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
                 <configuration>
-                    <mainClass>org.jugnicaragua.app.pico.MiAplicacionPICO</mainClass>
+                    <mainClass>org.jugnicaragua.app.pico.AplicacionPICO</mainClass>
                 </configuration>
             </plugin>
 
@@ -155,7 +155,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.7.0</version>
+            <version>6.17.0</version>
         </dependency>
         <!-- Fuentes -->
         <dependency>
