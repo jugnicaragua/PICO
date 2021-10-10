@@ -17,7 +17,7 @@
         <!-- En desarrollo una conecction pool  
         <property name="hibernate.connection.pool_size">2</property>  -->  
               
-        <mapping class="org.jugni.apps.pico.modelos.MiEmpresa"/>
-        <mapping class="org.jugni.apps.pico.modelos.CuentaTipo"/>
+        <mapping class="org.jugni.apps.pico.modelo.MiEmpresa"/>
+        <mapping class="org.jugni.apps.pico.modelo.CuentaTipo"/>
     </session-factory>
 </hibernate-configuration>
