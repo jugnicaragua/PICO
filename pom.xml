@@ -101,6 +101,7 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.6.0</version>
+                     
                 <configuration>
                     <mainClass>org.jugni.apps.pico.MiAplicacionPICO</mainClass>
                 </configuration>
@@ -155,7 +156,7 @@
         <dependency>
             <groupId>net.sf.jasperreports</groupId>
             <artifactId>jasperreports</artifactId>
-            <version>6.7.0</version>
+            <version>6.19.0</version>
         </dependency>
         <!-- Fuentes -->
         <dependency>
